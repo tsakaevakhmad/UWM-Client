@@ -32,7 +32,7 @@ export default class CategoryAxios {
         }
     }
 
-    async createCategory(id, category) {
+    async updateCategory(id, category) {
         try {
           await axios.put(`${baseUrl}/category/${id}`, { 
             id: category.id,
