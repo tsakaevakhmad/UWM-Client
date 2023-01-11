@@ -12,6 +12,15 @@ export default class ItemAxios {
         }
     }
 
+    async getItem(id) {
+      try {
+        return (await axios.get(`${baseUrl}/item/${id}`)).data;
+      } 
+      catch (error) {
+        console.error(error)
+      }
+  }
+
     async deleteItem(id) {
       try {
         return (await axios.delete(`${baseUrl}/item/${id}`)).data;

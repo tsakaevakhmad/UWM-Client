@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import CategoryAxios from '../../Axios/Category';
+import CategoryAxios from '../../Axios/CategoryServices';
 
 export default class SidebarComponent extends Component {
     constructor(props) {

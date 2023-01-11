@@ -1,19 +1,28 @@
-import React, { Component } from 'react'
+import ItemAxios from '../../Axios/ItemServices';
+import React, { useState, useEffect } from 'react'
+import { useParams } from 'react-router-dom'
 
-export default class ItemDetail extends Component {
+export default function Itemdetail(props) {
 
-    constructor(props) {
-        super(props)
-        this.state = {
+  let [item, setItem] = useState({});
+  let { id } = useParams();
+  let itemServices = new ItemAxios();
 
-        }
-    }
+  async function getItem() {
+    setItem(await itemServices.getItem(id));
+  }
+
+  useEffect(() => { 
+    getItem();
+  }, [id]);
 
 
-    render() {
-        console.log(this.props)
-        return (
-            <div>{}</div>
-        )
-    }
+  console.log(item);
+  return (
+    <div>
+      <h1>Item Detail</h1>
+      <p>Title: {item.title}</p>
+      <p>Id: {item.id}</p>
+    </div>
+  );
 }

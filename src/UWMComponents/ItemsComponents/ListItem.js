@@ -1,6 +1,7 @@
 import React, { Component } from 'react'
 import SidebarComponent from "./SidebarComponent";
-import ItemAxios from '../../Axios/item';
+import ItemAxios from '../../Axios/ItemServices';
+import { Link } from "react-router-dom";
 
 export default class MainComponent extends Component {
 
@@ -41,7 +42,7 @@ export default class MainComponent extends Component {
                         <tbody>
                             {this.state.items.map((item =>
                                 <tr key={item.id}>
-                                    <td>{item.title}</td>
+                                    <td><Link to={`/itemdetail/${item.id}`}>{item.title}</Link> </td>
                                     <td>{item.price}</td>
                                     <td>{item.quantity} | {item.unit}</td>
                                     <td>{item.providerName}</td>
