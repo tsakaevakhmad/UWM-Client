@@ -20,7 +20,6 @@ export default class MainComponent extends Component {
     }
 
     render() {
-
         return (
             <div className="row">
 
@@ -40,14 +39,14 @@ export default class MainComponent extends Component {
                             </tr>
                         </thead>
                         <tbody>
-                            {this.state.items.map((item =>
+                            {this.state.items.map(item =>
                                 <tr key={item.id}>
                                     <td><Link to={`/itemdetail/${item.id}`}>{item.title}</Link> </td>
                                     <td>{item.price}</td>
                                     <td>{item.quantity} | {item.unit}</td>
                                     <td>{item.providerName}</td>
                                 </tr>
-                            ))}
+                            )}
                         </tbody>
                     </table>
                 </div>

@@ -30,7 +30,7 @@ export default class SidebarComponent extends Component {
                         <div id={category.name.replace(" ", "")} className="accordion-collapse collapse" aria-labelledby={category.name.replace(" ", "")} data-bs-parent="#accordionExample">
                             <div className="accordion-body ">
                                 <div className="list-group rounded">
-                                    {category.subCategoryDto.map((subcategory) =>
+                                    {category.subCategoryDto.map(subcategory =>
                                         <button key={subcategory.id} value={subcategory.id} onClick={() => this.props.getBy(subcategory.id)} type="button" className="btn btn-outline-secondary">{subcategory.name}</button>
                                     )}
                                 </div>

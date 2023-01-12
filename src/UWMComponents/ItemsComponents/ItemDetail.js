@@ -35,7 +35,6 @@ class Item extends Component {
   }
 
   render() {
-    console.log(this.state.item);
     let item = this.state.item;
     if (typeof item.specifications === 'string')
       return (
