@@ -1,9 +1,12 @@
 import ItemAxios from '../../Axios/ItemServices';
 import React, { Component } from 'react'
 import { useParams } from 'react-router-dom'
+import {
+  Link,
+} from "react-router-dom";
 
 
-export default function Itemdetail(props) {
+export default function ItemDetail(props) {
 
   let { id } = useParams();
 
@@ -80,13 +83,13 @@ class Item extends Component {
               </table>
             </div>
             <div className="card-footer border-dark bg-transparent">
-              <div className='row '>
-                <div class="col-8 d-grid gap-2 d-md-flex">
-                  <button type="button" class="btn btn-outline-dark fw-bolder">Назад</button>
-                  <button type="button" class="btn btn-outline-warning fw-bolder">Редактировать</button>
+              <div className="row" >
+                <div className="col-8 d-grid gap-2 d-md-flex">
+                  <Link to="/"><button type="button"  className="btn btn-outline-dark fw-bolder">Назад</button></Link>
+                  <Link to={`/itemEdit/${item.id}`}><button type="button" className="btn btn-outline-warning fw-bolder">Редактировать</button></Link>
                 </div>
-                <div class="col-4 d-grid gap-2 d-md-flex justify-content-end">
-                  <button type="button" class="btn btn-outline-danger fw-bolder">Удалить</button>
+                <div className="col-4 d-grid gap-2 d-md-flex justify-content-end">
+                  <button type="button" className="btn btn-outline-danger fw-bolder">Удалить</button>
                 </div>
               </div>
             </div>
@@ -96,4 +99,4 @@ class Item extends Component {
   }
 }
 // Запись характеристик
-// название характеристики - Характеристика; След характеристика - характеристика 
+// Название характеристики: Характеристика; След характеристика: характеристика 

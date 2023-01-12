@@ -1,7 +1,7 @@
 import axios from 'axios';
 import { baseUrl } from './Base';
 
-export default class ItemAxios {
+export default class ItemServices {
 
     async getItemByCategory(categoryId) {
         try {

@@ -1,6 +1,7 @@
 import React, { Component } from 'react'
-import ListItem from "./ListItem";
-import ItemDetail from "./ItemDetail";
+import ListItem from "./ItemsComponents/ListItem";
+import ItemDetail from "./ItemsComponents/ItemDetail";
+import ItemEdit from './ItemsComponents/ItemEdit';
 
 import {
     Routes,
@@ -32,8 +33,8 @@ export default class NavbarComponent extends Component {
                                 </li>
                             </ul>
                             <form className="d-flex">
-                                <input className="form-control me-2" type="search" placeholder="Search" aria-label="Search"/>
-                                    <button className="btn btn-outline-success" type="submit">Search</button>
+                                <input className="form-control me-2" type="search" placeholder="Поиск" aria-label="Search"/>
+                                    <button className="btn btn-outline-success" type="submit">Поиск</button>
                             </form>
                         </div>
                     </div>
@@ -41,6 +42,7 @@ export default class NavbarComponent extends Component {
                 <Routes>
                     <Route path="/" element={<ListItem />} />
                     <Route path="/itemDetail/:id" element={<ItemDetail />} />
+                    <Route path="/ItemEdit/:id" element={<ItemEdit />} />
                 </Routes>
             </div>
         )

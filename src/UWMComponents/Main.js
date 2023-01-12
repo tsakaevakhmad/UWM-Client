@@ -1,4 +1,4 @@
-import NavbarComponent from "./ItemsComponents/NavbarComponent";
+import NavbarComponent from "./NavbarComponent";
 
 
 import React, { Component } from 'react'
