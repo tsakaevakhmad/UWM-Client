@@ -1,6 +1,6 @@
 import ItemAxios from '../../Axios/ItemServices';
 import React, { Component } from 'react'
-import { useParams } from 'react-router-dom'
+import { useParams, Navigate } from 'react-router-dom'
 import {
   Link,
 } from "react-router-dom";
@@ -26,16 +26,30 @@ class Item extends Component {
     this.itemServices = new ItemAxios();
 
     this.state = {
+      redirectToList: false,
       item: {},
     }
+
+    this.Delete = this.Delete.bind(this);
   }
 
   async componentDidMount() {
     this.setState({ item: await this.itemServices.getItem(this.props.itemId) })
   }
 
+  async Delete() {
+    console.log("-")
+    await this.itemServices.deleteItem(this.props.itemId);
+    this.setState({ redirectToList: true });
+  }
+
   render() {
     let item = this.state.item;
+
+    if (this.state.redirectToList) {
+      return <Navigate to={"/"} />
+    }
+
     if (typeof item.specifications === 'string')
       return (
         <div >
@@ -84,11 +98,11 @@ class Item extends Component {
             <div className="card-footer border-dark bg-transparent">
               <div className="row" >
                 <div className="col-8 d-grid gap-2 d-md-flex">
-                  <Link to="/"><button type="button"  className="btn btn-outline-dark fw-bolder">Назад</button></Link>
+                  <Link to="/"><button type="button" className="btn btn-outline-dark fw-bolder">Назад</button></Link>
                   <Link to={`/itemEdit/${item.id}`}><button type="button" className="btn btn-outline-warning fw-bolder">Редактировать</button></Link>
                 </div>
                 <div className="col-4 d-grid gap-2 d-md-flex justify-content-end">
-                  <button type="button" className="btn btn-outline-danger fw-bolder">Удалить</button>
+                  <button type="button" onClick={this.Delete} className="btn btn-outline-danger fw-bolder">Удалить</button>
                 </div>
               </div>
             </div>

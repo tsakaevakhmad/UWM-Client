@@ -3,7 +3,8 @@ import ProviderServices from '../../Axios/ProviderServices';
 import WarehouseServices from '../../Axios/WarehouseServices';
 import SubCategoryServices from '../../Axios/SubcategoryServices';
 import React, { Component } from 'react'
-import { useParams } from 'react-router-dom'
+import { useParams, Navigate } from 'react-router-dom'
+
 import {
     Link,
 } from "react-router-dom";
@@ -39,6 +40,8 @@ class Item extends Component {
             subCategoryId: 0,
             title: "",
             unit: "",
+            redirect: false,
+            redirectToList: false,
             warehouseId: 0,
             subCategory: [],
             provider: [],
@@ -55,6 +58,7 @@ class Item extends Component {
         this.handleChangeWarehouseId = this.handleChangeWarehouseId.bind(this);
         this.handleChangeSubCategoryId = this.handleChangeSubCategoryId.bind(this);
         this.Update = this.Update.bind(this);
+        this.Delete = this.Delete.bind(this);
     }
 
     handleChangeTitle(e) {
@@ -124,8 +128,14 @@ class Item extends Component {
             warehouseId: this.state.warehouseId,
             subCategoryId: this.state.subCategoryId,
         }
-
         await this.itemServices.updateItem(this.props.itemId, item);
+        this.setState({ redirect: true });
+    }
+
+    async Delete() {
+        console.log("-")
+        await this.itemServices.deleteItem(this.state.id);
+        this.setState({ redirectToList: true });
     }
 
     async componentDidMount() {
@@ -149,7 +159,14 @@ class Item extends Component {
     }
 
     render() {
-        const { manufacturer, price, providerId, quantity, specifications, subCategoryId, title, unit, warehouseId } = this.state;
+        const { id, manufacturer, price, providerId, quantity, specifications, subCategoryId, title, unit, warehouseId } = this.state;
+
+        if (this.state.redirect) {
+            return <Navigate to={`/itemdetail/${id}`} />
+        }
+        if (this.state.redirectToList) {
+            return <Navigate to={"/"} />
+        }
         return (
             <div >
                 <br /><br />
@@ -195,7 +212,7 @@ class Item extends Component {
                                 <button type="button" onClick={this.Update} className="btn btn-outline-success fw-bolder">Сохранить</button>
                             </div>
                             <div className="col-4 d-grid gap-2 d-md-flex justify-content-end">
-                                <button type="button" className="btn btn-outline-danger fw-bolder">Удалить</button>
+                                <button type="button" onClick={this.Delete} className="btn btn-outline-danger fw-bolder">Удалить</button>
                             </div>
                         </div>
                     </div>

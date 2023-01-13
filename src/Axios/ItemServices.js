@@ -22,6 +22,7 @@ export default class ItemServices {
   }
 
     async deleteItem(id) {
+      console.log("+")
       try {
         return (await axios.delete(`${baseUrl}/item/${id}`)).data;
       } 
