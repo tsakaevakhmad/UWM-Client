@@ -1,4 +1,4 @@
-import NavbarComponent from "./NavbarComponent";
+import Navbar from "./Navbar";
 
 
 import React, { Component } from 'react'
@@ -8,7 +8,7 @@ export default class Main extends Component {
         return (
             <div className="container">
                 <br />
-                <NavbarComponent />
+                <Navbar />
             </div>
         )
     }

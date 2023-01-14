@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import CategoryServices from '../../Axios/CategoryServices';
 
-export default class SidebarComponent extends Component {
+export default class Sidebar extends Component {
     constructor(props) {
         super(props);
         this.categoryServices = new CategoryServices();
@@ -18,7 +18,6 @@ export default class SidebarComponent extends Component {
 
 
     render() {
-        console.log(this.state.categorys)
         return (
             <div>
                 {this.state.categorys.map(category =>

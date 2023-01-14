@@ -2,14 +2,14 @@ import React, { Component } from 'react'
 import ListItem from "./ItemsComponents/ListItem";
 import ItemDetail from "./ItemsComponents/ItemDetail";
 import ItemEdit from './ItemsComponents/ItemEdit';
-
+import ItemCreate from './ItemsComponents/ItemCreate';
 import {
     Routes,
     Route,
     Link,
 } from "react-router-dom";
 
-export default class NavbarComponent extends Component {
+export default class Navbar extends Component {
     constructor(props) {
         super(props);
         this.state = {
@@ -31,6 +31,9 @@ export default class NavbarComponent extends Component {
                                 <li className="nav-item">
                                     <Link className="nav-link active" aria-current="page" to="/">Список</Link>
                                 </li>
+                                <li className="nav-item">
+                                    <Link className="nav-link active" aria-current="page" to="/ItemCreate">Добавить предмет</Link>
+                                </li>
                             </ul>
                             <form className="d-flex">
                                 <input className="form-control me-2" type="search" placeholder="Поиск" aria-label="Search"/>
@@ -41,8 +44,9 @@ export default class NavbarComponent extends Component {
                 </nav>
                 <Routes>
                     <Route path="/" element={<ListItem />} />
-                    <Route path="/itemDetail/:id" element={<ItemDetail />} />
+                    <Route path="/ItemDetail/:id" element={<ItemDetail />} />
                     <Route path="/ItemEdit/:id" element={<ItemEdit />} />
+                    <Route path="/ItemCreate/" element={<ItemCreate />} />
                 </Routes>
             </div>
         )

@@ -1,9 +1,9 @@
 import React, { Component } from 'react'
-import SidebarComponent from "./SidebarComponent";
+import Sidebar from "./Sidebar";
 import ItemAxios from '../../Axios/ItemServices';
 import { Link } from "react-router-dom";
 
-export default class MainComponent extends Component {
+export default class Main extends Component {
 
     constructor(props) {
         super(props);
@@ -24,7 +24,7 @@ export default class MainComponent extends Component {
             <div className="row">
 
                 <div className="col-md-3 border-end">
-                    <SidebarComponent getBy={this.getBySubCategory} />
+                    <Sidebar getBy={this.getBySubCategory} />
                 </div>
 
                 <div className="col-6 col-md-9">
@@ -41,7 +41,7 @@ export default class MainComponent extends Component {
                         <tbody>
                             {this.state.items.map(item =>
                                 <tr key={item.id}>
-                                    <td><Link to={`/itemdetail/${item.id}`}>{item.title}</Link> </td>
+                                    <td><Link to={`/ItemDetail/${item.id}`}>{item.title}</Link> </td>
                                     <td>{item.price}</td>
                                     <td>{item.quantity} | {item.unit}</td>
                                     <td>{item.providerName}</td>
