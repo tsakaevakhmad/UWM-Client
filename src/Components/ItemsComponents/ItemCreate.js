@@ -27,7 +27,7 @@ export default class ItemCreate extends Component {
             quantity: 0,
             specifications: "",
             subCategoryId: 0,
-            title: "Новый предмет",
+            title: "",
             unit: "",
             redirect: false,
             warehouseId: 0,
@@ -138,7 +138,7 @@ export default class ItemCreate extends Component {
             <div >
                 <br /><br />
                 <div className="mx-auto col-md-11 card border-dark" >
-                    <div className="card-header bg-transparent border-dark"><h3>{this.state.title}</h3></div>
+                    <div className="card-header bg-transparent border-dark"><h3>Новый предмет</h3></div>
                     <div className="card-body text-dark">
                         <label className="form-label">Название</label>
                         <input className="form-control" type="text" name="title" onChange={this.handleChangeTitle} placeholder="Название" />
