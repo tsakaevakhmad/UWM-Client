@@ -13,6 +13,7 @@ export default class WarehouseServices {
     }
 
     async getWarehouseById(id) {
+        console.log("+")
         try {
             return (await axios.get(`${baseUrl}/Warehouse/${id}`)).data;
         }

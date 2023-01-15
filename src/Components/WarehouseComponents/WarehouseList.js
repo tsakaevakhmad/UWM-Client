@@ -38,7 +38,7 @@ export default class WarehouseList extends Component {
                                         <td>{item.number}</td>
                                         <td>{item.addressDto.country}</td>
                                         <td>{item.addressDto.city}</td>
-                                        <td><Link to={`/WarehouseEdit/${item.id}`}><button type="button" className="btn btn-outline-warning btn-sm fw-bolder">Редактировать</button></Link></td>
+                                        <td><Link to={`/WarehouseEdit/${item.id}`}><button type="button" className="btn btn-outline-dark btn-sm fw-bolder">Открыть</button></Link></td>
                                     </tr>
                                 )}
                             </tbody>

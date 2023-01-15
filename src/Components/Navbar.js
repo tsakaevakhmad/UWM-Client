@@ -1,6 +1,5 @@
 import React, { Component } from 'react'
 import ListItem from "./ItemsComponents/ListItem";
-import ItemDetail from "./ItemsComponents/ItemDetail";
 import ItemEdit from './ItemsComponents/ItemEdit';
 import ItemCreate from './ItemsComponents/ItemCreate';
 import WarehouseEdit from './WarehouseComponents/WarehouseEdit';
@@ -53,7 +52,6 @@ export default class Navbar extends Component {
                 </nav>
                 <Routes>
                     <Route path="/" element={<ListItem />} />
-                    <Route path="/ItemDetail/:id" element={<ItemDetail />} />
                     <Route path="/ItemEdit/:id" element={<ItemEdit />} />
                     <Route path="/ItemCreate/" element={<ItemCreate />} />
                     <Route path="/WarehouseEdit/:id" element={<WarehouseEdit />} />
