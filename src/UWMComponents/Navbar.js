@@ -3,6 +3,9 @@ import ListItem from "./ItemsComponents/ListItem";
 import ItemDetail from "./ItemsComponents/ItemDetail";
 import ItemEdit from './ItemsComponents/ItemEdit';
 import ItemCreate from './ItemsComponents/ItemCreate';
+import WarehouseEdit from './WarehouseComponents/WarehouseEdit';
+import WarehouseCreate from './WarehouseComponents/WarehouseCreate';
+import WarehouseList from './WarehouseComponents/WarehouseList';
 import {
     Routes,
     Route,
@@ -34,6 +37,12 @@ export default class Navbar extends Component {
                                 <li className="nav-item">
                                     <Link className="nav-link active" aria-current="page" to="/ItemCreate">Добавить предмет</Link>
                                 </li>
+                                <li className="nav-item">
+                                    <Link className="nav-link active" aria-current="page" to="/WarehouseCreate">Добавить склад</Link>
+                                </li>
+                                <li className="nav-item">
+                                    <Link className="nav-link active" aria-current="page" to="/WarehouseList">Список складов</Link>
+                                </li>
                             </ul>
                             <form className="d-flex">
                                 <input className="form-control me-2" type="search" placeholder="Поиск" aria-label="Search"/>
@@ -47,6 +56,9 @@ export default class Navbar extends Component {
                     <Route path="/ItemDetail/:id" element={<ItemDetail />} />
                     <Route path="/ItemEdit/:id" element={<ItemEdit />} />
                     <Route path="/ItemCreate/" element={<ItemCreate />} />
+                    <Route path="/WarehouseEdit/:id" element={<WarehouseEdit />} />
+                    <Route path="/WarehouseCreate" element={<WarehouseCreate />} />
+                    <Route path="/WarehouseList" element={<WarehouseList />} />
                 </Routes>
             </div>
         )

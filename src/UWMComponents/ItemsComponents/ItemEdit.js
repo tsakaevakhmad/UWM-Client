@@ -133,7 +133,6 @@ class Item extends Component {
     }
 
     async Delete() {
-        console.log("-")
         await this.itemServices.deleteItem(this.state.id);
         this.setState({ redirectToList: true });
     }

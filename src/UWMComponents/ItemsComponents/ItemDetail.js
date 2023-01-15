@@ -77,7 +77,7 @@ class Item extends Component {
                   </tr>
                   <tr>
                     <th>Номер склада</th>
-                    <th>{item.warehouseNumber}</th>
+                    <th><Link to={`/WarehouseEdit/${item.warehouseId}`}>{item.warehouseNumber}</Link></th>
                   </tr>
                 </tbody>
               </table>

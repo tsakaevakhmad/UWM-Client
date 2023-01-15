@@ -12,6 +12,15 @@ export default class WarehouseServices {
         }
     }
 
+    async getWarehouseById(id) {
+        try {
+            return (await axios.get(`${baseUrl}/Warehouse/${id}`)).data;
+        }
+        catch (error) {
+            console.error(error)
+        }
+    }
+
     async deleteWarehouse(id) {
         try {
             return (await axios.delete(`${baseUrl}/Warehouse/${id}`)).data;
@@ -26,9 +35,9 @@ export default class WarehouseServices {
             await axios.post(`${baseUrl}/Warehouse`, {
                 number: warehouse.number,
                 addressDto: {
-                    country: warehouse.addressDto.country,
-                    city: warehouse.addressDto.city,
-                    building: warehouse.addressDto.building,
+                    country: warehouse.country,
+                    city: warehouse.city,
+                    building: warehouse.building,
                 }
             })
         }
@@ -43,11 +52,11 @@ export default class WarehouseServices {
                 id: warehouse.id,
                 number: warehouse.number,
                 addressDto: {
-                    id: warehouse.addressDto.id,
-                    country: warehouse.addressDto.country,
-                    city: warehouse.addressDto.city,
-                    building: warehouse.addressDto.building,
-                    warehouseId: warehouse.addressDto.warehouseId
+                    id: warehouse.addressId,
+                    country: warehouse.country,
+                    city: warehouse.city,
+                    building: warehouse.building,
+                    warehouseId: warehouse.id
                 }
             })
         }
