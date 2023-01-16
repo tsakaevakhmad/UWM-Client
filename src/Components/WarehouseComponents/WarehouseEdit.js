@@ -181,7 +181,7 @@ class Warehouse extends Component {
                         <div className="card-footer border-dark bg-transparent">
                             <div className="row" >
                                 <div className="col-8 d-grid gap-2 d-md-flex">
-                                    <Link to={`/`}><button type="button" className="btn btn-outline-dark fw-bolder">Назад</button></Link>
+                                    <Link className="btn btn-outline-dark fw-bolder" to={`/`}>Назад</Link>
                                     <button type="button" onClick={() => { this.setState({ edit: true }) }} className="btn btn-outline-warning fw-bolder">Редактировать</button>
                                 </div>
                             </div>

@@ -26,31 +26,42 @@ export default class Navbar extends Component {
     render() {
         return (
             <div>
-                <nav className="navbar navbar-expand-lg navbar-light bg-light">
-                    <div className="container-fluid">
-                        <button className="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarTogglerDemo03" aria-controls="navbarTogglerDemo03" aria-expanded="false" aria-label="Toggle navigation">
+                <nav className="navbar navbar-expand-lg navbar-light border-bottom border-2">
+                    <div className="container-fluid ">
+                        <a className="navbar-brand fw-bold">UWM</a>
+                        <button className="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarToggler" aria-controls="navbarTogglerDemo03" aria-expanded="false" aria-label="Toggle navigation">
                             <span className="navbar-toggler-icon"></span>
                         </button>
-                        <a className="navbar-brand" href="#">UWM</a>
-                        <div className="collapse navbar-collapse" id="navbarTogglerDemo03">
-                            <ul className="navbar-nav me-auto mb-2 mb-lg-0">
-                                <li className="nav-item">
-                                    <Link className="nav-link active" aria-current="page" to="/">Список</Link>
+                        <div className="collapse navbar-collapse " id="navbarToggler">
+                            <ul className="navbar-nav me-auto mb-2 mb-lg-0 ">
+                                <li className="nav-item dropdown fw-bold">
+                                    <a className="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                                        Предметы
+                                    </a>
+                                    <ul className="dropdown-menu" aria-labelledby="navbarDropdown">
+                                        <li><Link className="dropdown-item" aria-current="page" to="/">Список</Link></li>
+                                        <li><Link className="dropdown-item" aria-current="page" to="/ItemCreate">Добавить предмет</Link></li>
+                                    </ul>
                                 </li>
-                                <li className="nav-item">
-                                    <Link className="nav-link active" aria-current="page" to="/ItemCreate">Добавить предмет</Link>
+
+                                <li className="nav-item dropdown">
+                                    <a className="nav-link dropdown-toggle fw-bold" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                                        Склады
+                                    </a>
+                                    <ul className="dropdown-menu" aria-labelledby="navbarDropdown">
+                                        <li><Link className="dropdown-item" aria-current="page" to="/WarehouseList">Список складов</Link></li>
+                                        <li><Link className="dropdown-item" aria-current="page" to="/WarehouseCreate">Добавить склад</Link></li>
+                                    </ul>
                                 </li>
-                                <li className="nav-item">
-                                    <Link className="nav-link active" aria-current="page" to="/WarehouseCreate">Добавить склад</Link>
-                                </li>
-                                <li className="nav-item">
-                                    <Link className="nav-link active" aria-current="page" to="/WarehouseList">Список складов</Link>
-                                </li>
-                                <li className="nav-item">
-                                    <Link className="nav-link active" aria-current="page" to="/ProviderCreate">Добавить поставщика</Link>
-                                </li>
-                                <li className="nav-item">
-                                    <Link className="nav-link active" aria-current="page" to="/ProviderList">Список поставщикаов</Link>
+
+                                <li className="nav-item dropdown">
+                                    <a className="nav-link dropdown-toggle fw-bold" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                                        Поставщики
+                                    </a>
+                                    <ul className="dropdown-menu" aria-labelledby="navbarDropdown">
+                                        <li><Link className="dropdown-item" aria-current="page" to="/ProviderList">Список поставщикаов</Link></li>
+                                        <li><Link className="dropdown-item" aria-current="page" to="/ProviderCreate">Добавить поставщика</Link></li>
+                                    </ul>
                                 </li>
                             </ul>
                             {/* <form className="d-flex">

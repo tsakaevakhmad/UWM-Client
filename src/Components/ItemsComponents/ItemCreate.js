@@ -178,7 +178,7 @@ export default class ItemCreate extends Component {
                     <div className="card-footer border-dark bg-transparent">
                         <div className="row" >
                             <div className="col-8 d-grid gap-2 d-md-flex">
-                                <Link to="/"><button type="button" className="btn btn-outline-dark fw-bolder">Отмена</button></Link>
+                                <Link className="btn btn-outline-dark fw-bolder" to="/">Отмена</Link>
                                 <button type="button" onClick={this.Create} className="btn btn-outline-success fw-bolder">Сохранить</button>
                             </div>
                         </div>
