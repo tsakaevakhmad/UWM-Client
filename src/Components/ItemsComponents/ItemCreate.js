@@ -115,6 +115,7 @@ export default class ItemCreate extends Component {
             subCategoryId: this.state.subCategoryId,
         }
         let id = await this.itemServices.createItem(item);
+        console.log(id);
         this.setState({ id: id.data, redirect: true });
     }
 
@@ -128,10 +129,10 @@ export default class ItemCreate extends Component {
     }
 
     render() {
-        const { id } = this.state;
+        const { id, redirect } = this.state;
 
-        if (this.state.redirect) {
-            return <Navigate to={`/Itemdetail/${id}`} />
+        if (redirect) {
+            return <Navigate to={`/ItemEdit/${id}`} />
         }
 
         return (

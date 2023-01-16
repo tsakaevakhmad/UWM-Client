@@ -26,10 +26,12 @@ class Warehouse extends Component {
         this.warehouseServices = new WarehouseServices();
 
         this.state = {
+            id: 0,
             number: "",
             country: "",
             city: "",
             building: "",
+            redirect: false,
         }
 
         this.handleChangeNumber = this.handleChangeNumber.bind(this);
@@ -72,15 +74,15 @@ class Warehouse extends Component {
             building: this.state.building,
         }
 
-        await this.warehouseServices.createWarehouse(warehouse);
-        this.setState({ redirectToList: true });
+        let id = await this.warehouseServices.createWarehouse(warehouse);
+        this.setState({ id:id.data, redirect: true });
     }
 
     render() {
-        const { number, country, city, building } = this.state;
+        const { redirect, number, country, city, building, id } = this.state;
 
-        if (this.state.redirectToList) {
-            return <Navigate to={"/"} />
+        if (redirect) {
+            return <Navigate to={`/WarehouseEdit/${id}`} />
         }
         return (
             <div >
@@ -90,9 +92,9 @@ class Warehouse extends Component {
                     <div className="card-body text-dark">
                         <label className="form-label">Номер склада</label>
                         <input className="form-control" type="text" value={number} name="number" onChange={this.handleChangeNumber} placeholder="Номер склада" />
-                        <br/>
+                        <br />
                         <h3>Адрес</h3>
-                        <br/>
+                        <br />
                         <label className="form-label">Страна</label>
                         <input className="form-control" type="text" value={country} name="country" onChange={this.handleChangeCountry} placeholder="Страна" />
                         <label className="form-label">Город</label>

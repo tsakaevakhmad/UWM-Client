@@ -32,7 +32,7 @@ export default class WarehouseServices {
 
     async createWarehouse(warehouse) {
         try {
-            await axios.post(`${baseUrl}/Warehouse`, {
+            return await axios.post(`${baseUrl}/Warehouse`, {
                 number: warehouse.number,
                 addressDto: {
                     country: warehouse.country,

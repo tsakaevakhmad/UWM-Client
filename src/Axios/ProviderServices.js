@@ -32,7 +32,7 @@ export default class ProviderServices {
 
   async createProvider(provider) {
     try {
-      await axios.post(`${baseUrl}/provider`, {
+      return await axios.post(`${baseUrl}/provider`, {
         name: provider.name
       })
     }

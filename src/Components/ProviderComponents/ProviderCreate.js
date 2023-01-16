@@ -36,7 +36,8 @@ class Provider extends Component {
 
     handleChangeName(e) {
         this.setState({
-            name: e.target.value
+            name: e.target.value,
+            id: 0
         });
     }
 
@@ -45,15 +46,15 @@ class Provider extends Component {
             name: this.state.name,
         }
 
-        await this.providerServices.createProvider(provider);
-        this.setState({ redirectToList: true });
+        let id = await this.providerServices.createProvider(provider);
+        this.setState({ id: id.data, redirectToList: true });
     }
 
     render() {
-        const { name } = this.state;
+        const { name, id } = this.state;
 
         if (this.state.redirectToList) {
-            return <Navigate to={"/"} />
+            return <Navigate to={`/ProviderEdit/${id}`} />
         }
         return (
             <div >
