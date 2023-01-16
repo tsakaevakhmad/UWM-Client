@@ -5,6 +5,10 @@ import ItemCreate from './ItemsComponents/ItemCreate';
 import WarehouseEdit from './WarehouseComponents/WarehouseEdit';
 import WarehouseCreate from './WarehouseComponents/WarehouseCreate';
 import WarehouseList from './WarehouseComponents/WarehouseList';
+import ProviderCreate from './ProviderComponents/ProviderCreate';
+import ProviderList from './ProviderComponents/ProviderList';
+import ProviderEdit from './ProviderComponents/ProviderEdit';
+
 import {
     Routes,
     Route,
@@ -42,11 +46,17 @@ export default class Navbar extends Component {
                                 <li className="nav-item">
                                     <Link className="nav-link active" aria-current="page" to="/WarehouseList">Список складов</Link>
                                 </li>
+                                <li className="nav-item">
+                                    <Link className="nav-link active" aria-current="page" to="/ProviderCreate">Добавить поставщика</Link>
+                                </li>
+                                <li className="nav-item">
+                                    <Link className="nav-link active" aria-current="page" to="/ProviderList">Список поставщикаов</Link>
+                                </li>
                             </ul>
-                            <form className="d-flex">
-                                <input className="form-control me-2" type="search" placeholder="Поиск" aria-label="Search"/>
-                                    <button className="btn btn-outline-success" type="submit">Поиск</button>
-                            </form>
+                            {/* <form className="d-flex">
+                                <input className="form-control me-2" type="search" placeholder="Поиск" aria-label="Search" />
+                                <button className="btn btn-outline-success" type="submit">Поиск</button>
+                            </form> */}
                         </div>
                     </div>
                 </nav>
@@ -57,6 +67,9 @@ export default class Navbar extends Component {
                     <Route path="/WarehouseEdit/:id" element={<WarehouseEdit />} />
                     <Route path="/WarehouseCreate" element={<WarehouseCreate />} />
                     <Route path="/WarehouseList" element={<WarehouseList />} />
+                    <Route path="/ProviderEdit/:id" element={<ProviderEdit />} />
+                    <Route path="/ProviderCreate" element={<ProviderCreate />} />
+                    <Route path="/ProviderList" element={<ProviderList />} />
                 </Routes>
             </div>
         )
