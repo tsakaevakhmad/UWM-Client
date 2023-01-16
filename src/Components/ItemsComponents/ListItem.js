@@ -42,8 +42,10 @@ export default class Main extends Component {
                             {this.state.items.map(item =>
                                 <tr key={item.id}>
                                     <td><Link to={`/ItemEdit/${item.id}`}>{item.title}</Link> </td>
-                                    <td>{item.price} $</td>
-                                    <td>{item.quantity} | {item.unit}</td>
+                                    <td> <p className="fw-bold" style={{ color: "green" }}> {item.price} $ </p></td>
+                                    <td>
+                                        <div>{item.quantity} {item.unit}</div>
+                                    </td>
                                     <td>{item.providerName}</td>
                                 </tr>
                             )}
