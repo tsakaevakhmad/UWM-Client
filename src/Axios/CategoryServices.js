@@ -14,7 +14,7 @@ export default class CategoryServices {
 
   async getCategoryByid(id) {
     try {
-      return (await axios.get(`${baseUrl}/category${id}`)).data;
+      return (await axios.get(`${baseUrl}/category/${id}`)).data;
     }
     catch (error) {
       console.error(error)

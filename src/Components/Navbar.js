@@ -96,7 +96,8 @@ export default class Navbar extends Component {
                     <Route path="/ProviderList" element={<ProviderList />} />
                     <Route path="/CategoryCreate" element={<CategoryCreate />} />
                     <Route path="/CategoryList" element={<CategoryList />} />
-                    <Route path="/SubCategoryEdit/:id" element={<SubCategoryEdit />} />
+                    <Route path="/SubCategoryEdit/:id/:categoryId" element={<SubCategoryEdit />} />
+                    <Route path="/CategoryEdit/:id" element={<CategoryEdit />} />
                 </Routes>
             </div>
         )

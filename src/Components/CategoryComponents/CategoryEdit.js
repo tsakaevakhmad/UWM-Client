@@ -60,6 +60,7 @@ class Category extends Component {
 
     async componentDidMount() {
         const c = await this.categoryServices.getCategoryByid(this.props.id)
+        console.log(c)
         this.setState({
             id: c.id,
             name: c.name,
@@ -69,10 +70,12 @@ class Category extends Component {
 
     render() {
         const { category, name, edit } = this.state;
-
+        console.log(category);
         if (this.state.redirectToList) {
             return <Navigate to={"/"} />
         }
+
+
 
         if (edit) {
             return (
@@ -99,32 +102,46 @@ class Category extends Component {
                 </div>
             )
         } else {
-            return (
-                <div >
-                    <br /><br />
-                    <div className="mx-auto col-md-11 card border-dark" >
-                        <div className="card-header bg-transparent border-dark"><h3>{category.name}</h3></div>
-                        <div className="card-body text-dark">
-                            <table className="table table-hover">
-                                <tbody>
-                                    <tr>
-                                        <th>Категория</th>
-                                        <th>{category.name}</th>
-                                    </tr>
-                                </tbody>
-                            </table>
-                        </div>
-                        <div className="card-footer border-dark bg-transparent">
-                            <div className="row" >
-                                <div className="col-8 d-grid gap-2 d-md-flex">
-                                    <Link className="btn btn-outline-dark fw-bolder" to={`/`}>Назад</Link>
-                                    <button type="button" onClick={() => this.setState({ edit: true })} className="btn btn-outline-warning fw-bolder">Редактировать</button>
+            if (category.subCategoryDto !== undefined)
+                return (
+                    <div >
+                        <br /><br />
+                        <div className="mx-auto col-md-11 card border-dark" >
+                            <div className="card-header bg-transparent border-dark"><h3>{category.name}</h3></div>
+                            <div className="card-body text-dark">
+                                <table className="table table-hover">
+                                    <tbody>
+                                        <tr>
+                                            <th>Категория</th>
+                                            <th>{category.name}</th>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                                <br />
+                                <h4>Подкатегории</h4>
+                                <table className="table table-hover">
+                                    <tbody>
+                                        {category.subCategoryDto.map(item =>
+                                            <tr key={item.id}>
+                                                <th>{item.name}</th>
+                                                <td><Link to={`/SubCategoryEdit/${item.id}/${category.id}`}><button type="button" className="btn btn-outline-warning btn-sm fw-bolder">Редактировать</button></Link></td>
+                                            </tr>
+                                        )}
+                                    </tbody>
+                                </table>
+                                <br />
+                            </div>
+                            <div className="card-footer border-dark bg-transparent">
+                                <div className="row" >
+                                    <div className="col-8 d-grid gap-2 d-md-flex">
+                                        <Link className="btn btn-outline-dark fw-bolder" to={`/`}>Назад</Link>
+                                        <button type="button" onClick={() => this.setState({ edit: true })} className="btn btn-outline-warning fw-bolder">Редактировать</button>
+                                    </div>
                                 </div>
                             </div>
                         </div>
-                    </div>
-                </div >
-            )
+                    </div >
+                )
         }
 
     }

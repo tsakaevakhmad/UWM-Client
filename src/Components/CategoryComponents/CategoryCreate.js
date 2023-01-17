@@ -48,7 +48,7 @@ export default class CategoryCreate extends Component {
         }
 
         let id = await this.categoryServices.createCategory(category);
-        
+
         if (this.state.addSubcategory) {
             await this.CreateSubcategory(id.data);
         }
