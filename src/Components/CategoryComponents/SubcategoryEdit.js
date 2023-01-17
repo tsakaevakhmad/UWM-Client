@@ -47,11 +47,11 @@ class SubCategory extends Component {
         const category = {
             id: this.state.id,
             name: this.state.name,
-            categoryId: this.props.categoryId,
+            categoryId: this.state.category.categoryId,
         }
 
         await this.subCategoryServices.updateSubCategory(this.props.id, category);
-        this.setState({ edit: false });
+        this.setState({ redirect: true });
     }
 
     async Delete() {
@@ -72,7 +72,7 @@ class SubCategory extends Component {
         const { name } = this.state;
 
         if (this.state.redirect) {
-            return <Navigate to={`/CategoryEdit/${this.props.categoryId}`} />
+            return <Navigate to={`/CategoryEdit/${this.state.category.categoryId}`} />
         }
 
         return (

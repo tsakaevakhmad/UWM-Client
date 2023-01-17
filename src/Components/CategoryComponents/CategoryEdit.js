@@ -51,6 +51,7 @@ class Category extends Component {
 
         await this.categoryServices.updateCategory(this.props.id, category);
         this.setState({ edit: false });
+        await this.componentDidMount();
     }
 
     async Delete() {
@@ -60,7 +61,6 @@ class Category extends Component {
 
     async componentDidMount() {
         const c = await this.categoryServices.getCategoryByid(this.props.id)
-        console.log(c)
         this.setState({
             id: c.id,
             name: c.name,
@@ -70,12 +70,10 @@ class Category extends Component {
 
     render() {
         const { category, name, edit } = this.state;
-        console.log(category);
+        
         if (this.state.redirectToList) {
             return <Navigate to={"/"} />
         }
-
-
 
         if (edit) {
             return (
@@ -124,9 +122,14 @@ class Category extends Component {
                                         {category.subCategoryDto.map(item =>
                                             <tr key={item.id}>
                                                 <th>{item.name}</th>
-                                                <td><Link to={`/SubCategoryEdit/${item.id}/${category.id}`}><button type="button" className="btn btn-outline-warning btn-sm fw-bolder">Редактировать</button></Link></td>
+                                                <td><Link to={`/SubCategoryEdit/${item.id}`}><button type="button" className="btn btn-outline-warning btn-sm fw-bolder">Редактировать</button></Link></td>
                                             </tr>
+
                                         )}
+                                        <tr>
+                                            <th></th>
+                                            <td><Link to={`/SubCategoryCreate/${category.id}`}><button type="button" className="btn btn-outline-success btn-sm fw-bolder">Добавить</button></Link></td>
+                                        </tr>
                                     </tbody>
                                 </table>
                                 <br />

@@ -45,10 +45,7 @@ export default class SubCategoryServices {
 
   async updateSubCategory(id, subcategory) {
     try {
-      await axios.put(`${baseUrl}/SubCategory/${id}`, {
-        id: subcategory.id,
-        name: subcategory.name
-      })
+      await axios.put(`${baseUrl}/SubCategory/${id}`, subcategory)
     }
     catch (error) {
       console.error(error)

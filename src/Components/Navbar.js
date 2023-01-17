@@ -12,6 +12,8 @@ import CategoryCreate from './CategoryComponents/CategoryCreate';
 import CategoryEdit from './CategoryComponents/CategoryEdit';
 import CategoryList from './CategoryComponents/CategoryList';
 import SubCategoryEdit from './CategoryComponents/SubcategoryEdit';
+import SubCategoryCreate from './CategoryComponents/SubcategoryCreate';
+
 import {
     Routes,
     Route,
@@ -21,9 +23,6 @@ import {
 export default class Navbar extends Component {
     constructor(props) {
         super(props);
-        this.state = {
-            id: 1,
-        }
     }
 
     render() {
@@ -72,7 +71,7 @@ export default class Navbar extends Component {
                                         Категории
                                     </a>
                                     <ul className="dropdown-menu" aria-labelledby="navbarDropdown">
-                                        <li><Link className="dropdown-item" aria-current="page" to="/CategoryList">Список поставщикаов</Link></li>
+                                        <li><Link className="dropdown-item" aria-current="page" to="/CategoryList">Список категорий</Link></li>
                                         <li><Link className="dropdown-item" aria-current="page" to="/CategoryCreate">Добавить категорию</Link></li>
                                     </ul>
                                 </li>
@@ -96,8 +95,9 @@ export default class Navbar extends Component {
                     <Route path="/ProviderList" element={<ProviderList />} />
                     <Route path="/CategoryCreate" element={<CategoryCreate />} />
                     <Route path="/CategoryList" element={<CategoryList />} />
-                    <Route path="/SubCategoryEdit/:id/:categoryId" element={<SubCategoryEdit />} />
                     <Route path="/CategoryEdit/:id" element={<CategoryEdit />} />
+                    <Route path="/SubCategoryEdit/:id" element={<SubCategoryEdit />} />
+                    <Route path="/SubCategoryCreate/:categoryId" element={<SubCategoryCreate />} />
                 </Routes>
             </div>
         )

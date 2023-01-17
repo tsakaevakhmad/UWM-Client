@@ -47,12 +47,12 @@ export default class CategoryCreate extends Component {
             name: this.state.name,
         }
 
-        let id = await this.categoryServices.createCategory(category);
+        const id = await this.categoryServices.createCategory(category);
 
         if (this.state.addSubcategory) {
             await this.CreateSubcategory(id.data);
         }
-        await this.setState({ id: id, redirectToList: true });
+        await this.setState({ id: id.data, redirect: true });
     }
 
     async CreateSubcategory(categoryId) {
@@ -71,17 +71,21 @@ export default class CategoryCreate extends Component {
 
         if (this.state.addSubcategory) {
             document.getElementById("subcategory").hidden = false;
+            document.getElementById("yes").hidden = true;
+            document.getElementById("no").hidden = false;
         } else {
             document.getElementById("subcategory").hidden = true;
+            document.getElementById("yes").hidden = false;
+            document.getElementById("no").hidden = true;
         }
     }
 
     render() {
 
 
-        // if (this.state.redirect) {
-        //     return <Navigate to={`/ProviderEdit/${id}`} />
-        // }
+        if (this.state.redirect) {
+            return <Navigate to={`/CategoryEdit/${this.state.id}`} />
+        }
 
         return (
             <div >
@@ -101,7 +105,9 @@ export default class CategoryCreate extends Component {
                             <div className="col-8 d-grid gap-2 d-md-flex">
                                 <Link className="btn btn-outline-dark fw-bolder" to={`/`}>Отмена</Link>
                                 <button type="button" onClick={this.Create} className="btn btn-outline-success fw-bolder">Сохранить</button>
-                                <input className="form-check-input" onClick={this.addSubcategory} type="checkbox" value={this.state.addSubcategory} id="check"></input>
+                                <label className="btn btn-outline-primary" id="yes" htmlFor="check" >Добавить подкатегорию</label>
+                                <label className="btn btn-outline-danger" id="no" htmlFor="check" hidden>Не добавлять подкатегорию</label>
+                                <input autoComplete="off" className="btn-check"  onClick={this.addSubcategory} type="checkbox" value={this.state.addSubcategory} id="check"></input>
                             </div>
                         </div>
                     </div>
