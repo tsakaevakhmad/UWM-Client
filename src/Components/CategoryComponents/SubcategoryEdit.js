@@ -1,4 +1,4 @@
-import ProviderServices from '../../Axios/ProviderServices';
+import CategoryServices from '../../Axios/CategoryServices';
 import React, { Component } from 'react'
 import { useParams, Navigate } from 'react-router-dom'
 
@@ -6,30 +6,30 @@ import {
     Link,
 } from "react-router-dom";
 
-export default function ProviderEdit(props) {
+export default function SubCategoryEdit(props) {
 
     let { id } = useParams();
 
     return (
         <div>
-            <Provider id={id} />
+            <SubCategory id={id} />
         </div>
     );
 }
 
 
-class Provider extends Component {
+class SubCategory extends Component {
 
     constructor(props) {
         super(props);
 
-        this.providerServices = new ProviderServices();
+        this.categoryServices = new CategoryServices();
 
         this.state = {
             id: 0,
             name: "",
             edit: false,
-            provider: {}
+            category: {}
         }
 
         this.handleChangeName = this.handleChangeName.bind(this);
@@ -44,31 +44,31 @@ class Provider extends Component {
     }
 
     async Update() {
-        const provider = {
+        const category = {
             id: this.state.id,
             name: this.state.name,
         }
 
-        await this.providerServices.updateProvider(this.props.id, provider);
+        await this.categoryServices.updateCategory(this.props.id, category);
         this.setState({ edit: false });
     }
 
     async Delete() {
-        await this.providerServices.deleteProvider(this.state.id);
+        await this.categoryServices.deleteCategory(this.state.id);
         this.setState({ redirectToList: true });
     }
 
     async componentDidMount() {
-        const p = await this.providerServices.getProviderById(this.props.id)
+        const c = await this.categoryServices.getCategoryByid(this.props.id)
         this.setState({
-            id: p.id,
-            name: p.name,
-            provider: p,
+            id: c.id,
+            name: c.name,
+            category: c,
         })
     }
 
     render() {
-        const { provider, name, edit } = this.state;
+        const { category, name, edit } = this.state;
 
         if (this.state.redirectToList) {
             return <Navigate to={"/"} />
@@ -79,9 +79,9 @@ class Provider extends Component {
                 <div >
                     <br /><br />
                     <div className="mx-auto col-md-11 card border-dark" >
-                        <div className="card-header bg-transparent border-dark"><h3>Добавление поставщика</h3></div>
+                        <div className="card-header bg-transparent border-dark"><h3>Редактор категории</h3></div>
                         <div className="card-body text-dark">
-                            <label className="form-label">Поставщик</label>
+                            <label className="form-label">Категория</label>
                             <input className="form-control" type="text" value={name} name="name" onChange={this.handleChangeName} placeholder="Имя поставщика" />
                         </div>
                         <div className="card-footer border-dark bg-transparent">
@@ -103,13 +103,13 @@ class Provider extends Component {
                 <div >
                     <br /><br />
                     <div className="mx-auto col-md-11 card border-dark" >
-                        <div className="card-header bg-transparent border-dark"><h3>{provider.name}</h3></div>
+                        <div className="card-header bg-transparent border-dark"><h3>{category.name}</h3></div>
                         <div className="card-body text-dark">
                             <table className="table table-hover">
                                 <tbody>
                                     <tr>
-                                        <th>Поставщик</th>
-                                        <th>{provider.name}</th>
+                                        <th>Категория</th>
+                                        <th>{category.name}</th>
                                     </tr>
                                 </tbody>
                             </table>

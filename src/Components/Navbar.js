@@ -8,7 +8,10 @@ import WarehouseList from './WarehouseComponents/WarehouseList';
 import ProviderCreate from './ProviderComponents/ProviderCreate';
 import ProviderList from './ProviderComponents/ProviderList';
 import ProviderEdit from './ProviderComponents/ProviderEdit';
-
+import CategoryCreate from './CategoryComponents/CategoryCreate';
+import CategoryEdit from './CategoryComponents/CategoryEdit';
+import CategoryList from './CategoryComponents/CategoryList';
+import SubCategoryEdit from './CategoryComponents/SubcategoryEdit';
 import {
     Routes,
     Route,
@@ -63,6 +66,16 @@ export default class Navbar extends Component {
                                         <li><Link className="dropdown-item" aria-current="page" to="/ProviderCreate">Добавить поставщика</Link></li>
                                     </ul>
                                 </li>
+
+                                <li className="nav-item dropdown">
+                                    <a className="nav-link dropdown-toggle fw-bold" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                                        Категории
+                                    </a>
+                                    <ul className="dropdown-menu" aria-labelledby="navbarDropdown">
+                                        <li><Link className="dropdown-item" aria-current="page" to="/CategoryList">Список поставщикаов</Link></li>
+                                        <li><Link className="dropdown-item" aria-current="page" to="/CategoryCreate">Добавить категорию</Link></li>
+                                    </ul>
+                                </li>
                             </ul>
                             {/* <form className="d-flex">
                                 <input className="form-control me-2" type="search" placeholder="Поиск" aria-label="Search" />
@@ -81,6 +94,9 @@ export default class Navbar extends Component {
                     <Route path="/ProviderEdit/:id" element={<ProviderEdit />} />
                     <Route path="/ProviderCreate" element={<ProviderCreate />} />
                     <Route path="/ProviderList" element={<ProviderList />} />
+                    <Route path="/CategoryCreate" element={<CategoryCreate />} />
+                    <Route path="/CategoryList" element={<CategoryList />} />
+                    <Route path="/SubCategoryEdit/:id" element={<SubCategoryEdit />} />
                 </Routes>
             </div>
         )

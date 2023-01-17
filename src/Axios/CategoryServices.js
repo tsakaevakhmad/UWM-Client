@@ -12,6 +12,15 @@ export default class CategoryServices {
     }
   }
 
+  async getCategoryByid(id) {
+    try {
+      return (await axios.get(`${baseUrl}/category${id}`)).data;
+    }
+    catch (error) {
+      console.error(error)
+    }
+  }
+
   async deleteCategory(id) {
     try {
       return (await axios.delete(`${baseUrl}/category/${id}`)).data;
@@ -23,7 +32,7 @@ export default class CategoryServices {
 
   async createCategory(category) {
     try {
-      await axios.post(`${baseUrl}/category`, {
+      return await axios.post(`${baseUrl}/category`, {
         name: category.name
       })
     }

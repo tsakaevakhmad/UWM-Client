@@ -1,24 +1,12 @@
 import WarehouseServices from '../../Axios/WarehouseServices';
 import React, { Component } from 'react'
-import { useParams, Navigate } from 'react-router-dom'
+import { Navigate } from 'react-router-dom'
 
 import {
     Link,
 } from "react-router-dom";
 
-export default function WarehouseCreate(props) {
-
-    let { id } = useParams();
-
-    return (
-        <div>
-            <Warehouse id={id} />
-        </div>
-    );
-}
-
-
-class Warehouse extends Component {
+export default class WarehouseCreate extends Component {
 
     constructor(props) {
         super(props);

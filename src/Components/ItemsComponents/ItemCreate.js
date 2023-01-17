@@ -115,7 +115,6 @@ export default class ItemCreate extends Component {
             subCategoryId: this.state.subCategoryId,
         }
         let id = await this.itemServices.createItem(item);
-        console.log(id);
         this.setState({ id: id.data, redirect: true });
     }
 

@@ -1,24 +1,12 @@
 import ProviderServices from '../../Axios/ProviderServices';
 import React, { Component } from 'react'
-import { useParams, Navigate } from 'react-router-dom'
+import { Navigate } from 'react-router-dom'
 
 import {
     Link,
 } from "react-router-dom";
 
-export default function ProviderCreate(props) {
-
-    let { id } = useParams();
-
-    return (
-        <div>
-            <Provider id={id} />
-        </div>
-    );
-}
-
-
-class Provider extends Component {
+export default class ProviderCreate extends Component {
 
     constructor(props) {
         super(props);
