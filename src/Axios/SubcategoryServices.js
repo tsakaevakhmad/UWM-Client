@@ -12,6 +12,15 @@ export default class SubCategoryServices {
     }
   }
 
+  async getSubCategoryById(id) {
+    try {
+      return (await axios.get(`${baseUrl}/SubCategory/${id}`)).data;
+    }
+    catch (error) {
+      console.error(error)
+    }
+  }
+
   async deleteSubCategory(id) {
 
     try {
@@ -24,8 +33,9 @@ export default class SubCategoryServices {
 
   async createSubCategory(subcategory) {
     try {
-      await axios.post(`${baseUrl}/SubCategory`, {
-        name: subcategory.name
+      return await axios.post(`${baseUrl}/SubCategory`, {
+        name: subcategory.name,
+        categoryId: subcategory.categoryId
       })
     }
     catch (error) {
