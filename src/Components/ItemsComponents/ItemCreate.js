@@ -36,69 +36,14 @@ export default class ItemCreate extends Component {
             wahehouse: [],
         }
 
-        this.handleChangeTitle = this.handleChangeTitle.bind(this);
-        this.handleChangeManufacturer = this.handleChangeManufacturer.bind(this);
-        this.handleChangePrice = this.handleChangePrice.bind(this);
-        this.handleChangeProviderId = this.handleChangeProviderId.bind(this);
-        this.handleChangeQuantity = this.handleChangeQuantity.bind(this);
-        this.handleChangeSpecifications = this.handleChangeSpecifications.bind(this);
-        this.handleChangeUnit = this.handleChangeUnit.bind(this);
-        this.handleChangeWarehouseId = this.handleChangeWarehouseId.bind(this);
-        this.handleChangeSubCategoryId = this.handleChangeSubCategoryId.bind(this);
+        this.handleChange = this.handleChange.bind(this);
         this.Create = this.Create.bind(this);
     }
 
-    handleChangeTitle(e) {
-        this.setState({
-            title: e.target.value
-        });
-    }
-
-    handleChangeManufacturer(e) {
-        this.setState({
-            manufacturer: e.target.value
-        });
-    }
-
-    handleChangePrice(e) {
-        this.setState({
-            price: e.target.value
-        });
-    }
-
-    handleChangeQuantity(e) {
-        this.setState({
-            quantity: e.target.value
-        });
-    }
-
-    handleChangeSpecifications(e) {
-        this.setState({
-            specifications: e.target.value
-        });
-    }
-
-    handleChangeUnit(e) {
-        this.setState({
-            unit: e.target.value
-        });
-    }
-
-    handleChangeWarehouseId(e) {
-        this.setState({
-            warehouseId: e.target.value
-        });
-    }
-
-    handleChangeProviderId(e) {
-        this.setState({
-            providerId: e.target.value
-        });
-    }
-
-    handleChangeSubCategoryId(e) {
-        this.setState({
-            subCategoryId: e.target.value
+    async handleChange(e) {
+        const { name, value } = e.target;
+        await this.setState({
+            [name]: value
         });
     }
 
@@ -141,39 +86,39 @@ export default class ItemCreate extends Component {
                     <div className="card-header bg-transparent border-dark"><h3>Новый предмет</h3></div>
                     <div className="card-body text-dark">
                         <label className="form-label">Название</label>
-                        <input className="form-control" type="text" name="title" onChange={this.handleChangeTitle} placeholder="Название" />
+                        <input className="form-control" type="text" name="title" onChange={this.handleChange} placeholder="Название" />
                         <label className="form-label">Производитель</label>
-                        <input className="form-control" type="text" name="manufacturer" onChange={this.handleChangeManufacturer} placeholder="Производитель" />
+                        <input className="form-control" type="text" name="manufacturer" onChange={this.handleChange} placeholder="Производитель" />
                         <label className="form-label">Цена</label>
-                        <input className="form-control" type="number" name="price" onChange={this.handleChangePrice} placeholder="Цена" />
+                        <input className="form-control" type="number" name="price" onChange={this.handleChange} placeholder="Цена" />
                         <label className="form-label">Количество / единица измерения</label>
                         <div className="input-group ">
-                            <input className="form-control col-6" type="number" name="quantity" onChange={this.handleChangeQuantity} placeholder="Количество" />
-                            <input className="form-control col-6" type="text" name="unit" onChange={this.handleChangeUnit} placeholder="Единица" />
+                            <input className="form-control col-6" type="number" name="quantity" onChange={this.handleChange} placeholder="Количество" />
+                            <input className="form-control col-6" type="text" name="unit" onChange={this.handleChange} placeholder="Единица" />
                         </div>
                         <label className="form-label">Поставщик</label>
-                        <select className="form-select" defaultValue={'Default'} name="providerId" onChange={this.handleChangeProviderId}>
+                        <select className="form-select" defaultValue={'Default'} name="providerId" onChange={this.handleChange}>
                             <option value="Default" disabled>Пусто</option>
                             {this.state.provider.map(p =>
                                 <option key={p.id} value={p.id}>{p.name}</option>
                             )}
                         </select>
                         <label className="form-label">Категория</label>
-                        <select className="form-select" defaultValue={'Default'} onChange={this.handleChangeSubCategoryId}>
+                        <select className="form-select" defaultValue={'Default'} name="subCategoryId" onChange={this.handleChange}>
                             <option value="Default" disabled>Пусто</option>
                             {this.state.subCategory.map(sc =>
                                 <option key={sc.id} value={sc.id}>{sc.name}</option>
                             )}
                         </select>
                         <label className="form-label">Склад</label>
-                        <select className="form-select" defaultValue={'Default'} name="warehouseId" onChange={this.handleChangeWarehouseId}>
+                        <select className="form-select" defaultValue={'Default'} name="warehouseId" onChange={this.handleChange}>
                             <option value="Default" disabled>Пусто</option>
                             {this.state.wahehouse.map(w =>
                                 <option key={w.id} value={w.id}>{w.number}</option>
                             )}
                         </select>
                         <label className="form-label">Описание товара</label>
-                        <textarea className="form-control" name="specifications" onChange={this.handleChangeSpecifications} rows="3"></textarea>
+                        <textarea className="form-control" name="specifications" onChange={this.handleChange} rows="3"></textarea>
                     </div>
                     <div className="card-footer border-dark bg-transparent">
                         <div className="row" >

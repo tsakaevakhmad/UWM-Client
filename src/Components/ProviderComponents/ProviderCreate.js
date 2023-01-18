@@ -18,14 +18,14 @@ export default class ProviderCreate extends Component {
             redirectToList: false
         }
 
-        this.handleChangeName = this.handleChangeName.bind(this);
+        this.handleChange = this.handleChange.bind(this);
         this.Create = this.Create.bind(this);
     }
 
-    handleChangeName(e) {
-        this.setState({
-            name: e.target.value,
-            id: 0
+    async handleChange(e) {
+        const { name, value } = e.target;
+        await this.setState({
+            [name]: value
         });
     }
 
@@ -51,7 +51,7 @@ export default class ProviderCreate extends Component {
                     <div className="card-header bg-transparent border-dark"><h3>Добавление поставщика</h3></div>
                     <div className="card-body text-dark">
                         <label className="form-label">Поставщик</label>
-                        <input className="form-control" type="text" value={name} name="name" onChange={this.handleChangeName} placeholder="Имя поставщика" />
+                        <input className="form-control" type="text" value={name} name="name" onChange={this.handleChange} placeholder="Имя поставщика" />
                     </div>
                     <div className="card-footer border-dark bg-transparent">
                         <div className="row" >

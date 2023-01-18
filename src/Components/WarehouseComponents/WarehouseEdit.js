@@ -35,38 +35,18 @@ class Warehouse extends Component {
             building: "",
         }
 
-        this.handleChangeNumber = this.handleChangeNumber.bind(this);
-        this.handleChangeCountry = this.handleChangeCountry.bind(this);
-        this.handleChangeCity = this.handleChangeCity.bind(this);
-        this.handleChangeBuilding = this.handleChangeBuilding.bind(this);
+        this.handleChange = this.handleChange.bind(this);
         this.Update = this.Update.bind(this);
         this.Delete = this.Delete.bind(this);
     }
 
-    handleChangeNumber(e) {
-        this.setState({
-            number: e.target.value
+    async handleChange(e) {
+        const { name, value } = e.target;
+        await this.setState({
+            [name]: value
         });
     }
-
-    handleChangeCountry(e) {
-        this.setState({
-            country: e.target.value
-        });
-    }
-
-    handleChangeCity(e) {
-        this.setState({
-            city: e.target.value
-        });
-    }
-
-    handleChangeBuilding(e) {
-        this.setState({
-            building: e.target.value
-        });
-    }
-
+    
     async Update() {
         const warehouse = {
             id: this.state.id,
@@ -114,16 +94,16 @@ class Warehouse extends Component {
                         <div className="card-header bg-transparent border-dark"><h3>{this.state.number}</h3></div>
                         <div className="card-body text-dark">
                             <label className="form-label">Номер склада</label>
-                            <input className="form-control" type="text" value={number} name="number" onChange={this.handleChangeNumber} placeholder="Номер склада" />
+                            <input className="form-control" type="text" value={number} name="number" onChange={this.handleChange} placeholder="Номер склада" />
                             <br />
                             <h3>Адрес</h3>
                             <br />
                             <label className="form-label">Страна</label>
-                            <input className="form-control" type="text" value={country} name="country" onChange={this.handleChangeCountry} placeholder="Страна" />
+                            <input className="form-control" type="text" value={country} name="country" onChange={this.handleChange} placeholder="Страна" />
                             <label className="form-label">Город</label>
-                            <input className="form-control" type="text" value={city} name="city" onChange={this.handleChangeCity} placeholder="Город" />
+                            <input className="form-control" type="text" value={city} name="city" onChange={this.handleChange} placeholder="Город" />
                             <label className="form-label">Здание (локальный адрес)</label>
-                            <input className="form-control" type="text" value={building} name="building" onChange={this.handleChangeBuilding} placeholder="Локальный адрес" />
+                            <input className="form-control" type="text" value={building} name="building" onChange={this.handleChange} placeholder="Локальный адрес" />
                         </div>
                         <div className="card-footer border-dark bg-transparent">
                             <div className="row" >

@@ -32,14 +32,15 @@ class SubCategory extends Component {
             category: {}
         }
 
-        this.handleChangeName = this.handleChangeName.bind(this);
+        this.handleChange = this.handleChange.bind(this);
         this.Update = this.Update.bind(this);
         this.Delete = this.Delete.bind(this);
     }
 
-    handleChangeName(e) {
-        this.setState({
-            name: e.target.value
+    async handleChange(e) {
+        const { name, value } = e.target;
+        await this.setState({
+            [name]: value
         });
     }
 
@@ -82,7 +83,7 @@ class SubCategory extends Component {
                     <div className="card-header bg-transparent border-dark"><h3>Редактор Подкатегории</h3></div>
                     <div className="card-body text-dark">
                         <label className="form-label">Категория</label>
-                        <input className="form-control" type="text" value={name} name="name" onChange={this.handleChangeName} placeholder="Имя поставщика" />
+                        <input className="form-control" type="text" value={name} name="name" onChange={this.handleChange} placeholder="Имя поставщика" />
                     </div>
                     <div className="card-footer border-dark bg-transparent">
                         <div className="row" >

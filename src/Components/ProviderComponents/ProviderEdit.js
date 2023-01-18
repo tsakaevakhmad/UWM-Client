@@ -32,14 +32,15 @@ class Provider extends Component {
             provider: {}
         }
 
-        this.handleChangeName = this.handleChangeName.bind(this);
+        this.handleChange = this.handleChange.bind(this);
         this.Update = this.Update.bind(this);
         this.Delete = this.Delete.bind(this);
     }
 
-    handleChangeName(e) {
-        this.setState({
-            name: e.target.value
+    async handleChange(e) {
+        const { name, value } = e.target;
+        await this.setState({
+            [name]: value
         });
     }
 
@@ -51,6 +52,7 @@ class Provider extends Component {
 
         await this.providerServices.updateProvider(this.props.id, provider);
         this.setState({ edit: false });
+        await this.componentDidMount();
     }
 
     async Delete() {
@@ -82,7 +84,7 @@ class Provider extends Component {
                         <div className="card-header bg-transparent border-dark"><h3>Добавление поставщика</h3></div>
                         <div className="card-body text-dark">
                             <label className="form-label">Поставщик</label>
-                            <input className="form-control" type="text" value={name} name="name" onChange={this.handleChangeName} placeholder="Имя поставщика" />
+                            <input className="form-control" type="text" value={name} name="name" onChange={this.handleChange} placeholder="Имя поставщика" />
                         </div>
                         <div className="card-footer border-dark bg-transparent">
                             <div className="row" >
