@@ -83,7 +83,7 @@ export default class ItemCreate extends Component {
             <div >
                 <br /><br />
                 <div className="mx-auto col-md-11 card border-dark" >
-                    <div className="card-header bg-transparent border-dark"><h3>Новый предмет</h3></div>
+                    <div className="card-header bg-transparent border-dark"><h3>Добавление предмета</h3></div>
                     <div className="card-body text-dark">
                         <label className="form-label">Название</label>
                         <input className="form-control" type="text" name="title" onChange={this.handleChange} placeholder="Название" />

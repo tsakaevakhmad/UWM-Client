@@ -18,31 +18,42 @@ export default class WarehouseList extends Component {
     }
 
     render() {
+        if (this.state.warhouses != null)
+            return (
+                <div>
+                    <div className="row">
+
+                        <div className="col-6 col-md-9">
+                            <br />
+                            <table className="table table-hover">
+                                <thead>
+                                    <tr>
+                                        <th scope="col">Номер</th>
+                                        <th scope="col">Страна</th>
+                                        <th scope="col">Город</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    {this.state.warhouses.map(item =>
+                                        <tr key={item.id}>
+                                            <td>{item.number}</td>
+                                            <td>{item.addressDto.country}</td>
+                                            <td>{item.addressDto.city}</td>
+                                            <td><Link to={`/WarehouseEdit/${item.id}`}><button type="button" className="btn btn-outline-dark btn-sm fw-bolder">Открыть</button></Link></td>
+                                        </tr>
+                                    )}
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            )
         return (
             <div>
-                <div className="row">
-
-                    <div className="col-6 col-md-9">
-                        <br />
-                        <table className="table table-hover">
-                            <thead>
-                                <tr>
-                                    <th scope="col">Номер</th>
-                                    <th scope="col">Страна</th>
-                                    <th scope="col">Город</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                {this.state.warhouses.map(item =>
-                                    <tr key={item.id}>
-                                        <td>{item.number}</td>
-                                        <td>{item.addressDto.country}</td>
-                                        <td>{item.addressDto.city}</td>
-                                        <td><Link to={`/WarehouseEdit/${item.id}`}><button type="button" className="btn btn-outline-dark btn-sm fw-bolder">Открыть</button></Link></td>
-                                    </tr>
-                                )}
-                            </tbody>
-                        </table>
+                <br /><br />
+                <br />
+                <div className="text-center">
+                    <div className="spinner-border" role="status">
                     </div>
                 </div>
             </div>

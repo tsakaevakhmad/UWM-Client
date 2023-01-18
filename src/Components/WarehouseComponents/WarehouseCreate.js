@@ -55,7 +55,7 @@ export default class WarehouseCreate extends Component {
             <div >
                 <br /><br />
                 <div className="mx-auto col-md-11 card border-dark" >
-                    <div className="card-header bg-transparent border-dark"><h3>Создание склада</h3></div>
+                    <div className="card-header bg-transparent border-dark"><h3>Добавление склада</h3></div>
                     <div className="card-body text-dark">
                         <label className="form-label">Номер склада</label>
                         <input className="form-control" type="text" value={number} name="number" onChange={this.handleChange} placeholder="Номер склада" />
