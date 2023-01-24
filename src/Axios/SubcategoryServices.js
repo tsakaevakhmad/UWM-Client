@@ -1,11 +1,12 @@
-import axios from 'axios';
-import { baseUrl } from './Base';
+import AxiosInstance from './AxiosInstance';
 
 export default class SubCategoryServices {
 
+  axios = new AxiosInstance();
+
   async getSubCategory() {
     try {
-      return (await axios.get(`${baseUrl}/SubCategory`)).data;
+      return (await this.axios.instance.get(`/SubCategory`)).data;
     }
     catch (error) {
       console.error(error)
@@ -14,7 +15,7 @@ export default class SubCategoryServices {
 
   async getSubCategoryById(id) {
     try {
-      return (await axios.get(`${baseUrl}/SubCategory/${id}`)).data;
+      return (await this.axios.instance.get(`/SubCategory/${id}`)).data;
     }
     catch (error) {
       console.error(error)
@@ -24,7 +25,7 @@ export default class SubCategoryServices {
   async deleteSubCategory(id) {
 
     try {
-      return (await axios.delete(`${baseUrl}/SubCategory/${id}`)).data;
+      return (await this.axios.instance.delete(`/SubCategory/${id}`)).data;
     }
     catch (error) {
       console.error(error)
@@ -33,7 +34,7 @@ export default class SubCategoryServices {
 
   async createSubCategory(subcategory) {
     try {
-      return await axios.post(`${baseUrl}/SubCategory`, {
+      return await this.axios.instance.post(`/SubCategory`, {
         name: subcategory.name,
         categoryId: subcategory.categoryId
       })
@@ -45,7 +46,7 @@ export default class SubCategoryServices {
 
   async updateSubCategory(id, subcategory) {
     try {
-      await axios.put(`${baseUrl}/SubCategory/${id}`, subcategory)
+      await this.axios.instance.put(`/SubCategory/${id}`, subcategory)
     }
     catch (error) {
       console.error(error)

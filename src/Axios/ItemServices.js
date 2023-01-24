@@ -1,11 +1,12 @@
-import axios from 'axios';
-import { baseUrl } from './Base';
+import AxiosInstance from './AxiosInstance';
 
 export default class ItemServices {
 
+  axios = new AxiosInstance();
+
   async getItemByCategory(categoryId) {
     try {
-      return (await axios.get(`${baseUrl}/item/getbysubcategory/${categoryId}`)).data;
+      return (await this.axios.instance.get(`/item/getbysubcategory/${categoryId}`)).data;
     }
     catch (error) {
       console.error(error)
@@ -14,7 +15,7 @@ export default class ItemServices {
 
   async getItem(id) {
     try {
-      return (await axios.get(`${baseUrl}/item/${id}`)).data;
+      return (await this.axios.instance.get(`/item/${id}`)).data;
     }
     catch (error) {
       console.error(error)
@@ -23,7 +24,7 @@ export default class ItemServices {
 
   async deleteItem(id) {
     try {
-      return (await axios.delete(`${baseUrl}/item/${id}`)).data;
+      return (await this.axios.instance.delete(`/item/${id}`)).data;
     }
     catch (error) {
       console.error(error)
@@ -32,7 +33,7 @@ export default class ItemServices {
 
   async createItem(item) {
     try {
-      return await axios.post(`${baseUrl}/item`, item)
+      return await this.axios.instance.post(`/item`, item)
     }
     catch (error) {
       console.error(error)
@@ -41,7 +42,7 @@ export default class ItemServices {
 
   async updateItem(id, item) {
     try {
-      await axios.put(`${baseUrl}/item/${id}`, item)
+      await this.axios.instance.put(`/item/${id}`, item)
     }
     catch (error) {
       console.error(error)

@@ -1,11 +1,12 @@
-import axios from 'axios';
-import { baseUrl } from './Base';
+import AxiosInstance from './AxiosInstance';
 
 export default class WarehouseServices {
 
+    axios = new AxiosInstance();
+
     async getWarehouse() {
         try {
-            return (await axios.get(`${baseUrl}/Warehouse`)).data;
+            return (await this.axios.instance.get(`/Warehouse`)).data;
         }
         catch (error) {
             console.error(error)
@@ -14,7 +15,7 @@ export default class WarehouseServices {
 
     async getWarehouseById(id) {
         try {
-            return (await axios.get(`${baseUrl}/Warehouse/${id}`)).data;
+            return (await this.axios.instance.get(`/Warehouse/${id}`)).data;
         }
         catch (error) {
             console.error(error)
@@ -23,7 +24,7 @@ export default class WarehouseServices {
 
     async deleteWarehouse(id) {
         try {
-            return (await axios.delete(`${baseUrl}/Warehouse/${id}`)).data;
+            return (await this.axios.instance.delete(`/Warehouse/${id}`)).data;
         }
         catch (error) {
             console.error(error)
@@ -32,7 +33,7 @@ export default class WarehouseServices {
 
     async createWarehouse(warehouse) {
         try {
-            return await axios.post(`${baseUrl}/Warehouse`, {
+            return await this.axios.instance.post(`/Warehouse`, {
                 number: warehouse.number,
                 addressDto: {
                     country: warehouse.country,
@@ -48,7 +49,7 @@ export default class WarehouseServices {
 
     async updateWarehouse(id, warehouse) {
         try {
-            await axios.put(`${baseUrl}/Warehouse/${id}`, {
+            await this.axios.instance.put(`/Warehouse/${id}`, {
                 id: warehouse.id,
                 number: warehouse.number,
                 addressDto: {

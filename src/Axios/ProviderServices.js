@@ -1,11 +1,12 @@
-import axios from 'axios';
-import { baseUrl } from './Base';
+import AxiosInstance from './AxiosInstance';
 
 export default class ProviderServices {
 
+  axios = new AxiosInstance();
+
   async getProvider() {
     try {
-      return (await axios.get(`${baseUrl}/provider`)).data;
+      return (await this.axios.instance.get(`/provider`)).data;
     }
     catch (error) {
       console.error(error)
@@ -14,7 +15,7 @@ export default class ProviderServices {
 
   async getProviderById(id) {
     try {
-      return (await axios.get(`${baseUrl}/provider/${id}`)).data;
+      return (await this.axios.instance.get(`/provider/${id}`)).data;
     }
     catch (error) {
       console.error(error)
@@ -23,7 +24,7 @@ export default class ProviderServices {
 
   async deleteProvider(id) {
     try {
-      return (await axios.delete(`${baseUrl}/provider/${id}`)).data;
+      return (await this.axios.instance.delete(`/provider/${id}`)).data;
     }
     catch (error) {
       console.error(error)
@@ -32,7 +33,7 @@ export default class ProviderServices {
 
   async createProvider(provider) {
     try {
-      return await axios.post(`${baseUrl}/provider`, {
+      return await this.axios.instance.post(`/provider`, {
         name: provider.name
       })
     }
@@ -43,7 +44,7 @@ export default class ProviderServices {
 
   async updateProvider(id, provider) {
     try {
-      await axios.put(`${baseUrl}/provider/${id}`, {
+      await this.axios.instance.put(`/provider/${id}`, {
         id: provider.id,
         name: provider.name
       })

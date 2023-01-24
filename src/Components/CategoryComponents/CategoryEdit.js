@@ -101,7 +101,8 @@ class Category extends Component {
                         </div>
                     </div>
                 )
-            } else {
+            }
+            else {
                 if (category.subCategoryDto !== undefined)
                     return (
                         <div >
@@ -124,13 +125,13 @@ class Category extends Component {
                                             {category.subCategoryDto.map(item =>
                                                 <tr key={item.id}>
                                                     <th>{item.name}</th>
-                                                    <td><Link to={`/SubCategoryEdit/${item.id}`}><button type="button" className="btn btn-outline-warning btn-sm fw-bolder">Редактировать</button></Link></td>
+                                                    <td><Link className="btn btn-outline-warning btn-sm fw-bolder" to={`/SubCategoryEdit/${item.id}`}>Редактировать</Link></td>
                                                 </tr>
 
                                             )}
                                             <tr>
                                                 <th></th>
-                                                <td><Link to={`/SubCategoryCreate/${category.id}`}><button type="button" className="btn btn-outline-success btn-sm fw-bolder">Добавить</button></Link></td>
+                                                <td><Link className="btn btn-outline-success btn-sm fw-bolder" to={`/SubCategoryCreate/${category.id}`}>Добавить</Link></td>
                                             </tr>
                                         </tbody>
                                     </table>

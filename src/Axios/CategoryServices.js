@@ -1,11 +1,12 @@
-import axios from 'axios';
-import { baseUrl } from './Base';
+import AxiosInstance from './AxiosInstance';
 
 export default class CategoryServices {
 
+  axios = new AxiosInstance();
+
   async getCategory() {
     try {
-      return (await axios.get(`${baseUrl}/category`)).data;
+      return (await this.axios.instance.get('/category')).data
     }
     catch (error) {
       console.error(error)
@@ -14,7 +15,7 @@ export default class CategoryServices {
 
   async getCategoryByid(id) {
     try {
-      return (await axios.get(`${baseUrl}/category/${id}`)).data;
+      return (await this.axios.instance.get(`/category/${id}`)).data;
     }
     catch (error) {
       console.error(error)
@@ -23,7 +24,7 @@ export default class CategoryServices {
 
   async deleteCategory(id) {
     try {
-      return (await axios.delete(`${baseUrl}/category/${id}`)).data;
+      return (await this.axios.instance.delete(`/category/${id}`)).data;
     }
     catch (error) {
       console.error(error)
@@ -32,7 +33,7 @@ export default class CategoryServices {
 
   async createCategory(category) {
     try {
-      return await axios.post(`${baseUrl}/category`, {
+      return await this.axios.instance.post(`/category`, {
         name: category.name
       })
     }
@@ -43,7 +44,7 @@ export default class CategoryServices {
 
   async updateCategory(id, category) {
     try {
-      await axios.put(`${baseUrl}/category/${id}`, {
+      await this.axios.instance.put(`/category/${id}`, {
         id: category.id,
         name: category.name
       })
