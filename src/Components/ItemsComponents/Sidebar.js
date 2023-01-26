@@ -50,8 +50,8 @@ export default class Sidebar extends Component {
             )
         return (
             <div>
-                <br/><br/>
-                <br/>
+                <br /><br />
+                <br />
                 <div className="text-center">
                     <div className="spinner-border" role="status">
                     </div>

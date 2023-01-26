@@ -1,12 +1,12 @@
 import Navbar from "./Navbar";
 import Authorization from "./AuthorizationComponents/Authorization";
-
+import CategoryServices from "../Axios/CategoryServices";
 import {
     Routes,
     Route,
 } from "react-router-dom";
-
 import React, { Component } from 'react'
+
 
 export default class Main extends Component {
 
@@ -15,7 +15,7 @@ export default class Main extends Component {
             <div className="container">
                 <br />
                 <Routes>
-                    <Route path="/" element={<Navbar />} />
+                    <Route path="/" element={<Navbar />} /> 
                     <Route path="/Authorization" element={<Authorization />} />
                 </Routes>
             </div>

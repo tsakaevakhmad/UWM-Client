@@ -9,11 +9,11 @@ export default class AuthorizationsServices {
             return await this.axios.instance.post(`/Authorization/Register`, register)
         }
         catch (error) {
-            console.error(error)
+            console.error(error.status)
         }
     }
 
-    async Register(login) {
+    async login(login) {
         try {
             const token = await this.axios.instance.post(`/Authorization/Login`, login)
             localStorage.setItem("Authorization", `Barear ${token}`)
