@@ -15,8 +15,9 @@ export default class AuthorizationsServices {
 
     async login(login) {
         try {
-            const token = await this.axios.instance.post(`/Authorization/Login`, login)
-            localStorage.setItem("Authorization", `Barear ${token}`)
+            const token = (await this.axios.instance.post(`/Authorization/Login`, login)).data.token
+            console.log(token)
+            localStorage.setItem("Authorization", `Bearer ${token}`)
             return true
         }
         catch (error) {
