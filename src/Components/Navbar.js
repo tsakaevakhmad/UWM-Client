@@ -1,4 +1,5 @@
 import React, { Component } from 'react'
+import AuthorizationsServices from '../Axios/AuthorizationsServices';
 import ListItem from "./ItemsComponents/ListItem";
 import ItemEdit from './ItemsComponents/ItemEdit';
 import ItemCreate from './ItemsComponents/ItemCreate';
@@ -21,6 +22,11 @@ import {
 } from "react-router-dom";
 
 export default class Navbar extends Component {
+
+    constructor(props) {
+        super(props)
+        this.authorization = new AuthorizationsServices();
+    }
 
     render() {
         return (
@@ -77,6 +83,7 @@ export default class Navbar extends Component {
                                 <input className="form-control me-2" type="search" placeholder="Поиск" aria-label="Search" />
                                 <button className="btn btn-outline-success" type="submit">Поиск</button>
                             </form> */}
+                            <button type="button" onClick={async () => (await this.authorization.logout())} className="btn btn-outline-primary btn-md fw-bolder">Выйти</button>
                         </div>
                     </div>
                 </nav>
