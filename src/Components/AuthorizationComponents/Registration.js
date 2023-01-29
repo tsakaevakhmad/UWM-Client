@@ -1,5 +1,6 @@
 import React, { Component } from 'react'
 import AuthorizationsServices from '../../Axios/AuthorizationsServices'
+import { Link, Navigate } from "react-router-dom";
 
 export default class Registration extends Component {
     constructor(props) {
@@ -65,9 +66,9 @@ export default class Registration extends Component {
                         <label className="form-label" htmlFor="form4">Подтвердите пароль</label>
                     </div>
 
-                    <button type="button" onClick={this.registering} className="btn btn-outline-primary col-12 mb-4">Подтвердить</button>
+                    <button type="button" onClick={this.registering} className="btn btn-outline-dark col-12 mb-4">Подтвердить</button>
                     <div className="text-center">
-                        <p><button className="btn btn-outline-dark col-8" onClick={() => this.props.updateData(true)}>Войти</button></p>
+                        <p><Link className="btn btn-outline-primary col-7 " to={"/authorization/login"}>Войти</Link></p>
                     </div>
                 </form>
             </div>

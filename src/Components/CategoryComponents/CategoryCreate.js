@@ -1,10 +1,10 @@
 import SubCategoryServices from '../../Axios/SubcategoryServices';
 import CategoryServices from '../../Axios/CategoryServices';
 import React, { Component } from 'react'
-import { Navigate } from 'react-router-dom'
 
 import {
     Link,
+    Navigate,
 } from "react-router-dom";
 
 export default class CategoryCreate extends Component {

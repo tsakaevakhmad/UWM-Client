@@ -28,7 +28,7 @@ export default class AuthorizationsServices {
     async logout() {
         try {
             await localStorage.removeItem("Authorization")
-            window.location.href = '/Authorization';
+            window.location.href = '/Authorization/Login';
         }
         catch (error) {
             console.error(error)

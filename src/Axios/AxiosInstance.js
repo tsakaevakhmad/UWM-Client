@@ -20,12 +20,12 @@ export default class AxiosInstance {
         this.instance.interceptors.response.use(
             response => {
                 if(response.status === 401)
-                    window.location.href = '/Authorization';
+                    window.location.href = '/Authorization/Login';
                 return response;
             },
             error => {
                 if(error.response.status === 401)
-                    window.location.href = '/Authorization';
+                    window.location.href = '/Authorization/Login';
                 return Promise.reject(error);
             }
         );
