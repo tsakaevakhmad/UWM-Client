@@ -1,13 +1,14 @@
 import React from 'react'
-import { useParams, Navigate } from 'react-router-dom'
+import { Link, useSearchParams } from 'react-router-dom'
 
-import {
-    Link,
-} from "react-router-dom";
-
-export default function ConfirmAccaunt() {
+export default function ConfirmAccaunt(props) {
+    
+    const [searchParams] = useSearchParams();
+    
+    const code = searchParams.get("code");
+    const email = searchParams.get("email");
     
     return (
-        <div>ConfirmAccaunt</div>
+        <div className="centerContentBox col-4">{code} {email}</div>
     )
 }
