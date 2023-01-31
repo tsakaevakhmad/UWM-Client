@@ -10,6 +10,7 @@ export default class ForgotPassword extends Component {
 
         this.state = {
             email: "",
+            redirect: false
         }
 
         this.submitMail = this.submitMail.bind(this);
@@ -17,7 +18,12 @@ export default class ForgotPassword extends Component {
     }
 
     async submitMail() {
-
+        const data = {
+            email: this.state.email
+        }
+        let status = (await this.authorization.forgotPassword(data)).status
+        if (status === 200)
+            await this.setState({ redirect: true })
     }
 
     async handleChange(e) {
@@ -28,6 +34,10 @@ export default class ForgotPassword extends Component {
     }
 
     render() {
+        if (this.state.redirect)
+            return (
+                <Navigate to={"/authorization/login"} />
+            )
         return (
             <div className="centerContentBox col-4">
                 <form>

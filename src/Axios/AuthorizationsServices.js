@@ -35,9 +35,9 @@ export default class AuthorizationsServices {
         }
     }
 
-    async forgotPassword(mail) {
+    async forgotPassword(data) {
         try {
-            return await this.axios.instance.post(`/authorization/forgotPassword`, mail)
+            return await this.axios.instance.post(`/authorization/forgotPassword`, data)
         }
         catch (error) {
             console.error(error.status)

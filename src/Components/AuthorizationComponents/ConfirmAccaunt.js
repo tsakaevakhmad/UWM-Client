@@ -8,7 +8,6 @@ export default function ConfirmAccaunt(props) {
 
     const code = searchParams.get('code').replace(/\s/g, "+");
     const email = searchParams.get('email');
-    console.log(code);
 
     return (
         <Confirm code={code} email={email} />
