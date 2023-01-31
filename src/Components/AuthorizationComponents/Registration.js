@@ -11,7 +11,8 @@ export default class Registration extends Component {
             userName: "",
             email: "",
             password: "",
-            confirmPassword: ""
+            confirmPassword: "",
+            loginOn: false
         }
 
         this.registering = this.registering.bind(this);
@@ -43,6 +44,10 @@ export default class Registration extends Component {
     }
 
     render() {
+        if (this.state.loginOn)
+            return (
+                <Navigate to={"/authorization/login"} />
+            )
         return (
             <div className="centerContentBox col-4">
                 <form>

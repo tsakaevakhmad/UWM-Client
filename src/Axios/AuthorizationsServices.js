@@ -34,4 +34,31 @@ export default class AuthorizationsServices {
             console.error(error)
         }
     }
+
+    async forgotPassword(mail) {
+        try {
+            return await this.axios.instance.post(`/authorization/forgotPassword`, mail)
+        }
+        catch (error) {
+            console.error(error.status)
+        }
+    }
+
+    async resetPassword(password) {
+        try {
+            return await this.axios.instance.post(`/authorization/resetPassword`, password)
+        }
+        catch (error) {
+            console.error(error.status)
+        }
+    }
+
+    async confirmAccaunt(confirmModel) {
+        try {
+            return await this.axios.instance.post(`/authorization`, confirmModel)
+        }
+        catch (error) {
+            console.error(error.status)
+        }
+    }
 }
