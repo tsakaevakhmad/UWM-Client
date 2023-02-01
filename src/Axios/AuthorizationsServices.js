@@ -17,6 +17,7 @@ export default class AuthorizationsServices {
         try {
             const token = await this.axios.instance.post(`/authorization/login`, login)
             await localStorage.setItem("Authorization", `Bearer ${token.data.token}`)
+            await localStorage.setItem("UserInfo", JSON.stringify(token.data.userInfo))
             return token
         }
         catch (error) {
@@ -28,6 +29,7 @@ export default class AuthorizationsServices {
     async logout() {
         try {
             await localStorage.removeItem("Authorization")
+            await localStorage.removeItem("UserInfo")
             window.location.href = '/authorization/login';
         }
         catch (error) {
@@ -59,6 +61,6 @@ export default class AuthorizationsServices {
         }
         catch (error) {
             console.error(error.status)
-        }
+        }        
     }
 }

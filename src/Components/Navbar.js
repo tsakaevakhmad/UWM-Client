@@ -83,7 +83,10 @@ export default class Navbar extends Component {
                                 <input className="form-control me-2" type="search" placeholder="Поиск" aria-label="Search" />
                                 <button className="btn btn-outline-success" type="submit">Поиск</button>
                             </form> */}
-                            <button type="button" onClick={async () => (await this.authorization.logout())} className="btn btn-outline-primary btn-md fw-bolder">Выйти</button>
+                            <div className="btn-group " role="group" aria-label="Basic outlined example">
+                                <button type="button" disabled className="btn btn-outline-success fw-bolder border-0 ">{this.props.userInfo.userName}</button>
+                                <button type="button" onClick={async () => (await this.authorization.logout())} className="btn btn-outline-dark  ">Выйти</button>
+                            </div>
                         </div>
                     </div>
                 </nav>

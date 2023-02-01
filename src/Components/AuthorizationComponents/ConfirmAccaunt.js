@@ -15,6 +15,7 @@ export default function ConfirmAccaunt(props) {
 }
 
 class Confirm extends Component {
+
     constructor(props) {
         super(props)
         this.authorizationsServices = new AuthorizationsServices();
@@ -22,6 +23,7 @@ class Confirm extends Component {
             confirmed: false
         }
     }
+
     async componentDidMount() {
         const confirmModel = {
             email: this.props.email,
@@ -31,6 +33,7 @@ class Confirm extends Component {
             confirmed: await this.authorizationsServices.confirmAccaunt(confirmModel)
         })
     }
+
     render() {
         if (this.state.confirmed)
             return (
