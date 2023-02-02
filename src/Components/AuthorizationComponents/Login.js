@@ -1,6 +1,7 @@
 import React, { Component } from 'react'
 import AuthorizationsServices from '../../Axios/AuthorizationsServices'
-import { Link, Navigate } from "react-router-dom";
+import { Link } from "react-router-dom";
+import { loginSchema } from '../../ValidationSchema/Authorization/Login';
 
 export default class Login extends Component {
 
@@ -11,6 +12,14 @@ export default class Login extends Component {
         this.state = {
             email: "",
             password: "",
+            validEmail: {
+                valid: false,
+                message: []
+            },
+            validPassword: {
+                valid: false,
+                message: []
+            }
         }
 
         this.logining = this.logining.bind(this);
@@ -36,20 +45,63 @@ export default class Login extends Component {
         await this.setState({
             [name]: value
         });
+
+        await this.validpassword()
+        await this.validEmail()
+    }
+
+    async validpassword() {
+        try {
+            await loginSchema.fields.password.validate(this.state.password, { abortEarly: true })
+            await this.setState({
+                validPassword: { valid: true, message: [] },
+            })
+            document.getElementById("password").classList.add("is-valid")
+            document.getElementById("password").classList.remove("is-invalid")
+        }
+        catch (error) {
+            await this.setState({
+                validPassword: { valid: false, message: error.errors },
+            })
+            document.getElementById("password").classList.add("is-invalid")
+            document.getElementById("password").classList.remove("is-valid")
+        }
+    }
+
+    async validEmail() {
+        try {
+            await loginSchema.fields.email.validate(this.state.email, { abortEarly: true })
+            await this.setState({
+                validEmail: { valid: true, message: [] },
+            })
+            document.getElementById("email").classList.add("is-valid")
+            document.getElementById("email").classList.remove("is-invalid")
+        }
+        catch (error) {
+            await this.setState({
+                validEmail: { valid: false, message: error.errors },
+            })
+            document.getElementById("email").classList.add("is-invalid")
+            document.getElementById("email").classList.remove("is-valid")
+        }
     }
 
     render() {
         return (
             <div className="centerContentBox col-4">
-                <form>
-                    <div className="form-outline mb-4">
-                        <input type="email" id="form7" name="email" onChange={this.handleChange} className="form-control" />
-                        <label className="form-label" htmlFor="form7">Почта</label>
+                <form className="needs-validation">
+                    <div className="form-outline mb-5">
+                        <input type="email" id="email" name="email" onChange={this.handleChange} className="form-control" placeholder="Почта" />
+                        <div className="invalid-feedback">
+                            {this.state.validEmail.message[0]}
+                        </div>
                     </div>
 
-                    <div className="form-outline mb-4">
-                        <input type="password" name="password" onChange={this.handleChange} id="form8" className="form-control" />
-                        <label className="form-label" htmlFor="form8">Пароль</label>
+                    <div className="form-outline mb-5">
+                        <input type="password" id="password" name="password" onChange={this.handleChange} className="form-control" placeholder="Пароль" />
+                        <div className="invalid-feedback">
+                            {this.state.validPassword.message[0]}
+                        </div>
                     </div>
 
                     <button type="button" onClick={this.logining} className="btn btn-outline-primary col-12 mb-4">Войти</button>
