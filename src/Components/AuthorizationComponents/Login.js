@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import AuthorizationsServices from '../../Axios/AuthorizationsServices'
 import { Link } from "react-router-dom";
-import { loginSchema } from '../../ValidationSchema/Authorization/Login';
+import * as validation from "../../ValidationSchema/Authorization/LoginValidation"
 
 export default class Login extends Component {
 
@@ -46,36 +46,14 @@ export default class Login extends Component {
             [name]: value
         });
 
-        await this.validpassword()
-        await this.validEmail()
-    }
-
-    async validpassword() {
-        try {
-            await loginSchema.fields.password.validate(this.state.password, { abortEarly: true })
-            await this.setState({
-                validPassword: { valid: true, message: [] },
-            })
+        const data = {
+            email: this.state.email,
+            password: this.state.password
         }
-        catch (error) {
-            await this.setState({
-                validPassword: { valid: false, message: error.errors },
-            })
-        }
-    }
-
-    async validEmail() {
-        try {
-            await loginSchema.fields.email.validate(this.state.email, { abortEarly: true })
-            await this.setState({
-                validEmail: { valid: true, message: [] },
-            })
-        }
-        catch (error) {
-            await this.setState({
-                validEmail: { valid: false, message: error.errors },
-            })
-        }
+        this.setState({
+            validEmail: await validation.validEmail(data),
+            validPassword: await validation.validpassword(data)
+        })
     }
 
     render() {

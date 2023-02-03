@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import AuthorizationsServices from '../../Axios/AuthorizationsServices';
 import { Link, Navigate } from "react-router-dom";
-import { RegistrationSchema } from '../../ValidationSchema/Authorization/Registration';
+import * as validation from "../../ValidationSchema/Authorization/RegistrationValidation"
 
 export default class Registration extends Component {
     constructor(props) {
@@ -14,7 +14,6 @@ export default class Registration extends Component {
             password: "",
             confirmPassword: "",
             loginOn: false,
-
             validEmail: {
                 valid: false,
                 message: []
@@ -59,72 +58,20 @@ export default class Registration extends Component {
         await this.setState({
             [name]: value
         })
-        this.validUserName()
-        this.validEmail()
-        this.validPassword()
-        this.validConfirmPassword()
-    }
 
-    async validPassword() {
-        try {
-            await RegistrationSchema.fields.password.validate(this.state.password, { abortEarly: true })
-            await this.setState({
-                validPassword: { valid: true, message: [] },
-            })
-        }
-        catch (error) {
-            await this.setState({
-                validPassword: { valid: false, message: error.errors },
-            })
-        }
-    }
-
-    async validEmail() {
-        try {
-            await RegistrationSchema.fields.email.validate(this.state.email, { abortEarly: true })
-            await this.setState({
-                validEmail: { valid: true, message: [] },
-            })
-        }
-        catch (error) {
-            await this.setState({
-                validEmail: { valid: false, message: error.errors },
-            })
-        }
-    }
-
-    async validConfirmPassword() {
-        const value = {
+        const data = {
             userName: this.state.userName,
             email: this.state.email,
             password: this.state.password,
             confirmPassword: this.state.confirmPassword,
-        };
-        try {
-            await RegistrationSchema.validate(value, { abortEarly: true })
-            await this.setState({
-                validConfirmPassword: { valid: true, message: [] },
-            })
         }
-        catch (error) {
-            await this.setState({
-                validConfirmPassword: { valid: false, message: error.errors },
-            })
-        }
-    }
 
-    async validUserName() {
-        try {
-            await RegistrationSchema.fields.userName.validate(this.state.userName, { abortEarly: true })
-            await this.setState({
-                validUserName: { valid: true, message: [] },
-            })
-        }
-        catch (error) {
-            await this.setState({
-                validUserName: { valid: false, message: error.errors },
-            })
-        }
+        await this.setState({
+            validUserName: await validation.userName(data),
+            validPassword: await validation.password(data),
+            validConfirmPassword: await validation.confirmPassword(data),
+            validEmail: await validation.email(data)
+        })
     }
 
     render() {
