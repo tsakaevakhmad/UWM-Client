@@ -19,5 +19,8 @@ export const RegistrationSchema = yup.object().shape({
     confirmPassword: yup
         .string()
         .required("Обязательное поле")
-        .oneOf([yup.ref("password"), null], 'Пароль должен совпадать')
-})  
+        .test('compared', 'Парорль должен совпадать', (value, testContext) => {
+            if (testContext.parent.password !== testContext.parent.confirmPassword) return false
+            return true
+        })
+}) 

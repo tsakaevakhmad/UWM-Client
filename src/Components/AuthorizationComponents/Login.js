@@ -56,15 +56,11 @@ export default class Login extends Component {
             await this.setState({
                 validPassword: { valid: true, message: [] },
             })
-            document.getElementById("password").classList.add("is-valid")
-            document.getElementById("password").classList.remove("is-invalid")
         }
         catch (error) {
             await this.setState({
                 validPassword: { valid: false, message: error.errors },
             })
-            document.getElementById("password").classList.add("is-invalid")
-            document.getElementById("password").classList.remove("is-valid")
         }
     }
 
@@ -74,15 +70,11 @@ export default class Login extends Component {
             await this.setState({
                 validEmail: { valid: true, message: [] },
             })
-            document.getElementById("email").classList.add("is-valid")
-            document.getElementById("email").classList.remove("is-invalid")
         }
         catch (error) {
             await this.setState({
                 validEmail: { valid: false, message: error.errors },
             })
-            document.getElementById("email").classList.add("is-invalid")
-            document.getElementById("email").classList.remove("is-valid")
         }
     }
 
@@ -91,14 +83,14 @@ export default class Login extends Component {
             <div className="centerContentBox col-4">
                 <form className="needs-validation">
                     <div className="form-outline mb-5">
-                        <input type="email" id="email" name="email" onChange={this.handleChange} className="form-control" placeholder="Почта" />
+                        <input type="email" id="email" name="email" onChange={this.handleChange} className={`form-control  ${this.state.validEmail.valid ? "is-valid" : "is-invalid"}`} placeholder="Почта" />
                         <div className="invalid-feedback">
                             {this.state.validEmail.message[0]}
                         </div>
                     </div>
 
                     <div className="form-outline mb-5">
-                        <input type="password" id="password" name="password" onChange={this.handleChange} className="form-control" placeholder="Пароль" />
+                        <input type="password" id="password" name="password" onChange={this.handleChange} className={`form-control  ${this.state.validPassword.valid ? "is-valid" : "is-invalid"}`} placeholder="Пароль" />
                         <div className="invalid-feedback">
                             {this.state.validPassword.message[0]}
                         </div>

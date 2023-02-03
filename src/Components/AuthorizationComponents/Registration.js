@@ -59,7 +59,6 @@ export default class Registration extends Component {
         await this.setState({
             [name]: value
         })
-
         this.validUserName()
         this.validEmail()
         this.validPassword()
@@ -72,15 +71,11 @@ export default class Registration extends Component {
             await this.setState({
                 validPassword: { valid: true, message: [] },
             })
-            document.getElementById("password").classList.add("is-valid")
-            document.getElementById("password").classList.remove("is-invalid")
         }
         catch (error) {
             await this.setState({
                 validPassword: { valid: false, message: error.errors },
             })
-            document.getElementById("password").classList.add("is-invalid")
-            document.getElementById("password").classList.remove("is-valid")
         }
     }
 
@@ -90,34 +85,31 @@ export default class Registration extends Component {
             await this.setState({
                 validEmail: { valid: true, message: [] },
             })
-            document.getElementById("email").classList.add("is-valid")
-            document.getElementById("email").classList.remove("is-invalid")
         }
         catch (error) {
             await this.setState({
                 validEmail: { valid: false, message: error.errors },
             })
-            document.getElementById("email").classList.add("is-invalid")
-            document.getElementById("email").classList.remove("is-valid")
         }
     }
 
     async validConfirmPassword() {
+        const value = {
+            userName: this.state.userName,
+            email: this.state.email,
+            password: this.state.password,
+            confirmPassword: this.state.confirmPassword,
+        };
         try {
-            await RegistrationSchema.fields.confirmPassword.validate(this.state.confirmPassword, { abortEarly: true })
+            await RegistrationSchema.validate(value, { abortEarly: true })
             await this.setState({
                 validConfirmPassword: { valid: true, message: [] },
             })
-            document.getElementById("confirmPassword").classList.add("is-valid")
-            document.getElementById("confirmPassword").classList.remove("is-invalid")
         }
         catch (error) {
             await this.setState({
                 validConfirmPassword: { valid: false, message: error.errors },
             })
-            console.log(error.errors)
-            document.getElementById("confirmPassword").classList.add("is-invalid")
-            document.getElementById("confirmPassword").classList.remove("is-valid")
         }
     }
 
@@ -127,15 +119,11 @@ export default class Registration extends Component {
             await this.setState({
                 validUserName: { valid: true, message: [] },
             })
-            document.getElementById("userName").classList.add("is-valid")
-            document.getElementById("userName").classList.remove("is-invalid")
         }
         catch (error) {
             await this.setState({
                 validUserName: { valid: false, message: error.errors },
             })
-            document.getElementById("userName").classList.add("is-invalid")
-            document.getElementById("userName").classList.remove("is-valid")
         }
     }
 
@@ -148,28 +136,28 @@ export default class Registration extends Component {
             <div className="centerContentBox col-4">
                 <form>
                     <div className="form-outline mb-5">
-                        <input type="text" id="userName" name="userName" onChange={this.handleChange} className="form-control" placeholder="Имя пользователя" />
+                        <input type="text" id="userName" name="userName" onChange={this.handleChange} className={`form-control  ${this.state.validUserName.valid ? "is-valid" : "is-invalid"}`} placeholder="Имя пользователя" />
                         <div className="invalid-feedback">
                             {this.state.validUserName.message[0]}
                         </div>
                     </div>
 
                     <div className="form-outline mb-5">
-                        <input type="email" id="email" name="email" onChange={this.handleChange} className="form-control" placeholder="Почта" />
+                        <input type="email" id="email" name="email" onChange={this.handleChange} className={`form-control  ${this.state.validEmail.valid ? "is-valid" : "is-invalid"}`} placeholder="Почта" />
                         <div className="invalid-feedback">
                             {this.state.validEmail.message[0]}
                         </div>
                     </div>
 
                     <div className="form-outline mb-5">
-                        <input type="password" id="password" name="password" onChange={this.handleChange} className="form-control" placeholder="Пароль" />
+                        <input type="password" id="password" name="password" onChange={this.handleChange} className={`form-control  ${this.state.validPassword.valid ? "is-valid" : "is-invalid"}`} placeholder="Пароль" />
                         <div className="invalid-feedback">
                             {this.state.validPassword.message[0]}
                         </div>
                     </div>
 
                     <div className="form-outline mb-5">
-                        <input type="password" id="confirmPassword" name="confirmPassword" onChange={this.handleChange} className="form-control" placeholder="Подтвердите пароль" />
+                        <input type="password" id="confirmPassword" name="confirmPassword" onChange={this.handleChange} className={`form-control  ${this.state.validConfirmPassword.valid ? "is-valid" : "is-invalid"}`} placeholder="Подтвердите пароль" />
                         <div className="invalid-feedback">
                             {this.state.validConfirmPassword.message[0]}
                         </div>
