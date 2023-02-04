@@ -1,6 +1,7 @@
 import React, { Component } from 'react'
 import AuthorizationsServices from '../../Axios/AuthorizationsServices'
 import { Link, Navigate } from "react-router-dom";
+import * as validation from "../../ValidationSchema/Authorization/ForgotPasswordValidation"
 
 export default class ForgotPassword extends Component {
 
@@ -10,7 +11,11 @@ export default class ForgotPassword extends Component {
 
         this.state = {
             email: "",
-            redirect: false
+            redirect: false,
+            validEmail: {
+                valid: false,
+                message: []
+            },
         }
 
         this.submitMail = this.submitMail.bind(this);
@@ -21,9 +26,11 @@ export default class ForgotPassword extends Component {
         const data = {
             email: this.state.email
         }
-        let status = (await this.authorization.forgotPassword(data)).status
-        if (status === 200)
-            await this.setState({ redirect: true })
+        if (this.state.validEmail.valid) {
+            let status = (await this.authorization.forgotPassword(data)).status
+            if (status === 200)
+                await this.setState({ redirect: true })
+        }
     }
 
     async handleChange(e) {
@@ -31,6 +38,10 @@ export default class ForgotPassword extends Component {
         await this.setState({
             [name]: value
         });
+
+        await this.setState({
+            validEmail: await validation.email(this.state.email)
+        })
     }
 
     render() {
@@ -42,10 +53,12 @@ export default class ForgotPassword extends Component {
             <div className="centerContentBox col-4">
                 <form>
                     <div className="form-outline mb-4">
-                        <input type="email" id="form7" name="email" onChange={this.handleChange} className="form-control" />
-                        <label className="form-label" htmlFor="form7">Почта</label>
+                        <input type="email" id="form7" name="email" onChange={this.handleChange} className={`form-control ${this.state.validEmail.valid ? "is-valid" : "is-invalid"}`} placeholder="Почта" />
+                        <div className="invalid-feedback">
+                            {this.state.validEmail.message[0]}
+                        </div>
                     </div>
-                    <button type="button" onClick={this.submitMail} className="btn btn-outline-success col-12 mb-4">Отправить</button>
+                    <button type="button" onClick={this.submitMail} className={`btn btn-outline-success col-12 mb-4 ${this.state.validEmail.valid ? "" : "disabled"}`}>Отправить</button>
 
                     <div className="text-center">
                         <p><Link className="btn btn-outline-primary col-7 btn-sm" to={"/authorization/login"}>Войти</Link></p>

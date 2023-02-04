@@ -1,18 +1,19 @@
 import React, { Component } from 'react'
 import AuthorizationsServices from '../../Axios/AuthorizationsServices';
-import { useParams, Navigate, useSearchParams } from 'react-router-dom'
+import { Navigate, useSearchParams } from 'react-router-dom'
+import * as validation from "../../ValidationSchema/Authorization/ResetpasswordValidation"
 
 export default function ResetPassword(props) {
 
     const [searchParams, setSearchParams] = useSearchParams();
     const code = searchParams.get("code").replace(/\s/g, "+");
 
-    return(
-        <Reset code={code}/>
+    return (
+        <Reset code={code} />
     )
 }
 
-class Reset extends Component{
+class Reset extends Component {
     constructor(props) {
         super(props)
 
@@ -21,6 +22,19 @@ class Reset extends Component{
             password: "",
             confirmPassword: "",
             confirmed: false,
+            validForm: false,
+            validEmail: {
+                valid: false,
+                message: []
+            },
+            validPassword: {
+                valid: false,
+                message: []
+            },
+            validConfirmPassword: {
+                valid: false,
+                message: []
+            }
         }
         this.authorizationsServices = new AuthorizationsServices();
         this.handleChange = this.handleChange.bind(this);
@@ -32,6 +46,19 @@ class Reset extends Component{
         await this.setState({
             [name]: value
         });
+
+        const data = {
+            email: this.state.email,
+            password: this.state.password,
+            confirmPassword: this.state.confirmPassword,
+        }
+
+        await this.setState({
+            validPassword: await validation.password(data),
+            validConfirmPassword: await validation.confirmPassword(data),
+            validEmail: await validation.email(data),
+            validForm: await validation.form(data),
+        })
     }
 
     async resetPassword() {
@@ -42,9 +69,9 @@ class Reset extends Component{
             code: this.props.code
         }
         const status = (await this.authorizationsServices.resetPassword(data)).status
-        
-        if(status === 200)
-            await this.setState({confirmed: true});
+
+        if (status === 200)
+            await this.setState({ confirmed: true });
     }
 
     render() {
@@ -55,22 +82,29 @@ class Reset extends Component{
         return (
             <div className="centerContentBox col-4">
                 <form>
-                    <div className="form-outline mb-4">
-                        <input type="email" id="form2" name="email" onChange={this.handleChange} className="form-control" />
-                        <label className="form-label" htmlFor="form2">Почта</label>
+
+                    <div className="form-outline mb-5">
+                        <input type="email" id="email" name="email" onChange={this.handleChange} className={`form-control  ${this.state.validEmail.valid ? "is-valid" : "is-invalid"}`} placeholder="Почта" />
+                        <div className="invalid-feedback">
+                            {this.state.validEmail.message[0]}
+                        </div>
                     </div>
 
-                    <div className="form-outline mb-4">
-                        <input type="password" id="form3" name="password" onChange={this.handleChange} className="form-control" />
-                        <label className="form-label" htmlFor="form3">Пароль</label>
+                    <div className="form-outline mb-5">
+                        <input type="password" id="password" name="password" onChange={this.handleChange} className={`form-control  ${this.state.validPassword.valid ? "is-valid" : "is-invalid"}`} placeholder="Пароль" />
+                        <div className="invalid-feedback">
+                            {this.state.validPassword.message[0]}
+                        </div>
                     </div>
 
-                    <div className="form-outline mb-4">
-                        <input type="password" id="form4" name="confirmPassword" onChange={this.handleChange} className="form-control" />
-                        <label className="form-label" htmlFor="form4">Подтвердите пароль</label>
+                    <div className="form-outline mb-5">
+                        <input type="password" id="confirmPassword" name="confirmPassword" onChange={this.handleChange} className={`form-control  ${this.state.validConfirmPassword.valid ? "is-valid" : "is-invalid"}`} placeholder="Подтвердите пароль" />
+                        <div className="invalid-feedback">
+                            {this.state.validConfirmPassword.message[0]}
+                        </div>
                     </div>
 
-                    <button type="button" className="btn btn-outline-success col-12 mb-4" onClick={this.resetPassword}>Сбросить</button>
+                    <button type="button" className={`btn btn-outline-success col-12 mb-4 ${this.state.validForm ? "" : "disabled"}`} onClick={this.resetPassword}>Сбросить</button>
                 </form>
             </div>
         )

@@ -14,6 +14,7 @@ export default class Registration extends Component {
             password: "",
             confirmPassword: "",
             loginOn: false,
+            validForm: false,
             validEmail: {
                 valid: false,
                 message: []
@@ -43,13 +44,15 @@ export default class Registration extends Component {
             password: this.state.password,
             confirmPassword: this.state.confirmPassword,
         }
-        let result = await this.authorization.Register(data);
-        if (typeof (result.data) !== "undefined") {
-            await alert(result.data)
-            this.setState({ loginOn: true })
-        }
-        else {
-            await alert("Ошибка!")
+        if (this.state.validForm) {
+            let result = await this.authorization.Register(data);
+            if (typeof (result.data) !== "undefined") {
+                await alert(result.data)
+                this.setState({ loginOn: true })
+            }
+            else {
+                await alert("Ошибка!")
+            }
         }
     }
 
@@ -70,7 +73,8 @@ export default class Registration extends Component {
             validUserName: await validation.userName(data),
             validPassword: await validation.password(data),
             validConfirmPassword: await validation.confirmPassword(data),
-            validEmail: await validation.email(data)
+            validEmail: await validation.email(data),
+            validForm: await validation.form(data),
         })
     }
 
@@ -110,7 +114,7 @@ export default class Registration extends Component {
                         </div>
                     </div>
 
-                    <button type="button" onClick={this.registering} className="btn btn-outline-dark col-12 mb-4">Подтвердить</button>
+                    <button type="button" onClick={this.registering} className={`btn btn-outline-dark col-12 mb-4 ${this.state.validForm ? "" : "disabled"}`}>Подтвердить</button>
                     <div className="text-center">
                         <p><Link className="btn btn-outline-primary col-7 " to={"/authorization/login"}>Войти</Link></p>
                     </div>

@@ -13,26 +13,12 @@ const Schema = yup.object({
         .required("Пароль обязательное поле")
 })
 
-export async function password(value) {
-    try {
-        await Schema.fields.password.validate(value.password, { abortEarly: true })
-        return { valid: true, message: [] }
-    }
-    catch (error) {
-        return { valid: false, message: error.errors }
-    }
-}
-
 export async function email(value) {
     try {
-        await Schema.fields.email.validate(value.email, { abortEarly: true })
+        await Schema.fields.email.validate(value, { abortEarly: true })
         return { valid: true, message: [] }
     }
     catch (error) {
         return { valid: false, message: error.errors }
     }
-}
-
-export async function form(value) {
-    return await Schema.isValid(value, { abortEarly: true })
 }

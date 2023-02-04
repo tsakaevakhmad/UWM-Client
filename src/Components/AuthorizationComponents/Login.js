@@ -12,6 +12,7 @@ export default class Login extends Component {
         this.state = {
             email: "",
             password: "",
+            validForm: false,
             validEmail: {
                 valid: false,
                 message: []
@@ -31,12 +32,14 @@ export default class Login extends Component {
             email: this.state.email,
             password: this.state.password
         }
-        let result = await this.authorization.login(data);
-        if (typeof (result.data.token) !== "undefined") {
-            window.location.href = '/';
-        }
-        else {
-            await alert("Убедитесь что подтвердили ваш аккаунт через почту")
+        if (this.state.validForm) {
+            let result = await this.authorization.login(data);
+            if (typeof (result.data.token) !== "undefined") {
+                window.location.href = '/';
+            }
+            else {
+                await alert("Убедитесь что подтвердили ваш аккаунт через почту")
+            }
         }
     }
 
@@ -50,9 +53,10 @@ export default class Login extends Component {
             email: this.state.email,
             password: this.state.password
         }
-        this.setState({
-            validEmail: await validation.validEmail(data),
-            validPassword: await validation.validpassword(data)
+        await this.setState({
+            validEmail: await validation.email(data),
+            validPassword: await validation.password(data),
+            validForm: await validation.form(data)
         })
     }
 
@@ -74,10 +78,10 @@ export default class Login extends Component {
                         </div>
                     </div>
 
-                    <button type="button" onClick={this.logining} className="btn btn-outline-primary col-12 mb-4">Войти</button>
+                    <button type="button" onClick={this.logining} className={`btn btn-outline-primary col-12 mb-4 ${this.state.validForm ? "" : "disabled"}`}>Войти</button>
 
                     <div className="text-center">
-                        <p><Link className="btn btn-outline-dark col-7 " to={"/authorization/registration"}>Зарегистрироваться</Link></p>
+                        <p><Link className="btn btn-outline-dark col-7" to={"/authorization/registration"}>Зарегистрироваться</Link></p>
                         <p><Link className="btn btn-outline-success col-7 btn-sm" to={"/authorization/forgotpassword"}>Забыл пароль</Link></p>
                     </div>
                 </form>

@@ -1,48 +1,10 @@
 import * as yup from "yup";
 
-export async function userName(value) {
-    try {
-        await Schema.fields.userName.validate(value.userName, { abortEarly: true })
-        return { valid: true, message: [] }
-    }
-    catch (error) {
-        return { valid: false, message: error.errors }
-    }
-}
-
-export async function password(value) {
-    try {
-        await Schema.fields.password.validate(value.password, { abortEarly: true })
-        return { valid: true, message: [] }
-    }
-    catch (error) {
-        return { valid: false, message: error.errors }
-    }
-}
-
-export async function email(value) {
-    try {
-        await Schema.fields.email.validate(value.email, { abortEarly: true })
-        return { valid: true, message: [] }
-    }
-    catch (error) {
-        return { valid: false, message: error.errors }
-    }
-}
-
-export async function confirmPassword(value) {
-    try {
-        await Schema.validate(value, { abortEarly: true })
-        return { valid: true, message: [] }
-    }
-    catch (error) {
-        return { valid: false, message: error.errors }
-    }
-}
 
 const Schema = yup.object({
     userName: yup
         .string()
+        .min(3, "Длина имени не должна быть меньше 3 символов")
         .required("Имя пользователя обязательное поле"),
 
     email: yup
@@ -64,4 +26,49 @@ const Schema = yup.object({
             return true
         })
 })
+
+export async function userName(value) {
+    try {
+        await Schema.fields.userName.validate(value.userName, { abortEarly: true })
+        return { valid: true, message: [] }
+    }
+    catch (error) {
+        return { valid: false, message: error.errors }
+    }
+}
+
+export async function email(value) {
+    try {
+        await Schema.fields.email.validate(value.email, { abortEarly: true })
+        return { valid: true, message: [] }
+    }
+    catch (error) {
+        return { valid: false, message: error.errors }
+    }
+}
+
+export async function password(value) {
+    try {
+        await Schema.fields.password.validate(value.password, { abortEarly: true })
+        return { valid: true, message: [] }
+    }
+    catch (error) {
+        return { valid: false, message: error.errors }
+    }
+}
+
+export async function confirmPassword(value) {
+    try {
+        await Schema.validate(value, { abortEarly: true })
+        return { valid: true, message: [] }
+    }
+    catch (error) {
+        return { valid: false, message: error.errors }
+    }
+}
+
+export async function form(value) {
+    return await Schema.isValid(value, { abortEarly: true })
+}
+
 
