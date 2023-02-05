@@ -52,14 +52,18 @@ export default class ForgotPassword extends Component {
         return (
             <div className="centerContentBox col-4">
                 <form>
-                    <div className="form-outline mb-4">
-                        <input type="email" id="form7" name="email" onChange={this.handleChange} className={`form-control ${this.state.validEmail.valid ? "is-valid" : "is-invalid"}`} placeholder="Почта" />
-                        <div className="invalid-feedback">
-                            {this.state.validEmail.message[0]}
+
+                    <div className="form-outline mb-5">
+                        <div class="form-floating">
+                            <input type="email" id="email" name="email" onChange={this.handleChange} className={`form-control ${this.state.validEmail.valid ? "is-valid" : "is-invalid"}`} placeholder="Почта" />
+                            <label for="email">Почта</label>
+                            <div className="invalid-feedback">
+                                {this.state.validEmail.message[0]}
+                            </div>
                         </div>
                     </div>
-                    <button type="button" onClick={this.submitMail} className={`btn btn-outline-success col-12 mb-4 ${this.state.validEmail.valid ? "" : "disabled"}`}>Отправить</button>
 
+                    <button type="button" onClick={this.submitMail} className={`btn btn-outline-success col-12 mb-4 ${this.state.validEmail.valid ? "" : "disabled"}`}>Отправить</button>
                     <div className="text-center">
                         <p><Link className="btn btn-outline-primary col-7 btn-sm" to={"/authorization/login"}>Войти</Link></p>
                     </div>

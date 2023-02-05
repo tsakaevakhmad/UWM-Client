@@ -85,40 +85,77 @@ export default class ItemCreate extends Component {
                 <div className="mx-auto col-md-11 card border-dark" >
                     <div className="card-header bg-transparent border-dark"><h3>Добавление предмета</h3></div>
                     <div className="card-body text-dark">
-                        <label className="form-label">Название</label>
-                        <input className="form-control" type="text" name="title" onChange={this.handleChange} placeholder="Название" />
-                        <label className="form-label">Производитель</label>
-                        <input className="form-control" type="text" name="manufacturer" onChange={this.handleChange} placeholder="Производитель" />
-                        <label className="form-label">Цена</label>
-                        <input className="form-control" type="number" name="price" onChange={this.handleChange} placeholder="Цена" />
-                        <label className="form-label">Количество / единица измерения</label>
-                        <div className="input-group ">
-                            <input className="form-control col-6" type="number" name="quantity" onChange={this.handleChange} placeholder="Количество" />
-                            <input className="form-control col-6" type="text" name="unit" onChange={this.handleChange} placeholder="Единица" />
+                        <div class="form-floating">
+                            <input className="form-control mb-4" id="title" type="text" name="title" onChange={this.handleChange} placeholder="Название" />
+                            <label className="form-label" for="title">Название</label>
                         </div>
-                        <label className="form-label">Поставщик</label>
-                        <select className="form-select" defaultValue={'Default'} name="providerId" onChange={this.handleChange}>
-                            <option value="Default" disabled>Пусто</option>
-                            {this.state.provider.map(p =>
-                                <option key={p.id} value={p.id}>{p.name}</option>
-                            )}
-                        </select>
-                        <label className="form-label">Категория</label>
-                        <select className="form-select" defaultValue={'Default'} name="subCategoryId" onChange={this.handleChange}>
-                            <option value="Default" disabled>Пусто</option>
-                            {this.state.subCategory.map(sc =>
-                                <option key={sc.id} value={sc.id}>{sc.name}</option>
-                            )}
-                        </select>
-                        <label className="form-label">Склад</label>
-                        <select className="form-select" defaultValue={'Default'} name="warehouseId" onChange={this.handleChange}>
-                            <option value="Default" disabled>Пусто</option>
-                            {this.state.wahehouse.map(w =>
-                                <option key={w.id} value={w.id}>{w.number}</option>
-                            )}
-                        </select>
-                        <label className="form-label">Описание товара</label>
-                        <textarea className="form-control" name="specifications" onChange={this.handleChange} rows="3"></textarea>
+
+                        <div class="form-floating">
+                            <input className="form-control mb-4" id="manufacturer" type="text" name="manufacturer" onChange={this.handleChange} placeholder="Производитель" />
+                            <label className="form-label" for="manufacturer">Производитель</label>
+                        </div>
+
+                        <div class="form-floating">
+                            <input className="form-control mb-4" id="price" type="number" name="price" onChange={this.handleChange} placeholder="Цена" />
+                            <label className="form-label" for="price">Цена</label>
+                        </div>
+
+                        <div className="row g-2 mb-4">
+                            <div class="col-md">
+                                <div class="form-floating">
+                                    <input className="form-control col-6" id="quantity" type="number" name="quantity" onChange={this.handleChange} placeholder="Количество" />
+                                    <label className="form-label" for="quantity">Количество</label>
+                                </div>
+                            </div>
+                            <div class="col-md">
+                                <div class="form-floating">
+                                    <input className="form-control col-6" id="unit" type="text" name="unit" onChange={this.handleChange} placeholder="Единица" />
+                                    <label className="form-label" for="unit">Единица</label>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="col-md mb-4">
+                            <div class="form-floating">
+                                <select className="form-select mb-4" id="providerId" defaultValue={'Default'} name="providerId" onChange={this.handleChange}>
+                                    <option value="Default" disabled>Пусто</option>
+                                    {this.state.provider.map(p =>
+                                        <option key={p.id} value={p.id}>{p.name}</option>
+                                    )}
+                                </select>
+                                <label className="form-label" for="providerId">Поставщик</label>
+                            </div>
+                        </div>
+
+                        <div class="col-md mb-4">
+                            <div class="form-floating">
+                                <select className="form-select mb-4" id="subCategoryId" defaultValue={'Default'} name="subCategoryId" onChange={this.handleChange}>
+                                    <option value="Default" disabled>Пусто</option>
+                                    {this.state.subCategory.map(sc =>
+                                        <option key={sc.id} value={sc.id}>{sc.name}</option>
+                                    )}
+                                </select>
+                                <label className="form-label" for="subCategoryId">Категория</label>
+                            </div>
+                        </div>
+
+                        <div class="col-md mb-4">
+                            <div class="form-floating">
+                                <select className="form-select mb-4" id="warehouseId" defaultValue={'Default'} name="warehouseId" onChange={this.handleChange}>
+                                    <option value="Default" disabled>Пусто</option>
+                                    {this.state.wahehouse.map(w =>
+                                        <option key={w.id} value={w.id}>{w.number}</option>
+                                    )}
+                                </select>
+                                <label className="form-label" for="warehouseId">Склад</label>
+                            </div>
+                        </div>
+
+                        <div class="form-floating">
+                            <textarea className="form-control" id="specifications" placeholder="Описание товара" name="specifications" onChange={this.handleChange}></textarea>
+                            <label for="specifications">Описание товара</label>
+                        </div>
+
                     </div>
                     <div className="card-footer border-dark bg-transparent">
                         <div className="row" >

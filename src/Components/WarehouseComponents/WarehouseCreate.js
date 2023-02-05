@@ -63,11 +63,11 @@ export default class WarehouseCreate extends Component {
                         <h3>Адрес</h3>
                         <br />
                         <label className="form-label">Страна</label>
-                        <input className="form-control" type="text" value={country} name="country" onChange={this.handleChange} placeholder="Страна" />
+                        <input className="form-control mb-4" type="text" value={country} name="country" onChange={this.handleChange} placeholder="Страна" />
                         <label className="form-label">Город</label>
-                        <input className="form-control" type="text" value={city} name="city" onChange={this.handleChange} placeholder="Город" />
+                        <input className="form-control mb-4" type="text" value={city} name="city" onChange={this.handleChange} placeholder="Город" />
                         <label className="form-label">Здание (локальный адрес)</label>
-                        <input className="form-control" type="text" value={building} name="building" onChange={this.handleChange} placeholder="Здание" />
+                        <input className="form-control mb-4" type="text" value={building} name="building" onChange={this.handleChange} placeholder="Здание" />
                     </div>
                     <div className="card-footer border-dark bg-transparent">
                         <div className="row" >
