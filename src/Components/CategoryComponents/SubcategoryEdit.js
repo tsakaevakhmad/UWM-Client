@@ -77,7 +77,7 @@ class SubCategory extends Component {
         if (this.state.redirect) {
             return <Navigate to={`/CategoryEdit/${this.state.category.categoryId}`} />
         }
-        
+
         if (category != null)
             return (
                 <div >
@@ -85,8 +85,15 @@ class SubCategory extends Component {
                     <div className="mx-auto col-md-11 card border-dark" >
                         <div className="card-header bg-transparent border-dark"><h3>Редактор подкатегории</h3></div>
                         <div className="card-body text-dark">
-                            <label className="form-label">Категория</label>
-                            <input className="form-control" type="text" value={name} name="name" onChange={this.handleChange} placeholder="Имя поставщика" />
+
+                            <div class="form-floating">
+                                <input className="form-control mb-4" type="text" value={name} id="name" name="name" onChange={this.handleChange} placeholder="Подкатегория" />
+                                <label className="form-label" for="name">Подкатегория</label>
+                                <div className="invalid-feedback">
+                                    {/* {this.state.validConfirmPassword.message[0]} */}
+                                </div>
+                            </div>
+
                         </div>
                         <div className="card-footer border-dark bg-transparent">
                             <div className="row" >

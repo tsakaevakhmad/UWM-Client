@@ -122,16 +122,25 @@ class Item extends Component {
                                 <div class="form-floating">
                                     <input className="form-control mb-4" id="title" type="text" value={title} name="title" onChange={this.handleChange} placeholder="Название" />
                                     <label className="form-label" for="title">Название</label>
+                                    <div className="invalid-feedback">
+                                        {/* {this.state.validConfirmPassword.message[0]} */}
+                                    </div>
                                 </div>
 
                                 <div class="form-floating">
                                     <input className="form-control mb-4" id="manufacturer" type="text" value={manufacturer} name="manufacturer" onChange={this.handleChange} placeholder="Производитель" />
                                     <label className="form-label" for="manufacturer">Производитель</label>
+                                    <div className="invalid-feedback">
+                                        {/* {this.state.validConfirmPassword.message[0]} */}
+                                    </div>
                                 </div>
 
                                 <div class="form-floating">
                                     <input className="form-control mb-4" id="price" type="number" value={price} name="price" onChange={this.handleChange} placeholder="Цена" />
                                     <label className="form-label" for="price">Цена</label>
+                                    <div className="invalid-feedback">
+                                        {/* {this.state.validConfirmPassword.message[0]} */}
+                                    </div>
                                 </div>
 
                                 <div className="row g-2 mb-4">
@@ -139,12 +148,18 @@ class Item extends Component {
                                         <div class="form-floating">
                                             <input className="form-control col-6" id="quantity" type="number" value={quantity} name="quantity" onChange={this.handleChange} placeholder="Количество" />
                                             <label className="form-label" for="quantity">Количество</label>
+                                            <div className="invalid-feedback">
+                                                {/* {this.state.validConfirmPassword.message[0]} */}
+                                            </div>
                                         </div>
                                     </div>
                                     <div class="col-md">
                                         <div class="form-floating">
                                             <input className="form-control col-6" id="unit" type="text" value={unit} name="unit" onChange={this.handleChange} placeholder="Единица" />
                                             <label className="form-label" for="unit">Единица</label>
+                                            <div className="invalid-feedback">
+                                                {/* {this.state.validConfirmPassword.message[0]} */}
+                                            </div>
                                         </div>
                                     </div>
                                 </div>
@@ -158,6 +173,9 @@ class Item extends Component {
                                             )}
                                         </select>
                                         <label className="form-label" for="providerId">Поставщик</label>
+                                        <div className="invalid-feedback">
+                                            {/* {this.state.validConfirmPassword.message[0]} */}
+                                        </div>
                                     </div>
                                 </div>
 
@@ -170,6 +188,9 @@ class Item extends Component {
                                             )}
                                         </select>
                                         <label className="form-label" for="subCategoryId">Категория</label>
+                                        <div className="invalid-feedback">
+                                            {/* {this.state.validConfirmPassword.message[0]} */}
+                                        </div>
                                     </div>
                                 </div>
 
@@ -182,12 +203,18 @@ class Item extends Component {
                                             )}
                                         </select>
                                         <label className="form-label" for="warehouseId">Склад</label>
+                                        <div className="invalid-feedback">
+                                            {/* {this.state.validConfirmPassword.message[0]} */}
+                                        </div>
                                     </div>
                                 </div>
 
                                 <div class="form-floating">
                                     <textarea className="form-control" id="specifications" value={specifications} placeholder="Описание товара" name="specifications" onChange={this.handleChange}></textarea>
                                     <label for="specifications">Описание товара</label>
+                                    <div className="invalid-feedback">
+                                        {/* {this.state.validConfirmPassword.message[0]} */}
+                                    </div>
                                 </div>
 
                             </div>

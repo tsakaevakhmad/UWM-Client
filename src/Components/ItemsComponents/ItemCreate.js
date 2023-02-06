@@ -88,16 +88,25 @@ export default class ItemCreate extends Component {
                         <div class="form-floating">
                             <input className="form-control mb-4" id="title" type="text" name="title" onChange={this.handleChange} placeholder="Название" />
                             <label className="form-label" for="title">Название</label>
+                            <div className="invalid-feedback">
+                                {/* {this.state.validConfirmPassword.message[0]} */}
+                            </div>
                         </div>
 
                         <div class="form-floating">
                             <input className="form-control mb-4" id="manufacturer" type="text" name="manufacturer" onChange={this.handleChange} placeholder="Производитель" />
                             <label className="form-label" for="manufacturer">Производитель</label>
+                            <div className="invalid-feedback">
+                                {/* {this.state.validConfirmPassword.message[0]} */}
+                            </div>
                         </div>
 
                         <div class="form-floating">
                             <input className="form-control mb-4" id="price" type="number" name="price" onChange={this.handleChange} placeholder="Цена" />
                             <label className="form-label" for="price">Цена</label>
+                            <div className="invalid-feedback">
+                                {/* {this.state.validConfirmPassword.message[0]} */}
+                            </div>
                         </div>
 
                         <div className="row g-2 mb-4">
@@ -105,12 +114,18 @@ export default class ItemCreate extends Component {
                                 <div class="form-floating">
                                     <input className="form-control col-6" id="quantity" type="number" name="quantity" onChange={this.handleChange} placeholder="Количество" />
                                     <label className="form-label" for="quantity">Количество</label>
+                                    <div className="invalid-feedback">
+                                        {/* {this.state.validConfirmPassword.message[0]} */}
+                                    </div>
                                 </div>
                             </div>
                             <div class="col-md">
                                 <div class="form-floating">
                                     <input className="form-control col-6" id="unit" type="text" name="unit" onChange={this.handleChange} placeholder="Единица" />
                                     <label className="form-label" for="unit">Единица</label>
+                                    <div className="invalid-feedback">
+                                        {/* {this.state.validConfirmPassword.message[0]} */}
+                                    </div>
                                 </div>
                             </div>
                         </div>
@@ -124,6 +139,9 @@ export default class ItemCreate extends Component {
                                     )}
                                 </select>
                                 <label className="form-label" for="providerId">Поставщик</label>
+                                <div className="invalid-feedback">
+                                    {/* {this.state.validConfirmPassword.message[0]} */}
+                                </div>
                             </div>
                         </div>
 
@@ -136,6 +154,9 @@ export default class ItemCreate extends Component {
                                     )}
                                 </select>
                                 <label className="form-label" for="subCategoryId">Категория</label>
+                                <div className="invalid-feedback">
+                                    {/* {this.state.validConfirmPassword.message[0]} */}
+                                </div>
                             </div>
                         </div>
 
@@ -148,12 +169,18 @@ export default class ItemCreate extends Component {
                                     )}
                                 </select>
                                 <label className="form-label" for="warehouseId">Склад</label>
+                                <div className="invalid-feedback">
+                                    {/* {this.state.validConfirmPassword.message[0]} */}
+                                </div>
                             </div>
                         </div>
 
                         <div class="form-floating">
                             <textarea className="form-control" id="specifications" placeholder="Описание товара" name="specifications" onChange={this.handleChange}></textarea>
                             <label for="specifications">Описание товара</label>
+                            <div className="invalid-feedback">
+                                {/* {this.state.validConfirmPassword.message[0]} */}
+                            </div>
                         </div>
 
                     </div>

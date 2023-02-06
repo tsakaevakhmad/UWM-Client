@@ -86,11 +86,23 @@ export default class CategoryCreate extends Component {
                 <div className="mx-auto col-md-11 card border-dark" >
                     <div className="card-header bg-transparent border-dark"><h3>Добавление категории</h3></div>
                     <div className="card-body text-dark">
-                        <label className="form-label">Категория</label>
-                        <input className="form-control" type="text" name="name" onChange={this.handleChange} placeholder="Название" />
+
+                        <div class="form-floating">
+                            <input className="form-control mb-4" type="text" id="name" name="name" onChange={this.handleChange} placeholder="Категория" />
+                            <label className="form-label" for="name">Категория</label>
+                            <div className="invalid-feedback">
+                                {/* {this.state.validConfirmPassword.message[0]} */}
+                            </div>
+                        </div>
+
                         <div className="card-body text-dark col-4" id="subcategory" hidden>
-                            <label className="form-label">Подкатегория</label>
-                            <input className="form-control" type="text" name="subcategoryname" onChange={this.handleChange} placeholder="Название" />
+                            <div class="form-floating">
+                                <input className="form-control mb-4" type="text" id="subcategoryname" name="subcategoryname" onChange={this.handleChange} placeholder="Подкатегория" />
+                                <label className="form-label" for="subcategoryname">Подкатегория</label>
+                                <div className="invalid-feedback">
+                                    {/* {this.state.validConfirmPassword.message[0]} */}
+                                </div>
+                            </div>
                         </div>
                     </div>
                     <div className="card-footer border-dark bg-transparent">

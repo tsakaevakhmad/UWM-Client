@@ -84,9 +84,16 @@ class Provider extends Component {
                         <div className="mx-auto col-md-11 card border-dark" >
                             <div className="card-header bg-transparent border-dark"><h3>Добавление поставщика</h3></div>
                             <div className="card-body text-dark">
-                                <label className="form-label">Поставщик</label>
-                                <input className="form-control" type="text" value={name} name="name" onChange={this.handleChange} placeholder="Имя поставщика" />
+
+                                <div class="form-floating">
+                                    <input className="form-control" type="text" value={name} name="name" onChange={this.handleChange} placeholder="Имя поставщика" />
+                                    <label className="form-label" for="manufacturer">Поставщик</label>
+                                    <div className="invalid-feedback">
+                                        {/* {this.state.validConfirmPassword.message[0]} */}
+                                    </div>
+                                </div>
                             </div>
+                            
                             <div className="card-footer border-dark bg-transparent">
                                 <div className="row" >
                                     <div className="col-8 d-grid gap-2 d-md-flex">

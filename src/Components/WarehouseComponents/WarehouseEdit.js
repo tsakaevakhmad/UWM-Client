@@ -96,17 +96,43 @@ class Warehouse extends Component {
                         <div className="mx-auto col-md-11 card border-dark" >
                             <div className="card-header bg-transparent border-dark"><h3>{this.state.number}</h3></div>
                             <div className="card-body text-dark">
-                                <label className="form-label">Номер склада</label>
-                                <input className="form-control" type="text" value={number} name="number" onChange={this.handleChange} placeholder="Номер склада" />
+                                
+                                <div class="form-floating">
+                                    <input className="form-control" type="text" value={number} id="number" name="number" onChange={this.handleChange} placeholder="Номер склада" />
+                                    <label className="form-label" for="number">Номер склада</label>
+                                    <div className="invalid-feedback">
+                                        {/* {this.state.validConfirmPassword.message[0]} */}
+                                    </div>
+                                </div>
+
                                 <br />
                                 <h3>Адрес</h3>
                                 <br />
-                                <label className="form-label">Страна</label>
-                                <input className="form-control mb-4" type="text" value={country} name="country" onChange={this.handleChange} placeholder="Страна" />
-                                <label className="form-label">Город</label>
-                                <input className="form-control mb-4" type="text" value={city} name="city" onChange={this.handleChange} placeholder="Город" />
-                                <label className="form-label">Здание (локальный адрес)</label>
-                                <input className="form-control mb-4" type="text" value={building} name="building" onChange={this.handleChange} placeholder="Локальный адрес" />
+
+                                <div class="form-floating">
+                                    <input className="form-control mb-4" type="text" value={country} id="country" name="country" onChange={this.handleChange} placeholder="Страна" />
+                                    <label className="form-label" for="country">Страна</label>
+                                    <div className="invalid-feedback">
+                                        {/* {this.state.validConfirmPassword.message[0]} */}
+                                    </div>
+                                </div>
+
+                                <div class="form-floating">
+                                    <input className="form-control mb-4" type="text" value={city} id="city" name="city" onChange={this.handleChange} placeholder="Город" />
+                                    <label className="form-label" for="city">Город</label>
+                                    <div className="invalid-feedback">
+                                        {/* {this.state.validConfirmPassword.message[0]} */}
+                                    </div>
+                                </div>
+
+                                <div class="form-floating">
+                                    <input className="form-control mb-4" type="text" value={building} id="building" name="building" onChange={this.handleChange} placeholder="Локальный адрес" />
+                                    <label className="form-label" for="building">Локальный адрес</label>
+                                    <div className="invalid-feedback">
+                                        {/* {this.state.validConfirmPassword.message[0]} */}
+                                    </div>
+                                </div>
+                               
                             </div>
                             <div className="card-footer border-dark bg-transparent">
                                 <div className="row" >
