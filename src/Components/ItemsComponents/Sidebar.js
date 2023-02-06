@@ -38,7 +38,7 @@ export default class Sidebar extends Component {
                                     <div className="accordion-body">
                                         <div className="list-group rounded">
                                             {category.subCategoryDto.map(subcategory =>
-                                                <button key={subcategory.id} value={subcategory.id} onClick={() => this.props.getBy(subcategory.id)} type="button" className="btn btn-outline-secondary">{subcategory.name}</button>
+                                                <button key={subcategory.id} value={subcategory.id} onClick={() => this.props.getBy(subcategory.id)} type="button" className="btn btn-outline-secondary col-lg-12">{subcategory.name}</button>
                                             )}
                                         </div>
                                     </div>

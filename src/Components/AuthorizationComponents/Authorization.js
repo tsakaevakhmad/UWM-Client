@@ -14,7 +14,7 @@ export default class Authorization extends Component {
 
     render() {
         return (
-            <>
+            <div className="centerContentBox col-4">
                 <Routes>
                     <Route path="login" element={<Login />} />
                     <Route path="registration" element={<Registration />} />
@@ -22,7 +22,7 @@ export default class Authorization extends Component {
                     <Route path="resetpassword" element={< ResetPassword />} />
                     <Route path="confirmaccaunt" element={< ConfirmAccaunt />} />
                 </Routes>
-            </>
+            </div>
         )
     }
 }

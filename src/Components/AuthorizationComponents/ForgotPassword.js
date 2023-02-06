@@ -50,11 +50,11 @@ export default class ForgotPassword extends Component {
                 <Navigate to={"/authorization/login"} />
             )
         return (
-            <div className="centerContentBox col-4">
+            <div>
                 <form>
 
                     <div className="form-outline mb-5">
-                        <div class="form-floating">
+                        <div className="form-floating">
                             <input type="email" id="email" name="email" onChange={this.handleChange} className={`form-control ${this.state.validEmail.valid ? "is-valid" : "is-invalid"}`} placeholder="Почта" />
                             <label htmlFor="email">Почта</label>
                             <div className="invalid-feedback">

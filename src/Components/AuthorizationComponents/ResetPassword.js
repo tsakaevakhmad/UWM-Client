@@ -80,11 +80,11 @@ class Reset extends Component {
                 <Navigate to={"/authorization/login"} />
             )
         return (
-            <div className="centerContentBox col-4">
+            <div>
                 <form>
 
                     <div className="form-outline mb-5">
-                        <div class="form-floating">
+                        <div className="form-floating">
                             <input type="email" id="email" name="email" onChange={this.handleChange} className={`form-control ${this.state.validEmail.valid ? "is-valid" : "is-invalid"}`} placeholder="Почта" />
                             <label htmlFor="email">Почта</label>
                             <div className="invalid-feedback">
@@ -94,7 +94,7 @@ class Reset extends Component {
                     </div>
 
                     <div className="form-outline mb-5">
-                        <div class="form-floating">
+                        <div className="form-floating">
                             <input type="password" id="password" name="password" onChange={this.handleChange} className={`form-control  ${this.state.validPassword.valid ? "is-valid" : "is-invalid"}`} placeholder="Пароль" />
                             <label htmlFor="password">Пароль</label>
                             <div className="invalid-feedback">
@@ -104,7 +104,7 @@ class Reset extends Component {
                     </div>
 
                     <div className="form-outline mb-5">
-                        <div class="form-floating">
+                        <div className="form-floating">
                             <input type="password" id="confirmPassword" name="confirmPassword" onChange={this.handleChange} className={`form-control  ${this.state.validConfirmPassword.valid ? "is-valid" : "is-invalid"}`} placeholder="Подтвердите пароль" />
                             <label htmlFor="confirmPassword">Подтвердите пароль</label>
                             <div className="invalid-feedback">

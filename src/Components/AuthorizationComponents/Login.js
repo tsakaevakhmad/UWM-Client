@@ -62,11 +62,11 @@ export default class Login extends Component {
 
     render() {
         return (
-            <div className="centerContentBox col-4">
+            <div>
                 <form className="needs-validation">
 
                     <div className="form-outline mb-5">
-                        <div class="form-floating">
+                        <div className="form-floating">
                             <input type="email" id="email" name="email" onChange={this.handleChange} className={`form-control  ${this.state.validEmail.valid ? "is-valid" : "is-invalid"}`} placeholder="Почта" />
                             <label htmlFor="email">Почта</label>
                             <div className="invalid-feedback">
@@ -76,7 +76,7 @@ export default class Login extends Component {
                     </div>
 
                     <div className="form-outline mb-5">
-                        <div class="form-floating">
+                        <div className="form-floating">
                             <input type="password" id="password" name="password" onChange={this.handleChange} className={`form-control  ${this.state.validPassword.valid ? "is-valid" : "is-invalid"}`} placeholder="Пароль" />
                             <label htmlFor="password">Пароль</label>
                             <div className="invalid-feedback">
@@ -88,7 +88,7 @@ export default class Login extends Component {
                     <button type="button" onClick={this.logining} className={`btn btn-outline-primary col-12 mb-4 ${this.state.validForm ? "" : "disabled"}`}>Войти</button>
 
                     <div className="text-center">
-                        <p><Link className="btn btn-outline-dark col-7" to={"/authorization/registration"}>Зарегистрироваться</Link></p>
+                        <p><Link className="btn btn-outline-dark col-lg-7" to={"/authorization/registration"}>Зарегистрироваться</Link></p>
                         <p><Link className="btn btn-outline-success col-7 btn-sm" to={"/authorization/forgotpassword"}>Забыл пароль</Link></p>
                     </div>
                 </form>
