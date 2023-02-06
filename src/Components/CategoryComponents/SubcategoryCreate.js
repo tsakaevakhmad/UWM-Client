@@ -65,9 +65,9 @@ class SubCategory extends Component {
                     <div className="card-header bg-transparent border-dark"><h3>Добавление подкатегории</h3></div>
                     <div className="card-body text-dark">
 
-                        <div class="form-floating">
+                        <div className="form-floating">
                             <input className="form-control mb-4" type="text" id="name" name="name" onChange={this.handleChange} placeholder="Подкатегория" />
-                            <label className="form-label" for="name">Подкатегория</label>
+                            <label className="form-label" htmlFor="name">Подкатегория</label>
                             <div className="invalid-feedback">
                                 {/* {this.state.validConfirmPassword.message[0]} */}
                             </div>

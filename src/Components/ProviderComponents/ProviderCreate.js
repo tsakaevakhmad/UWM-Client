@@ -51,9 +51,9 @@ export default class ProviderCreate extends Component {
                     <div className="card-header bg-transparent border-dark"><h3>Добавление поставщика</h3></div>
                     <div className="card-body text-dark">
 
-                        <div class="form-floating">
+                        <div className="form-floating">
                             <input className="form-control" type="text" name="name" onChange={this.handleChange} placeholder="Имя поставщика" />
-                            <label className="form-label" for="manufacturer">Поставщик</label>
+                            <label className="form-label" htmlFor="manufacturer">Поставщик</label>
                             <div className="invalid-feedback">
                                 {/* {this.state.validConfirmPassword.message[0]} */}
                             </div>

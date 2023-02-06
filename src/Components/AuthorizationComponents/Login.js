@@ -68,7 +68,7 @@ export default class Login extends Component {
                     <div className="form-outline mb-5">
                         <div class="form-floating">
                             <input type="email" id="email" name="email" onChange={this.handleChange} className={`form-control  ${this.state.validEmail.valid ? "is-valid" : "is-invalid"}`} placeholder="Почта" />
-                            <label for="email">Почта</label>
+                            <label htmlFor="email">Почта</label>
                             <div className="invalid-feedback">
                                 {this.state.validEmail.message[0]}
                             </div>
@@ -78,7 +78,7 @@ export default class Login extends Component {
                     <div className="form-outline mb-5">
                         <div class="form-floating">
                             <input type="password" id="password" name="password" onChange={this.handleChange} className={`form-control  ${this.state.validPassword.valid ? "is-valid" : "is-invalid"}`} placeholder="Пароль" />
-                            <label for="password">Пароль</label>
+                            <label htmlFor="password">Пароль</label>
                             <div className="invalid-feedback">
                                 {this.state.validPassword.message[0]}
                             </div>

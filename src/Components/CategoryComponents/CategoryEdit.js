@@ -85,9 +85,9 @@ class Category extends Component {
                             <div className="card-header bg-transparent border-dark"><h3>Редактор категории</h3></div> 
                             <div className="card-body text-dark">
                                 
-                                <div class="form-floating">
+                                <div className="form-floating">
                                     <input className="form-control mb-4" type="text" value={name} id="name" name="name" onChange={this.handleChange} placeholder="Категория" />
-                                    <label className="form-label" for="name">Категория</label>
+                                    <label className="form-label" htmlFor="name">Категория</label>
                                     <div className="invalid-feedback">
                                         {/* {this.state.validConfirmPassword.message[0]} */}
                                     </div>

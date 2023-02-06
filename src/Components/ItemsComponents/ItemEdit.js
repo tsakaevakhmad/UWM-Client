@@ -119,44 +119,44 @@ class Item extends Component {
                         <div className="mx-auto col-md-11 card border-dark" >
                             <div className="card-header bg-transparent border-dark"><h3>{this.state.title}</h3></div>
                             <div className="card-body text-dark">
-                                <div class="form-floating">
+                                <div className="form-floating">
                                     <input className="form-control mb-4" id="title" type="text" value={title} name="title" onChange={this.handleChange} placeholder="Название" />
-                                    <label className="form-label" for="title">Название</label>
+                                    <label className="form-label" htmlFor="title">Название</label>
                                     <div className="invalid-feedback">
                                         {/* {this.state.validConfirmPassword.message[0]} */}
                                     </div>
                                 </div>
 
-                                <div class="form-floating">
+                                <div className="form-floating">
                                     <input className="form-control mb-4" id="manufacturer" type="text" value={manufacturer} name="manufacturer" onChange={this.handleChange} placeholder="Производитель" />
-                                    <label className="form-label" for="manufacturer">Производитель</label>
+                                    <label className="form-label" htmlFor="manufacturer">Производитель</label>
                                     <div className="invalid-feedback">
                                         {/* {this.state.validConfirmPassword.message[0]} */}
                                     </div>
                                 </div>
 
-                                <div class="form-floating">
+                                <div className="form-floating">
                                     <input className="form-control mb-4" id="price" type="number" value={price} name="price" onChange={this.handleChange} placeholder="Цена" />
-                                    <label className="form-label" for="price">Цена</label>
+                                    <label className="form-label" htmlFor="price">Цена</label>
                                     <div className="invalid-feedback">
                                         {/* {this.state.validConfirmPassword.message[0]} */}
                                     </div>
                                 </div>
 
                                 <div className="row g-2 mb-4">
-                                    <div class="col-md">
-                                        <div class="form-floating">
+                                    <div className="col-md">
+                                        <div className="form-floating">
                                             <input className="form-control col-6" id="quantity" type="number" value={quantity} name="quantity" onChange={this.handleChange} placeholder="Количество" />
-                                            <label className="form-label" for="quantity">Количество</label>
+                                            <label className="form-label" htmlFor="quantity">Количество</label>
                                             <div className="invalid-feedback">
                                                 {/* {this.state.validConfirmPassword.message[0]} */}
                                             </div>
                                         </div>
                                     </div>
-                                    <div class="col-md">
-                                        <div class="form-floating">
+                                    <div className="col-md">
+                                        <div className="form-floating">
                                             <input className="form-control col-6" id="unit" type="text" value={unit} name="unit" onChange={this.handleChange} placeholder="Единица" />
-                                            <label className="form-label" for="unit">Единица</label>
+                                            <label className="form-label" htmlFor="unit">Единица</label>
                                             <div className="invalid-feedback">
                                                 {/* {this.state.validConfirmPassword.message[0]} */}
                                             </div>
@@ -164,54 +164,54 @@ class Item extends Component {
                                     </div>
                                 </div>
 
-                                <div class="col-md mb-4">
-                                    <div class="form-floating">
+                                <div className="col-md mb-4">
+                                    <div className="form-floating">
                                         <select className="form-select mb-4" id="providerId" value={providerId} name="providerId" onChange={this.handleChange}>
                                             <option value="Default" disabled>Пусто</option>
                                             {this.state.provider.map(p =>
                                                 <option key={p.id} value={p.id}>{p.name}</option>
                                             )}
                                         </select>
-                                        <label className="form-label" for="providerId">Поставщик</label>
+                                        <label className="form-label" htmlFor="providerId">Поставщик</label>
                                         <div className="invalid-feedback">
                                             {/* {this.state.validConfirmPassword.message[0]} */}
                                         </div>
                                     </div>
                                 </div>
 
-                                <div class="col-md mb-4">
-                                    <div class="form-floating">
+                                <div className="col-md mb-4">
+                                    <div className="form-floating">
                                         <select className="form-select mb-4" id="subCategoryId" value={subCategoryId} name="subCategoryId" onChange={this.handleChange}>
                                             <option value="Default" disabled>Пусто</option>
                                             {this.state.subCategory.map(sc =>
                                                 <option key={sc.id} value={sc.id}>{sc.name}</option>
                                             )}
                                         </select>
-                                        <label className="form-label" for="subCategoryId">Категория</label>
+                                        <label className="form-label" htmlFor="subCategoryId">Категория</label>
                                         <div className="invalid-feedback">
                                             {/* {this.state.validConfirmPassword.message[0]} */}
                                         </div>
                                     </div>
                                 </div>
 
-                                <div class="col-md mb-4">
-                                    <div class="form-floating">
+                                <div className="col-md mb-4">
+                                    <div className="form-floating">
                                         <select className="form-select mb-4" id="warehouseId" value={warehouseId} name="warehouseId" onChange={this.handleChange}>
                                             <option value="Default" disabled>Пусто</option>
                                             {this.state.wahehouse.map(w =>
                                                 <option key={w.id} value={w.id}>{w.number}</option>
                                             )}
                                         </select>
-                                        <label className="form-label" for="warehouseId">Склад</label>
+                                        <label className="form-label" htmlFor="warehouseId">Склад</label>
                                         <div className="invalid-feedback">
                                             {/* {this.state.validConfirmPassword.message[0]} */}
                                         </div>
                                     </div>
                                 </div>
 
-                                <div class="form-floating">
+                                <div className="form-floating">
                                     <textarea className="form-control" id="specifications" value={specifications} placeholder="Описание товара" name="specifications" onChange={this.handleChange}></textarea>
-                                    <label for="specifications">Описание товара</label>
+                                    <label htmlFor="specifications">Описание товара</label>
                                     <div className="invalid-feedback">
                                         {/* {this.state.validConfirmPassword.message[0]} */}
                                     </div>

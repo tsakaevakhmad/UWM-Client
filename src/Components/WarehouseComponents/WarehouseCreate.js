@@ -58,9 +58,9 @@ export default class WarehouseCreate extends Component {
                     <div className="card-header bg-transparent border-dark"><h3>Добавление склада</h3></div>
                     <div className="card-body text-dark">
 
-                        <div class="form-floating">
+                        <div className="form-floating">
                         <input className="form-control" type="text" id="number" name="number" onChange={this.handleChange} placeholder="Номер склада" />
-                            <label className="form-label" for="number">Номер склада</label>
+                            <label className="form-label" htmlFor="number">Номер склада</label>
                             <div className="invalid-feedback">
                                 {/* {this.state.validConfirmPassword.message[0]} */}
                             </div>
@@ -70,25 +70,25 @@ export default class WarehouseCreate extends Component {
                         <h3>Адрес</h3>
                         <br />
 
-                        <div class="form-floating">
+                        <div className="form-floating">
                         <input className="form-control mb-4" type="text" id="country" name="country" onChange={this.handleChange} placeholder="Страна" />
-                            <label className="form-label" for="country">Страна</label>
+                            <label className="form-label" htmlFor="country">Страна</label>
                             <div className="invalid-feedback">
                                 {/* {this.state.validConfirmPassword.message[0]} */}
                             </div>
                         </div>
 
-                        <div class="form-floating">
+                        <div className="form-floating">
                         <input className="form-control mb-4" type="text" id="city" name="city" onChange={this.handleChange} placeholder="Город" />
-                            <label className="form-label" for="city">Город</label>
+                            <label className="form-label" htmlFor="city">Город</label>
                             <div className="invalid-feedback">
                                 {/* {this.state.validConfirmPassword.message[0]} */}
                             </div>
                         </div>
 
-                        <div class="form-floating">
+                        <div className="form-floating">
                         <input className="form-control mb-4" type="text" id="building" name="building" onChange={this.handleChange} placeholder="Локальный адрес" />
-                            <label className="form-label" for="building">Локальный адрес</label>
+                            <label className="form-label" htmlFor="building">Локальный адрес</label>
                             <div className="invalid-feedback">
                                 {/* {this.state.validConfirmPassword.message[0]} */}
                             </div>
