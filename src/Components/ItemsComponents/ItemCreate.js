@@ -82,7 +82,7 @@ export default class ItemCreate extends Component {
         return (
             <div >
                 <br /><br />
-                <div className="mx-auto col-md-11 card border-dark" >
+                <div className="shadow mx-auto col-md-11 card mb-4" >
                     <div className="card-header bg-transparent border-dark"><h3>Добавление предмета</h3></div>
                     <div className="card-body text-dark">
                         <div className="form-floating">

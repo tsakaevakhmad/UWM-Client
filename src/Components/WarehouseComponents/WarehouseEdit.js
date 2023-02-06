@@ -93,7 +93,7 @@ class Warehouse extends Component {
                 return (
                     <div >
                         <br /><br />
-                        <div className="mx-auto col-md-11 card border-dark" >
+                        <div className="shadow mb-4 mx-auto col-md-11 card" >
                             <div className="card-header bg-transparent border-dark"><h3>{this.state.number}</h3></div>
                             <div className="card-body text-dark">
 
@@ -149,11 +149,10 @@ class Warehouse extends Component {
                     </div>
                 )
             } else {
-
                 return (
                     <div >
                         <br /><br />
-                        <div className="mx-auto col-md-11 card border-dark" >
+                        <div className="shadow mb-4 mx-auto col-md-11 card" >
                             <div className="card-header bg-transparent border-dark"><h3>{warehouse.number}</h3></div>
                             <div className="card-body text-dark">
                                 <table className="table table-hover">

@@ -54,7 +54,7 @@ export default class WarehouseCreate extends Component {
         return (
             <div >
                 <br /><br />
-                <div className="mx-auto col-md-11 card border-dark" >
+                <div className="mx-auto col-md-11 card border-dark mb-4" >
                     <div className="card-header bg-transparent border-dark"><h3>Добавление склада</h3></div>
                     <div className="card-body text-dark">
 

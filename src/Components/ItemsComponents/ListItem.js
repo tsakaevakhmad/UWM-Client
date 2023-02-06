@@ -21,7 +21,7 @@ export default class Main extends Component {
 
     render() {
         return (
-            <div className="row">
+            <div className="shadow mb-4 row">
 
                 <div className="col-md-3 border-end">
                     <Sidebar getBy={this.getBySubCategory} />

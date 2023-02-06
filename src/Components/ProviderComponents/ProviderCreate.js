@@ -47,7 +47,7 @@ export default class ProviderCreate extends Component {
         return (
             <div >
                 <br /><br />
-                <div className="mx-auto col-md-11 card border-dark" >
+                <div className="mx-auto col-md-11 card shadow mb-4" >
                     <div className="card-header bg-transparent border-dark"><h3>Добавление поставщика</h3></div>
                     <div className="card-body text-dark">
 

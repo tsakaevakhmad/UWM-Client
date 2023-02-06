@@ -20,7 +20,7 @@ export default class Sidebar extends Component {
     render() {
         if (this.state.categorys != null)
             return (
-                <div>
+                <div className="mb-4">
                     {this.state.categorys.map(category =>
                         <div key={category.id} className="accordion" id={category.name.replace(" ", "") + "Wrapper"}>
                             <br />

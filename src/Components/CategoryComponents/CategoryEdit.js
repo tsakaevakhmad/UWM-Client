@@ -81,7 +81,7 @@ class Category extends Component {
                 return (
                     <div >
                         <br /><br />
-                        <div className="mx-auto col-md-11 card border-dark" >
+                        <div className="mx-auto col-md-11 card shadow mb-4" >
                             <div className="card-header bg-transparent border-dark"><h3>Редактор категории</h3></div> 
                             <div className="card-body text-dark">
                                 
@@ -114,7 +114,7 @@ class Category extends Component {
                     return (
                         <div >
                             <br /><br />
-                            <div className="mx-auto col-md-11 card border-dark" >
+                            <div className="mx-auto col-md-11 card shadow mb-4" >
                                 <div className="card-header bg-transparent border-dark"><h3>{category.name}</h3></div>
                                 <div className="card-body text-dark">
                                     <table className="table table-hover">

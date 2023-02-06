@@ -22,7 +22,7 @@ export default class CategoryList extends Component {
         if (this.state.categorys != null)
             return (
                 <div>
-                    <div className="row">
+                    <div className="row shadow mb-4">
                         <div className="col-6 col-md-9">
                             <br />
                             <table className="table table-hover">

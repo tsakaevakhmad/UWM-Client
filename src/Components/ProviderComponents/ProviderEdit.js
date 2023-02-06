@@ -81,7 +81,7 @@ class Provider extends Component {
                 return (
                     <div >
                         <br /><br />
-                        <div className="mx-auto col-md-11 card border-dark" >
+                        <div className="mx-auto col-md-11 card shadow mb-4" >
                             <div className="card-header bg-transparent border-dark"><h3>Добавление поставщика</h3></div>
                             <div className="card-body text-dark">
 
@@ -92,9 +92,9 @@ class Provider extends Component {
                                         {/* {this.state.validConfirmPassword.message[0]} */}
                                     </div>
                                 </div>
-                                
+
                             </div>
-                            
+
                             <div className="card-footer border-dark bg-transparent">
                                 <div className="row" >
                                     <div className="col-8 d-grid gap-2 d-md-flex">
@@ -113,7 +113,7 @@ class Provider extends Component {
                 return (
                     <div >
                         <br /><br />
-                        <div className="mx-auto col-md-11 card border-dark" >
+                        <div className="mx-auto col-md-11 card shadow mb-4" >
                             <div className="card-header bg-transparent border-dark"><h3>{provider.name}</h3></div>
                             <div className="card-body text-dark">
                                 <table className="table table-hover">

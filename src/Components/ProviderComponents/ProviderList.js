@@ -22,7 +22,7 @@ export default class ProviderList extends Component {
         if (this.state.provider != null)
             return (
                 <div>
-                    <div className="row">
+                    <div className="row shadow mb-4 mx-auto mb-4">
                         <div className="col-6 col-md-9">
                             <br />
                             <table className="table table-hover">

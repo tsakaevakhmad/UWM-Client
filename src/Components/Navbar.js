@@ -31,7 +31,7 @@ export default class Navbar extends Component {
     render() {
         return (
             <div>
-                <nav className="navbar navbar-expand-lg navbar-light border-bottom border-2">
+                <nav className="shadow navbar navbar-expand-lg mb-4 navbar-light rounded">
                     <div className="container-fluid ">
                         <a className="navbar-brand fw-bold">UWM</a>
                         <button className="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarToggler" aria-controls="navbarTogglerDemo03" aria-expanded="false" aria-label="Toggle navigation">
