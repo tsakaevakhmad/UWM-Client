@@ -2,6 +2,7 @@ import ItemServices from '../../Axios/ItemServices';
 import ProviderServices from '../../Axios/ProviderServices';
 import WarehouseServices from '../../Axios/WarehouseServices';
 import SubCategoryServices from '../../Axios/SubcategoryServices';
+import * as valid from "../../ValidationSchema/Item/ItemValidation";
 import React, { Component } from 'react'
 import { Navigate } from 'react-router-dom'
 
@@ -34,6 +35,28 @@ export default class ItemCreate extends Component {
             subCategory: [],
             provider: [],
             wahehouse: [],
+
+            validTitle: {
+                valid: false,
+                message: []
+            },
+            validPrice: {
+                valid: false,
+                message: []
+            },
+            validProviderId: {
+                valid: false,
+                message: []
+            },
+            validWarehouseId: {
+                valid: false,
+                message: []
+            },
+            validSubCategory: {
+                valid: false,
+                message: []
+            },
+            formValid: false,
         }
 
         this.handleChange = this.handleChange.bind(this);
@@ -45,6 +68,26 @@ export default class ItemCreate extends Component {
         await this.setState({
             [name]: value
         });
+        await this.validator()
+    }
+
+    async validator() {
+        const data = {
+            title: this.state.title,
+            price: this.state.price,
+            providerId: this.state.providerId,
+            warehouseId: this.state.warehouseId,
+            subCategoryId: this.state.subCategoryId,
+        }
+
+        await this.setState({
+            validTitle: await valid.title(data),
+            validPrice: await valid.price(data),
+            validProviderId: await valid.providerId(data),
+            validWarehouseId: await valid.warehouseId(data),
+            validSubCategory: await valid.subCategoryId(data),
+            formValid: await valid.form(data)
+        })
     }
 
     async Create() {
@@ -59,8 +102,11 @@ export default class ItemCreate extends Component {
             warehouseId: this.state.warehouseId,
             subCategoryId: this.state.subCategoryId,
         }
-        let id = await this.itemServices.createItem(item);
-        this.setState({ id: id.data, redirect: true });
+        if (this.state.formValid) {
+            let id = await this.itemServices.createItem(item);
+            this.setState({ id: id.data, redirect: true });
+            console.log("+")
+        }
     }
 
 
@@ -85,27 +131,24 @@ export default class ItemCreate extends Component {
                 <div className="shadow mx-auto col-md-11 card mb-4" >
                     <div className="card-header bg-transparent border-dark"><h3>Добавление предмета</h3></div>
                     <div className="card-body text-dark">
-                        <div className="form-floating">
-                            <input className="form-control mb-4" id="title" type="text" name="title" onChange={this.handleChange} placeholder="Название" />
+                        <div className="form-floating mb-4">
+                            <input className={`form-control ${this.state.validTitle.valid ? "is-valid" : "is-invalid"}`} id="title" type="text" name="title" onChange={this.handleChange} placeholder="Название" />
                             <label className="form-label" htmlFor="title">Название</label>
                             <div className="invalid-feedback">
-                                {/* {this.state.validConfirmPassword.message[0]} */}
+                                {this.state.validTitle.message[0]}
                             </div>
                         </div>
 
-                        <div className="form-floating">
-                            <input className="form-control mb-4" id="manufacturer" type="text" name="manufacturer" onChange={this.handleChange} placeholder="Производитель" />
+                        <div className="form-floating mb-4">
+                            <input className="form-control" id="manufacturer" type="text" name="manufacturer" onChange={this.handleChange} placeholder="Производитель" />
                             <label className="form-label" htmlFor="manufacturer">Производитель</label>
-                            <div className="invalid-feedback">
-                                {/* {this.state.validConfirmPassword.message[0]} */}
-                            </div>
                         </div>
 
-                        <div className="form-floating">
-                            <input className="form-control mb-4" id="price" type="number" name="price" onChange={this.handleChange} placeholder="Цена" />
+                        <div className="form-floating mb-4">
+                            <input className={`form-control ${this.state.validPrice.valid ? "is-valid" : "is-invalid"}`} id="price" type="number" name="price" onChange={this.handleChange} placeholder="Цена" />
                             <label className="form-label" htmlFor="price">Цена</label>
                             <div className="invalid-feedback">
-                                {/* {this.state.validConfirmPassword.message[0]} */}
+                                {this.state.validPrice.message[0]}
                             </div>
                         </div>
 
@@ -114,25 +157,19 @@ export default class ItemCreate extends Component {
                                 <div className="form-floating">
                                     <input className="form-control col-6" id="quantity" type="number" name="quantity" onChange={this.handleChange} placeholder="Количество" />
                                     <label className="form-label" htmlFor="quantity">Количество</label>
-                                    <div className="invalid-feedback">
-                                        {/* {this.state.validConfirmPassword.message[0]} */}
-                                    </div>
                                 </div>
                             </div>
                             <div className="col-md">
                                 <div className="form-floating">
                                     <input className="form-control col-6" id="unit" type="text" name="unit" onChange={this.handleChange} placeholder="Единица" />
                                     <label className="form-label" htmlFor="unit">Единица</label>
-                                    <div className="invalid-feedback">
-                                        {/* {this.state.validConfirmPassword.message[0]} */}
-                                    </div>
                                 </div>
                             </div>
                         </div>
 
                         <div className="col-md mb-4">
                             <div className="form-floating">
-                                <select className="form-select mb-4" id="providerId" defaultValue={'Default'} name="providerId" onChange={this.handleChange}>
+                                <select className={`form-select ${this.state.validProviderId.valid ? "is-valid" : "is-invalid"}`} id="providerId" defaultValue={'Default'} name="providerId" onChange={this.handleChange}>
                                     <option value="Default" disabled>Пусто</option>
                                     {this.state.provider.map(p =>
                                         <option key={p.id} value={p.id}>{p.name}</option>
@@ -140,14 +177,14 @@ export default class ItemCreate extends Component {
                                 </select>
                                 <label className="form-label" htmlFor="providerId">Поставщик</label>
                                 <div className="invalid-feedback">
-                                    {/* {this.state.validConfirmPassword.message[0]} */}
+                                    {this.state.validProviderId.message[0]}
                                 </div>
                             </div>
                         </div>
 
                         <div className="col-md mb-4">
                             <div className="form-floating">
-                                <select className="form-select mb-4" id="subCategoryId" defaultValue={'Default'} name="subCategoryId" onChange={this.handleChange}>
+                                <select className={`form-select ${this.state.validSubCategory.valid ? "is-valid" : "is-invalid"}`} id="subCategoryId" defaultValue={'Default'} name="subCategoryId" onChange={this.handleChange}>
                                     <option value="Default" disabled>Пусто</option>
                                     {this.state.subCategory.map(sc =>
                                         <option key={sc.id} value={sc.id}>{sc.name}</option>
@@ -155,14 +192,14 @@ export default class ItemCreate extends Component {
                                 </select>
                                 <label className="form-label" htmlFor="subCategoryId">Категория</label>
                                 <div className="invalid-feedback">
-                                    {/* {this.state.validConfirmPassword.message[0]} */}
+                                    {this.state.validSubCategory.message[0]}
                                 </div>
                             </div>
                         </div>
 
                         <div className="col-md mb-4">
                             <div className="form-floating">
-                                <select className="form-select mb-4" id="warehouseId" defaultValue={'Default'} name="warehouseId" onChange={this.handleChange}>
+                                <select className={`form-select ${this.state.validWarehouseId.valid ? "is-valid" : "is-invalid"}`} id="warehouseId" defaultValue={'Default'} name="warehouseId" onChange={this.handleChange}>
                                     <option value="Default" disabled>Пусто</option>
                                     {this.state.wahehouse.map(w =>
                                         <option key={w.id} value={w.id}>{w.number}</option>
@@ -170,7 +207,7 @@ export default class ItemCreate extends Component {
                                 </select>
                                 <label className="form-label" htmlFor="warehouseId">Склад</label>
                                 <div className="invalid-feedback">
-                                    {/* {this.state.validConfirmPassword.message[0]} */}
+                                    {this.state.validWarehouseId.message[0]}
                                 </div>
                             </div>
                         </div>
@@ -178,9 +215,6 @@ export default class ItemCreate extends Component {
                         <div className="form-floating">
                             <textarea className="form-control" id="specifications" placeholder="Описание товара" name="specifications" onChange={this.handleChange}></textarea>
                             <label htmlFor="specifications">Описание товара</label>
-                            <div className="invalid-feedback">
-                                {/* {this.state.validConfirmPassword.message[0]} */}
-                            </div>
                         </div>
 
                     </div>
@@ -188,7 +222,7 @@ export default class ItemCreate extends Component {
                         <div className="row" >
                             <div className="col-8 d-grid gap-2 d-md-flex">
                                 <Link className="btn btn-outline-dark fw-bolder" to="/">Отмена</Link>
-                                <button type="button" onClick={this.Create} className="btn btn-outline-success fw-bolder">Сохранить</button>
+                                <button type="button" onClick={this.Create} className={`btn btn-outline-success fw-bolder ${this.state.formValid ? "" : "disabled"}`}>Сохранить</button>
                             </div>
                         </div>
                     </div>

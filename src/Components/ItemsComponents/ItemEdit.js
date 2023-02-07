@@ -2,6 +2,7 @@ import ItemServices from '../../Axios/ItemServices';
 import ProviderServices from '../../Axios/ProviderServices';
 import WarehouseServices from '../../Axios/WarehouseServices';
 import SubCategoryServices from '../../Axios/SubcategoryServices';
+import * as valid from "../../ValidationSchema/Item/ItemValidation";
 import React, { Component } from 'react'
 import { useParams, Navigate } from 'react-router-dom'
 
@@ -47,7 +48,29 @@ class Item extends Component {
             subCategory: [],
             provider: [],
             wahehouse: [],
-            item: {}
+            item: {},
+
+            validTitle: {
+                valid: false,
+                message: []
+            },
+            validPrice: {
+                valid: false,
+                message: []
+            },
+            validProviderId: {
+                valid: false,
+                message: []
+            },
+            validWarehouseId: {
+                valid: false,
+                message: []
+            },
+            validSubCategory: {
+                valid: false,
+                message: []
+            },
+            formValid: false,
         }
 
         this.handleChange = this.handleChange.bind(this);
@@ -60,6 +83,26 @@ class Item extends Component {
         await this.setState({
             [name]: value
         });
+        await this.validator()
+    }
+
+    async validator() {
+        const data = {
+            title: this.state.title,
+            price: this.state.price,
+            providerId: this.state.providerId,
+            warehouseId: this.state.warehouseId,
+            subCategoryId: this.state.subCategoryId,
+        }
+
+        await this.setState({
+            validTitle: await valid.title(data),
+            validPrice: await valid.price(data),
+            validProviderId: await valid.providerId(data),
+            validWarehouseId: await valid.warehouseId(data),
+            validSubCategory: await valid.subCategoryId(data),
+            formValid: await valid.form(data)
+        })
     }
 
     async Update() {
@@ -75,9 +118,11 @@ class Item extends Component {
             warehouseId: this.state.warehouseId,
             subCategoryId: this.state.subCategoryId,
         }
-        await this.itemServices.updateItem(this.props.itemId, item);
-        await this.componentDidMount();
-        this.setState({ edit: false });
+        if (this.state.formValid) {
+            await this.itemServices.updateItem(this.props.itemId, item);
+            await this.componentDidMount();
+            this.setState({ edit: false });
+        }
     }
 
     async Delete() {
@@ -103,6 +148,7 @@ class Item extends Component {
             provider: await this.providerServices.getProvider(),
             wahehouse: await this.warehouseServices.getWarehouse(),
         })
+        await this.validator()
     }
 
     render() {
@@ -119,27 +165,24 @@ class Item extends Component {
                         <div className="shadow mx-auto col-md-11 card mb-4" >
                             <div className="card-header bg-transparent border-dark"><h3>{this.state.title}</h3></div>
                             <div className="card-body text-dark">
-                                <div className="form-floating">
-                                    <input className="form-control mb-4" id="title" type="text" value={title} name="title" onChange={this.handleChange} placeholder="Название" />
+                                <div className="form-floating mb-4">
+                                    <input className={`form-control ${this.state.validTitle.valid ? "is-valid" : "is-invalid"}`} id="title" type="text" value={title} name="title" onChange={this.handleChange} placeholder="Название" />
                                     <label className="form-label" htmlFor="title">Название</label>
                                     <div className="invalid-feedback">
-                                        {/* {this.state.validConfirmPassword.message[0]} */}
+                                        {this.state.validTitle.message[0]}
                                     </div>
                                 </div>
 
-                                <div className="form-floating">
-                                    <input className="form-control mb-4" id="manufacturer" type="text" value={manufacturer} name="manufacturer" onChange={this.handleChange} placeholder="Производитель" />
+                                <div className="form-floating mb-4">
+                                    <input className="form-control " id="manufacturer" type="text" value={manufacturer} name="manufacturer" onChange={this.handleChange} placeholder="Производитель" />
                                     <label className="form-label" htmlFor="manufacturer">Производитель</label>
-                                    <div className="invalid-feedback">
-                                        {/* {this.state.validConfirmPassword.message[0]} */}
-                                    </div>
                                 </div>
 
-                                <div className="form-floating">
-                                    <input className="form-control mb-4" id="price" type="number" value={price} name="price" onChange={this.handleChange} placeholder="Цена" />
+                                <div className="form-floating mb-4">
+                                    <input className={`form-control ${this.state.validPrice.valid ? "is-valid" : "is-invalid"}`} id="price" type="number" value={price} name="price" onChange={this.handleChange} placeholder="Цена" />
                                     <label className="form-label" htmlFor="price">Цена</label>
                                     <div className="invalid-feedback">
-                                        {/* {this.state.validConfirmPassword.message[0]} */}
+                                        {this.state.validPrice.message[0]}
                                     </div>
                                 </div>
 
@@ -148,25 +191,19 @@ class Item extends Component {
                                         <div className="form-floating">
                                             <input className="form-control col-6" id="quantity" type="number" value={quantity} name="quantity" onChange={this.handleChange} placeholder="Количество" />
                                             <label className="form-label" htmlFor="quantity">Количество</label>
-                                            <div className="invalid-feedback">
-                                                {/* {this.state.validConfirmPassword.message[0]} */}
-                                            </div>
                                         </div>
                                     </div>
                                     <div className="col-md">
                                         <div className="form-floating">
                                             <input className="form-control col-6" id="unit" type="text" value={unit} name="unit" onChange={this.handleChange} placeholder="Единица" />
                                             <label className="form-label" htmlFor="unit">Единица</label>
-                                            <div className="invalid-feedback">
-                                                {/* {this.state.validConfirmPassword.message[0]} */}
-                                            </div>
                                         </div>
                                     </div>
                                 </div>
 
                                 <div className="col-md mb-4">
                                     <div className="form-floating">
-                                        <select className="form-select mb-4" id="providerId" value={providerId} name="providerId" onChange={this.handleChange}>
+                                        <select className={`form-select ${this.state.validProviderId.valid ? "is-valid" : "is-invalid"}`} id="providerId" value={providerId} name="providerId" onChange={this.handleChange}>
                                             <option value="Default" disabled>Пусто</option>
                                             {this.state.provider.map(p =>
                                                 <option key={p.id} value={p.id}>{p.name}</option>
@@ -174,14 +211,14 @@ class Item extends Component {
                                         </select>
                                         <label className="form-label" htmlFor="providerId">Поставщик</label>
                                         <div className="invalid-feedback">
-                                            {/* {this.state.validConfirmPassword.message[0]} */}
+                                            {this.state.validProviderId.message[0]}
                                         </div>
                                     </div>
                                 </div>
 
                                 <div className="col-md mb-4">
                                     <div className="form-floating">
-                                        <select className="form-select mb-4" id="subCategoryId" value={subCategoryId} name="subCategoryId" onChange={this.handleChange}>
+                                        <select className={`form-select ${this.state.validSubCategory.valid ? "is-valid" : "is-invalid"}`} id="subCategoryId" value={subCategoryId} name="subCategoryId" onChange={this.handleChange}>
                                             <option value="Default" disabled>Пусто</option>
                                             {this.state.subCategory.map(sc =>
                                                 <option key={sc.id} value={sc.id}>{sc.name}</option>
@@ -189,14 +226,14 @@ class Item extends Component {
                                         </select>
                                         <label className="form-label" htmlFor="subCategoryId">Категория</label>
                                         <div className="invalid-feedback">
-                                            {/* {this.state.validConfirmPassword.message[0]} */}
+                                            {this.state.validSubCategory.message[0]}
                                         </div>
                                     </div>
                                 </div>
 
                                 <div className="col-md mb-4">
                                     <div className="form-floating">
-                                        <select className="form-select mb-4" id="warehouseId" value={warehouseId} name="warehouseId" onChange={this.handleChange}>
+                                        <select className={`form-select ${this.state.validWarehouseId.valid ? "is-valid" : "is-invalid"}`} value={warehouseId} name="warehouseId" onChange={this.handleChange}>
                                             <option value="Default" disabled>Пусто</option>
                                             {this.state.wahehouse.map(w =>
                                                 <option key={w.id} value={w.id}>{w.number}</option>
@@ -204,7 +241,7 @@ class Item extends Component {
                                         </select>
                                         <label className="form-label" htmlFor="warehouseId">Склад</label>
                                         <div className="invalid-feedback">
-                                            {/* {this.state.validConfirmPassword.message[0]} */}
+                                            {this.state.validWarehouseId.message[0]}
                                         </div>
                                     </div>
                                 </div>
@@ -222,7 +259,7 @@ class Item extends Component {
                                 <div className="row" >
                                     <div className="col-8 d-grid gap-2 d-md-flex">
                                         <button type="button" onClick={() => this.setState({ edit: false })} className="btn btn-outline-dark fw-bolder">Отмена</button>
-                                        <button type="button" onClick={this.Update} className="btn btn-outline-success fw-bolder">Сохранить</button>
+                                        <button type="button" onClick={this.Update} className={`btn btn-outline-success fw-bolder ${this.state.formValid ? "" : "disabled"}`}>Сохранить</button>
                                     </div>
                                     <div className="col-4 d-grid gap-2 d-md-flex justify-content-end">
                                         <button type="button" onClick={this.Delete} className="btn btn-outline-danger fw-bolder">Удалить</button>
