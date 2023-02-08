@@ -1,6 +1,7 @@
 import WarehouseServices from '../../Axios/WarehouseServices';
-import React, { Component } from 'react'
-import { useParams, Navigate } from 'react-router-dom'
+import * as valid from "../../ValidationSchema/Warehouse/WaregouseValidation";
+import React, { Component } from 'react';
+import { useParams, Navigate } from 'react-router-dom';
 
 import {
     Link,
@@ -16,7 +17,6 @@ export default function WarehouseEdit(props) {
         </div>
     );
 }
-
 
 class Warehouse extends Component {
 
@@ -34,6 +34,24 @@ class Warehouse extends Component {
             city: "",
             building: "",
             warehouse: {},
+
+            validNumber: {
+                valid: false,
+                message: []
+            },
+            validCountry: {
+                valid: false,
+                message: []
+            },
+            validCity: {
+                valid: false,
+                message: []
+            },
+            validBuilding: {
+                valid: false,
+                message: []
+            },
+            formValid: false,
         }
 
         this.handleChange = this.handleChange.bind(this);
@@ -46,6 +64,24 @@ class Warehouse extends Component {
         await this.setState({
             [name]: value
         });
+        await this.validator()
+    }
+
+    async validator() {
+        const data = {
+            number: this.state.number,
+            country: this.state.country,
+            city: this.state.city,
+            building: this.state.building,
+        }
+
+        await this.setState({
+            validNumber: await valid.number(data),
+            validCountry: await valid.country(data),
+            validCity: await valid.city(data),
+            validBuilding: await valid.building(data),
+            formValid: await valid.form(data)
+        })
     }
 
     async Update() {
@@ -57,9 +93,11 @@ class Warehouse extends Component {
             city: this.state.city,
             building: this.state.building,
         }
-
-        await this.warehouseServices.updateWarehouse(this.props.id, warehouse);
-        this.setState({ edit: false });
+        if (this.state.formValid) {
+            await this.componentDidMount();
+            await this.warehouseServices.updateWarehouse(this.props.id, warehouse);
+            await this.setState({ edit: false });
+        }
     }
 
     async Delete() {
@@ -68,22 +106,21 @@ class Warehouse extends Component {
     }
 
     async componentDidMount() {
-
         const w = await this.warehouseServices.getWarehouseById(this.props.id)
-        this.setState({
+        await this.setState({
+            warehouse: w,
             id: w.id,
             number: w.number,
             addressId: w.addressDto.id,
             country: w.addressDto.country,
             city: w.addressDto.city,
             building: w.addressDto.building,
-            warehouse: w,
         })
+        await this.validator()
     }
 
     render() {
         const { warehouse, number, country, city, building } = this.state;
-
         if (this.state.redirectToList) {
             return <Navigate to={"/"} />
         }
@@ -98,10 +135,10 @@ class Warehouse extends Component {
                             <div className="card-body text-dark">
 
                                 <div className="form-floating">
-                                    <input className="form-control" type="text" value={number} id="number" name="number" onChange={this.handleChange} placeholder="Номер склада" />
+                                    <input className={`form-control ${this.state.validNumber.valid ? "is-valid" : "is-invalid"}`} type="text" value={number} id="number" name="number" onChange={this.handleChange} placeholder="Номер склада" />
                                     <label className="form-label" htmlFor="number">Номер склада</label>
                                     <div className="invalid-feedback">
-                                        {/* {this.state.validConfirmPassword.message[0]} */}
+                                        {this.state.validNumber.message[0]}
                                     </div>
                                 </div>
 
@@ -109,27 +146,27 @@ class Warehouse extends Component {
                                 <h3>Адрес</h3>
                                 <br />
 
-                                <div className="form-floating">
-                                    <input className="form-control mb-4" type="text" value={country} id="country" name="country" onChange={this.handleChange} placeholder="Страна" />
+                                <div className="form-floating mb-4">
+                                    <input className={`form-control ${this.state.validCountry.valid ? "is-valid" : "is-invalid"}`} type="text" value={country} id="country" name="country" onChange={this.handleChange} placeholder="Страна" />
                                     <label className="form-label" htmlFor="country">Страна</label>
                                     <div className="invalid-feedback">
-                                        {/* {this.state.validConfirmPassword.message[0]} */}
+                                        {this.state.validCountry.message[0]}
                                     </div>
                                 </div>
 
-                                <div className="form-floating">
-                                    <input className="form-control mb-4" type="text" value={city} id="city" name="city" onChange={this.handleChange} placeholder="Город" />
+                                <div className="form-floating mb-4">
+                                    <input className={`form-control ${this.state.validCity.valid ? "is-valid" : "is-invalid"}`} type="text" value={city} id="city" name="city" onChange={this.handleChange} placeholder="Город" />
                                     <label className="form-label" htmlFor="city">Город</label>
                                     <div className="invalid-feedback">
-                                        {/* {this.state.validConfirmPassword.message[0]} */}
+                                        {this.state.validCity.message[0]}
                                     </div>
                                 </div>
 
-                                <div className="form-floating">
-                                    <input className="form-control mb-4" type="text" value={building} id="building" name="building" onChange={this.handleChange} placeholder="Локальный адрес" />
+                                <div className="form-floating mb-4">
+                                    <input className={`form-control ${this.state.validBuilding.valid ? "is-valid" : "is-invalid"}`} type="text" value={building} id="building" name="building" onChange={this.handleChange} placeholder="Локальный адрес" />
                                     <label className="form-label" htmlFor="building">Локальный адрес</label>
                                     <div className="invalid-feedback">
-                                        {/* {this.state.validConfirmPassword.message[0]} */}
+                                        {this.state.validBuilding.message[0]}
                                     </div>
                                 </div>
 
@@ -138,7 +175,7 @@ class Warehouse extends Component {
                                 <div className="row" >
                                     <div className="col-8 d-grid gap-2 d-md-flex">
                                         <button type="button" onClick={() => { this.setState({ edit: false }) }} className="btn btn-outline-dark fw-bolder">Отмена</button>
-                                        <button type="button" onClick={this.Update} className="btn btn-outline-success fw-bolder">Сохранить</button>
+                                        <button type="button" onClick={this.Update} className={`btn btn-outline-success fw-bolder ${this.state.formValid ? "" : "disabled"}`}>Сохранить</button>
                                     </div>
                                     <div className="col-4 d-grid gap-2 d-md-flex justify-content-end">
                                         <button type="button" onClick={this.Delete} className="btn btn-outline-danger fw-bolder">Удалить</button>

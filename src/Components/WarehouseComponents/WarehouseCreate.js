@@ -1,6 +1,7 @@
 import WarehouseServices from '../../Axios/WarehouseServices';
-import React, { Component } from 'react'
-import { Navigate } from 'react-router-dom'
+import * as valid from "../../ValidationSchema/Warehouse/WaregouseValidation";
+import React, { Component } from 'react';
+import { Navigate } from 'react-router-dom';
 
 import {
     Link,
@@ -20,6 +21,24 @@ export default class WarehouseCreate extends Component {
             city: "",
             building: "",
             redirect: false,
+
+            validNumber: {
+                valid: false,
+                message: []
+            },
+            validCountry: {
+                valid: false,
+                message: []
+            },
+            validCity: {
+                valid: false,
+                message: []
+            },
+            validBuilding: {
+                valid: false,
+                message: []
+            },
+            formValid: false,
         }
 
         this.handleChange = this.handleChange.bind(this);
@@ -31,6 +50,24 @@ export default class WarehouseCreate extends Component {
         await this.setState({
             [name]: value
         });
+        await this.validator();
+    }
+
+    async validator() {
+        const data = {
+            number: this.state.number,
+            country: this.state.country,
+            city: this.state.city,
+            building: this.state.building,
+        }
+
+        await this.setState({
+            validNumber: await valid.number(data),
+            validCountry: await valid.country(data),
+            validCity: await valid.city(data),
+            validBuilding: await valid.building(data),
+            formValid: await valid.form(data)
+        })
     }
 
     async Create() {
@@ -46,7 +83,7 @@ export default class WarehouseCreate extends Component {
     }
 
     render() {
-        const { redirect, number, country, city, building, id } = this.state;
+        const { redirect, id } = this.state;
 
         if (redirect) {
             return <Navigate to={`/WarehouseEdit/${id}`} />
@@ -59,10 +96,10 @@ export default class WarehouseCreate extends Component {
                     <div className="card-body text-dark">
 
                         <div className="form-floating">
-                        <input className="form-control" type="text" id="number" name="number" onChange={this.handleChange} placeholder="Номер склада" />
+                            <input className={`form-control ${this.state.validNumber.valid ? "is-valid" : "is-invalid"}`} type="text" id="number" name="number" onChange={this.handleChange} placeholder="Номер склада" />
                             <label className="form-label" htmlFor="number">Номер склада</label>
                             <div className="invalid-feedback">
-                                {/* {this.state.validConfirmPassword.message[0]} */}
+                                {this.state.validNumber.message[0]}
                             </div>
                         </div>
 
@@ -70,30 +107,30 @@ export default class WarehouseCreate extends Component {
                         <h3>Адрес</h3>
                         <br />
 
-                        <div className="form-floating">
-                        <input className="form-control mb-4" type="text" id="country" name="country" onChange={this.handleChange} placeholder="Страна" />
+                        <div className="form-floating mb-4">
+                            <input className={`form-control ${this.state.validCountry.valid ? "is-valid" : "is-invalid"}`} type="text" id="country" name="country" onChange={this.handleChange} placeholder="Страна" />
                             <label className="form-label" htmlFor="country">Страна</label>
                             <div className="invalid-feedback">
-                                {/* {this.state.validConfirmPassword.message[0]} */}
+                                {this.state.validCountry.message[0]}
                             </div>
                         </div>
 
-                        <div className="form-floating">
-                        <input className="form-control mb-4" type="text" id="city" name="city" onChange={this.handleChange} placeholder="Город" />
+                        <div className="form-floating mb-4">
+                            <input className={`form-control ${this.state.validCity.valid ? "is-valid" : "is-invalid"}`} type="text" id="city" name="city" onChange={this.handleChange} placeholder="Город" />
                             <label className="form-label" htmlFor="city">Город</label>
                             <div className="invalid-feedback">
-                                {/* {this.state.validConfirmPassword.message[0]} */}
+                                {this.state.validCity.message[0]}
                             </div>
                         </div>
 
-                        <div className="form-floating">
-                        <input className="form-control mb-4" type="text" id="building" name="building" onChange={this.handleChange} placeholder="Локальный адрес" />
+                        <div className="form-floating mb-4">
+                            <input className={`form-control ${this.state.validBuilding.valid ? "is-valid" : "is-invalid"}`} type="text" id="building" name="building" onChange={this.handleChange} placeholder="Локальный адрес" />
                             <label className="form-label" htmlFor="building">Локальный адрес</label>
                             <div className="invalid-feedback">
-                                {/* {this.state.validConfirmPassword.message[0]} */}
+                                {this.state.validBuilding.message[0]}
                             </div>
                         </div>
-                        
+
                     </div>
                     <div className="card-footer border-dark bg-transparent">
                         <div className="row" >
