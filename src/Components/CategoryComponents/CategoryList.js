@@ -22,8 +22,8 @@ export default class CategoryList extends Component {
         if (this.state.categorys != null)
             return (
                 <div>
-                    <div className="row shadow mb-4">
-                        <div className="col-6 col-md-9">
+                    <div className="row mb-4 justify-content-md-center">
+                        <div className="col-md-9 shadow">
                             <br />
                             <table className="table table-hover">
                                 <thead>

@@ -90,22 +90,24 @@ export default class Navbar extends Component {
                         </div>
                     </div>
                 </nav>
-                <Routes>
-                    <Route path="/" element={<ListItem />} />
-                    <Route path="/itemedit/:id" element={<ItemEdit />} />
-                    <Route path="/itemcreate/" element={<ItemCreate />} />
-                    <Route path="/warehouseedit/:id" element={<WarehouseEdit />} />
-                    <Route path="/warehousecreate" element={<WarehouseCreate />} />
-                    <Route path="/warehouselist" element={<WarehouseList />} />
-                    <Route path="/provideredit/:id" element={<ProviderEdit />} />
-                    <Route path="/providercreate" element={<ProviderCreate />} />
-                    <Route path="/providerlist" element={<ProviderList />} />
-                    <Route path="/categorycreate" element={<CategoryCreate />} />
-                    <Route path="/categorylist" element={<CategoryList />} />
-                    <Route path="/categoryedit/:id" element={<CategoryEdit />} />
-                    <Route path="/subcategoryedit/:id" element={<SubCategoryEdit />} />
-                    <Route path="/subcategorycreate/:categoryId" element={<SubCategoryCreate />} />
-                </Routes>
+                <div className="container">
+                    <Routes>
+                        <Route path="/" element={<ListItem />} />
+                        <Route path="/itemedit/:id" element={<ItemEdit />} />
+                        <Route path="/itemcreate/" element={<ItemCreate />} />
+                        <Route path="/warehouseedit/:id" element={<WarehouseEdit />} />
+                        <Route path="/warehousecreate" element={<WarehouseCreate />} />
+                        <Route path="/warehouselist" element={<WarehouseList />} />
+                        <Route path="/provideredit/:id" element={<ProviderEdit />} />
+                        <Route path="/providercreate" element={<ProviderCreate />} />
+                        <Route path="/providerlist" element={<ProviderList />} />
+                        <Route path="/categorycreate" element={<CategoryCreate />} />
+                        <Route path="/categorylist" element={<CategoryList />} />
+                        <Route path="/categoryedit/:id" element={<CategoryEdit />} />
+                        <Route path="/subcategoryedit/:id" element={<SubCategoryEdit />} />
+                        <Route path="/subcategorycreate/:categoryId" element={<SubCategoryCreate />} />
+                    </Routes>
+                </div>
             </div>
         )
     }

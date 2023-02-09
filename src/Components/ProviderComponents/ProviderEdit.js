@@ -1,4 +1,5 @@
 import ProviderServices from '../../Axios/ProviderServices';
+import * as valid from "../../ValidationSchema/Provider/ProviderValidation"
 import React, { Component } from 'react'
 import { useParams, Navigate } from 'react-router-dom'
 
@@ -29,7 +30,12 @@ class Provider extends Component {
             id: 0,
             name: "",
             edit: false,
-            provider: {}
+            provider: {},
+
+            validName: {
+                valid: false,
+                message: []
+            },
         }
 
         this.handleChange = this.handleChange.bind(this);
@@ -42,6 +48,17 @@ class Provider extends Component {
         await this.setState({
             [name]: value
         });
+        await this.validator();
+    }
+
+    async validator() {
+        const data = {
+            name: this.state.name,
+        }
+
+        await this.setState({
+            validName: await valid.name(data),
+        })
     }
 
     async Update() {
@@ -62,11 +79,12 @@ class Provider extends Component {
 
     async componentDidMount() {
         const p = await this.providerServices.getProviderById(this.props.id)
-        this.setState({
+        await this.setState({
             id: p.id,
             name: p.name,
             provider: p,
         })
+        await this.validator();
     }
 
     render() {
@@ -86,10 +104,10 @@ class Provider extends Component {
                             <div className="card-body text-dark">
 
                                 <div className="form-floating">
-                                    <input className="form-control" type="text" value={name} name="name" onChange={this.handleChange} placeholder="Имя поставщика" />
+                                    <input className={`form-control ${this.state.validName.valid ? "is-valid" : "is-invalid"}`} type="text" value={name} name="name" onChange={this.handleChange} placeholder="Имя поставщика" />
                                     <label className="form-label" htmlFor="manufacturer">Поставщик</label>
                                     <div className="invalid-feedback">
-                                        {/* {this.state.validConfirmPassword.message[0]} */}
+                                        {this.state.validName.message[0]}
                                     </div>
                                 </div>
 

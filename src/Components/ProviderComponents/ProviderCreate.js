@@ -1,4 +1,5 @@
 import ProviderServices from '../../Axios/ProviderServices';
+import * as valid from "../../ValidationSchema/Provider/ProviderValidation"
 import React, { Component } from 'react'
 import { Navigate } from 'react-router-dom'
 
@@ -15,7 +16,12 @@ export default class ProviderCreate extends Component {
 
         this.state = {
             name: "",
-            redirectToList: false
+            redirectToList: false,
+            
+            validName: {
+                valid: false,
+                message: []
+            },
         }
 
         this.handleChange = this.handleChange.bind(this);
@@ -27,6 +33,18 @@ export default class ProviderCreate extends Component {
         await this.setState({
             [name]: value
         });
+
+        await this.validator();
+    }
+
+    async validator() {
+        const data = {
+            name: this.state.name,
+        }
+
+        await this.setState({
+            validName: await valid.name(data),
+        })
     }
 
     async Create() {
@@ -39,7 +57,7 @@ export default class ProviderCreate extends Component {
     }
 
     render() {
-        const { name, id } = this.state;
+        const { id } = this.state;
 
         if (this.state.redirectToList) {
             return <Navigate to={`/ProviderEdit/${id}`} />
@@ -52,10 +70,10 @@ export default class ProviderCreate extends Component {
                     <div className="card-body text-dark">
 
                         <div className="form-floating">
-                            <input className="form-control" type="text" name="name" onChange={this.handleChange} placeholder="Имя поставщика" />
+                            <input className={`form-control ${this.state.validName.valid ? "is-valid" : "is-invalid"}`}  type="text" name="name" onChange={this.handleChange} placeholder="Имя поставщика" />
                             <label className="form-label" htmlFor="manufacturer">Поставщик</label>
                             <div className="invalid-feedback">
-                                {/* {this.state.validConfirmPassword.message[0]} */}
+                                {this.state.validName.message[0]}
                             </div>
                         </div>
 

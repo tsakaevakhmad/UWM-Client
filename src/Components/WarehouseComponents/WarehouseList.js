@@ -21,8 +21,8 @@ export default class WarehouseList extends Component {
         if (this.state.warhouses != null)
             return (
                 <div>
-                    <div className="row mb-4">
-                        <div className="shadow mb-4 col-6 col-md-9">
+                    <div className="row mb-4 justify-content-md-center">
+                        <div className="shadow mb-4 col-md-10">
                             <br />
                             <table className="table table-hover">
                                 <thead>
