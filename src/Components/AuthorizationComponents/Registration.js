@@ -13,6 +13,7 @@ export default class Registration extends Component {
             email: "",
             password: "",
             confirmPassword: "",
+            loading: false,
             loginOn: false,
             validForm: false,
             validEmail: {
@@ -45,6 +46,9 @@ export default class Registration extends Component {
             confirmPassword: this.state.confirmPassword,
         }
         if (this.state.validForm) {
+            await this.setState({
+                loading: true
+            })
             let result = await this.authorization.Register(data);
             if (typeof (result.data) !== "undefined") {
                 await alert(result.data)
@@ -52,6 +56,9 @@ export default class Registration extends Component {
             }
             else {
                 await alert("Ошибка!")
+                await this.setState({
+                    loading: false
+                })
             }
         }
     }
@@ -127,7 +134,10 @@ export default class Registration extends Component {
                         </div>
                     </div>
 
-                    <button type="button" onClick={this.registering} className={`btn btn-outline-dark col-12 mb-4 ${this.state.validForm ? "" : "disabled"}`}>Подтвердить</button>
+                    <button type="button" onClick={this.registering} className={`btn btn-outline-dark col-12 mb-4 ${this.state.validForm ? "" : "disabled"}`}>
+                        <span className="spinner-border spinner-border-sm" role="status" aria-hidden="true" hidden={!this.state.loading}></span>
+                        Подтвердить
+                    </button>
                     <div className="text-center">
                         <p><Link className="btn btn-outline-primary col-7 " to={"/authorization/login"}>Войти</Link></p>
                     </div>

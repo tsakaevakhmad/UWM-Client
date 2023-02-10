@@ -13,6 +13,7 @@ export default class Login extends Component {
             email: "",
             password: "",
             errorMessage: "",
+            loading: false,
             validForm: false,
             validEmail: {
                 valid: false,
@@ -35,17 +36,27 @@ export default class Login extends Component {
         }
         if (this.state.validForm) {
             try {
+                await this.setState({
+                    loading: true
+                })
                 let result = await this.authorization.login(data);
                 if (typeof (result.data.token) !== "undefined")
                     window.location.href = '/';
-                else
+                else{
                     await alert("Убедитесь что подтвердили ваш аккаунт через почту")
+                    await this.setState({
+                        loading: false
+                    })
+                }        
             }
             catch (error) {
                 if (error.response.status === 404)
                     await this.setState({
                         errorMessage: "Почта или пароль введены не правильно"
                     })
+                await this.setState({
+                    loading: false
+                })
             }
         }
     }
@@ -95,7 +106,10 @@ export default class Login extends Component {
                         </div>
                     </div>
 
-                    <button type="button" onClick={this.logining} className={`btn btn-outline-primary col-12 mb-4 ${this.state.validForm ? "" : "disabled"}`}>Войти</button>
+                    <button type="button" onClick={this.logining} className={`btn btn-outline-primary col-12 mb-4 ${this.state.validForm ? "" : "disabled"}`}>
+                        <span className="spinner-border spinner-border-sm" role="status" aria-hidden="true" hidden={!this.state.loading}></span>
+                        Войти
+                    </button>
 
                     <div className="text-center">
                         <p><Link className="btn btn-outline-dark col-lg-7" to={"/authorization/registration"}>Зарегистрироваться</Link></p>
