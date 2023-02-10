@@ -12,6 +12,7 @@ export default class Login extends Component {
         this.state = {
             email: "",
             password: "",
+            errorMessage: "",
             validForm: false,
             validEmail: {
                 valid: false,
@@ -33,12 +34,18 @@ export default class Login extends Component {
             password: this.state.password
         }
         if (this.state.validForm) {
-            let result = await this.authorization.login(data);
-            if (typeof (result.data.token) !== "undefined") {
-                window.location.href = '/';
+            try {
+                let result = await this.authorization.login(data);
+                if (typeof (result.data.token) !== "undefined")
+                    window.location.href = '/';
+                else
+                    await alert("Убедитесь что подтвердили ваш аккаунт через почту")
             }
-            else {
-                await alert("Убедитесь что подтвердили ваш аккаунт через почту")
+            catch (error) {
+                if (error.response.status === 404)
+                    await this.setState({
+                        errorMessage: "Почта или пароль введены не правильно"
+                    })
             }
         }
     }
@@ -64,7 +71,6 @@ export default class Login extends Component {
         return (
             <div>
                 <form className="needs-validation">
-
                     <div className="form-outline mb-5">
                         <div className="form-floating">
                             <input type="email" id="email" name="email" onChange={this.handleChange} className={`form-control  ${this.state.validEmail.valid ? "is-valid" : "is-invalid"}`} placeholder="Почта" />
@@ -82,6 +88,10 @@ export default class Login extends Component {
                             <div className="invalid-feedback">
                                 {this.state.validPassword.message[0]}
                             </div>
+                        </div>
+                        <div className="invalid text-danger">
+                            <hr />
+                            {this.state.errorMessage}
                         </div>
                     </div>
 

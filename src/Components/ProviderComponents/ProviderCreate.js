@@ -17,7 +17,7 @@ export default class ProviderCreate extends Component {
         this.state = {
             name: "",
             redirectToList: false,
-            
+
             validName: {
                 valid: false,
                 message: []
@@ -51,9 +51,10 @@ export default class ProviderCreate extends Component {
         const provider = {
             name: this.state.name,
         }
-
-        let id = await this.providerServices.createProvider(provider);
-        this.setState({ id: id.data, redirectToList: true });
+        if (this.state.validName.valid) {
+            let id = await this.providerServices.createProvider(provider);
+            this.setState({ id: id.data, redirectToList: true });
+        }
     }
 
     render() {
@@ -70,7 +71,7 @@ export default class ProviderCreate extends Component {
                     <div className="card-body text-dark">
 
                         <div className="form-floating">
-                            <input className={`form-control ${this.state.validName.valid ? "is-valid" : "is-invalid"}`}  type="text" name="name" onChange={this.handleChange} placeholder="Имя поставщика" />
+                            <input className={`form-control ${this.state.validName.valid ? "is-valid" : "is-invalid"}`} type="text" name="name" onChange={this.handleChange} placeholder="Имя поставщика" />
                             <label className="form-label" htmlFor="manufacturer">Поставщик</label>
                             <div className="invalid-feedback">
                                 {this.state.validName.message[0]}

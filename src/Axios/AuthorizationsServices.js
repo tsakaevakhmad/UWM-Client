@@ -22,7 +22,7 @@ export default class AuthorizationsServices {
         }
         catch (error) {
             console.error(error)
-            return error
+            throw error 
         }
     }
 
