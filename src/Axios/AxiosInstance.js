@@ -4,7 +4,7 @@ export default class AxiosInstance {
 
     constructor() {
         this.instance = axios.create({
-            baseURL: 'http://localhost/api',
+            baseURL: 'http://localhost:81/api',
             headers: { 'Authorization': localStorage.getItem("Authorization") }
         });
 

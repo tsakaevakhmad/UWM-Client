@@ -10,15 +10,6 @@ import React, { Component } from 'react'
 export default class Main extends Component {
     constructor(props) {
         super(props)
-
-        this.state = {
-            userInfo: {}
-        }
-    }
-
-    async componentDidMount() {
-        let parse = JSON.parse(localStorage.getItem("UserInfo"))
-        await this.setState({ userInfo: parse });
     }
 
     render() {
@@ -26,7 +17,7 @@ export default class Main extends Component {
             <div className="container">
                 <br />
                 <Routes>
-                    <Route path="*" element={<Navbar userInfo={this.state.userInfo} />} />
+                    <Route path="*" element={<Navbar />} />
                     <Route path="/authorization/*" element={<Authorization />} />
                 </Routes>
             </div>

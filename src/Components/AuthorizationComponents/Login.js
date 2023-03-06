@@ -40,8 +40,9 @@ export default class Login extends Component {
                     loading: true
                 })
                 let result = await this.authorization.login(data);
-                if (typeof (result.data.token) !== "undefined")
+                if (typeof (result.data.token) !== "undefined"){
                     window.location.href = '/';
+                }      
                 else{
                     await alert("Убедитесь что подтвердили ваш аккаунт через почту")
                     await this.setState({

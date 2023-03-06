@@ -26,8 +26,17 @@ export default class Navbar extends Component {
     constructor(props) {
         super(props)
         this.authorization = new AuthorizationsServices();
+        this.state = {
+            userInfo: {}
+        }
     }
 
+    async componentDidMount() {
+        await this.authorization.getUserInfo();
+        let parse = JSON.parse(localStorage.getItem("UserInfo"))
+        await this.setState({ userInfo: parse });
+    }
+    
     render() {
         return (
             <div>
@@ -84,7 +93,7 @@ export default class Navbar extends Component {
                                 <button className="btn btn-outline-success" type="submit">Поиск</button>
                             </form> */}
                             <div className="btn-group " role="group" aria-label="Basic outlined example">
-                                <button type="button" disabled className="btn btn-outline-success fw-bolder border-0 ">{this.props.userInfo.userName}</button>
+                                <button type="button" disabled className="btn btn-outline-success fw-bolder border-0 ">{this.state.userInfo.userName}</button>
                                 <button type="button" onClick={async () => (await this.authorization.logout())} className="btn btn-outline-dark  ">Выйти</button>
                             </div>
                         </div>

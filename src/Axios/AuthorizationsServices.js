@@ -17,8 +17,19 @@ export default class AuthorizationsServices {
         try {
             const token = await this.axios.instance.post(`/authorization/login`, login)
             await localStorage.setItem("Authorization", `Bearer ${token.data.token}`)
-            await localStorage.setItem("UserInfo", JSON.stringify(token.data.userInfo))
             return token
+        }
+        catch (error) {
+            console.error(error)
+            throw error 
+        }
+    }
+
+    async getUserInfo(){
+        try{
+            const userInfo = await this.axios.instance.get(`/authorization/userinfo`)
+            await localStorage.setItem("UserInfo", JSON.stringify(userInfo.data))
+            console.log(userInfo.data)
         }
         catch (error) {
             console.error(error)
