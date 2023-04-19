@@ -23,6 +23,7 @@ class Reset extends Component {
             confirmPassword: "",
             confirmed: false,
             validForm: false,
+            loading: false,
             validEmail: {
                 valid: false,
                 message: []
@@ -68,10 +69,12 @@ class Reset extends Component {
             confirmPassword: this.state.confirmPassword,
             code: this.props.code
         }
+        this.setState({ loading: true })
         const status = (await this.authorizationsServices.resetPassword(data)).status
 
         if (status === 200)
             await this.setState({ confirmed: true });
+        this.setState({ loading: false })
     }
 
     render() {
@@ -113,7 +116,10 @@ class Reset extends Component {
                         </div>
                     </div>
 
-                    <button type="button" className={`btn btn-outline-success col-12 mb-4 ${this.state.validForm ? "" : "disabled"}`} onClick={this.resetPassword}>Сбросить</button>
+                    <button type="button" className={`btn btn-outline-success col-12 mb-4 ${this.state.validForm ? "" : "disabled"}`} onClick={this.resetPassword}>
+                        <span className="spinner-border spinner-border-sm" role="status" aria-hidden="true" hidden={!this.state.loading}></span>
+                        {!this.state.loading ? "Сбросить" : ""}
+                    </button>
                 </form>
             </div>
         )
