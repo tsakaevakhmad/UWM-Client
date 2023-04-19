@@ -136,7 +136,7 @@ export default class Registration extends Component {
 
                     <button type="button" onClick={this.registering} className={`btn btn-outline-dark col-12 mb-4 ${this.state.validForm ? "" : "disabled"}`}>
                         <span className="spinner-border spinner-border-sm" role="status" aria-hidden="true" hidden={!this.state.loading}></span>
-                        Подтвердить
+                        {!this.state.loading ? "Подтвердить" : ""}
                     </button>
                     <div className="text-center">
                         <p><Link className="btn btn-outline-primary col-7 " to={"/authorization/login"}>Войти</Link></p>

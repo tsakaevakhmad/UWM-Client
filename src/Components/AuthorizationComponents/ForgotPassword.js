@@ -12,6 +12,7 @@ export default class ForgotPassword extends Component {
         this.state = {
             email: "",
             redirect: false,
+            loading: false,
             validEmail: {
                 valid: false,
                 message: []
@@ -27,9 +28,13 @@ export default class ForgotPassword extends Component {
             email: this.state.email
         }
         if (this.state.validEmail.valid) {
+            await this.setState({
+                loading: true
+            })
             let status = (await this.authorization.forgotPassword(data)).status
             if (status === 200)
                 await this.setState({ redirect: true })
+            await this.setState({ loading: false })
         }
     }
 
@@ -63,7 +68,10 @@ export default class ForgotPassword extends Component {
                         </div>
                     </div>
 
-                    <button type="button" onClick={this.submitMail} className={`btn btn-outline-success col-12 mb-4 ${this.state.validEmail.valid ? "" : "disabled"}`}>Отправить</button>
+                    <button type="button" onClick={this.submitMail} className={`btn btn-outline-success col-12 mb-4 ${this.state.validEmail.valid ? "" : "disabled"}`}>
+                        <span className="spinner-border spinner-border-sm" role="status" aria-hidden="true" hidden={!this.state.loading}></span>
+                        {!this.state.loading ? "Войти" : ""}
+                    </button>
                     <div className="text-center">
                         <p><Link className="btn btn-outline-primary col-7 btn-sm" to={"/authorization/login"}>Войти</Link></p>
                     </div>

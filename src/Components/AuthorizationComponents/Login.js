@@ -109,7 +109,7 @@ export default class Login extends Component {
 
                     <button type="button" onClick={this.logining} className={`btn btn-outline-primary col-12 mb-4 ${this.state.validForm ? "" : "disabled"}`}>
                         <span className="spinner-border spinner-border-sm" role="status" aria-hidden="true" hidden={!this.state.loading}></span>
-                        Войти
+                        {!this.state.loading ? "Войти" : ""}
                     </button>
 
                     <div className="text-center">

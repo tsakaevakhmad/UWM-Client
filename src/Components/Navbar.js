@@ -1,5 +1,6 @@
 import React, { Component } from 'react'
 import AuthorizationsServices from '../Axios/AuthorizationsServices';
+import UserServices from '../Axios/UserServices';
 import ListItem from "./ItemsComponents/ListItem";
 import ItemEdit from './ItemsComponents/ItemEdit';
 import ItemCreate from './ItemsComponents/ItemCreate';
@@ -26,18 +27,22 @@ export default class Navbar extends Component {
     constructor(props) {
         super(props)
         this.authorization = new AuthorizationsServices();
+        this.userServices = new UserServices();
         this.state = {
-            userInfo: {}
+            userInfo: {},
+            isAdmin: false
         }
     }
 
     async componentDidMount() {
-        await this.authorization.getUserInfo();
+        await this.userServices.getUserInfo();
         let parse = JSON.parse(localStorage.getItem("UserInfo"))
-        await this.setState({ userInfo: parse });
+        await this.setState({ userInfo: parse, isAdmin: parse.userRoles.includes("Administrator") });
+        console.log(this.state.isAdmin)
     }
     
     render() {
+        const { userInfo, isAdmin } = this.state
         return (
             <div>
                 <nav className="shadow navbar navbar-expand-lg mb-4 navbar-light rounded">
@@ -87,13 +92,23 @@ export default class Navbar extends Component {
                                         <li><Link className="dropdown-item" aria-current="page" to="/CategoryCreate">Добавить категорию</Link></li>
                                     </ul>
                                 </li>
+
+                                <li className={`nav-item dropdown ${isAdmin ? "" : "invisible"}`}>
+                                    <a className="nav-link dropdown-toggle fw-bold" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                                        Адимнистративная панель
+                                    </a>
+                                    <ul className="dropdown-menu" aria-labelledby="navbarDropdown">
+                                        <li><Link className="dropdown-item" aria-current="page" to="/CategoryList">Пользователи</Link></li>
+                                        <li><Link className="dropdown-item" aria-current="page" to="/CategoryCreate">Роли</Link></li>
+                                    </ul>
+                                </li>
                             </ul>
                             {/* <form className="d-flex">
                                 <input className="form-control me-2" type="search" placeholder="Поиск" aria-label="Search" />
                                 <button className="btn btn-outline-success" type="submit">Поиск</button>
                             </form> */}
                             <div className="btn-group " role="group" aria-label="Basic outlined example">
-                                <button type="button" disabled className="btn btn-outline-success fw-bolder border-0 ">{this.state.userInfo.userName}</button>
+                                <button type="button" disabled className="btn btn-outline-success fw-bolder border-0 ">{userInfo.userName}</button>
                                 <button type="button" onClick={async () => (await this.authorization.logout())} className="btn btn-outline-dark  ">Выйти</button>
                             </div>
                         </div>
@@ -115,6 +130,11 @@ export default class Navbar extends Component {
                         <Route path="/categoryedit/:id" element={<CategoryEdit />} />
                         <Route path="/subcategoryedit/:id" element={<SubCategoryEdit />} />
                         <Route path="/subcategorycreate/:categoryId" element={<SubCategoryCreate />} />
+                        
+                        <Route path="/admin/roles" element={<SubCategoryCreate />} />
+                        <Route path="/admin/users" element={<SubCategoryCreate />} />
+                        <Route path="/admin/user/:id" element={<SubCategoryCreate />} />
+                        <Route path="/admin/rolecreate" element={<SubCategoryCreate />} />
                     </Routes>
                 </div>
             </div>

@@ -25,18 +25,6 @@ export default class AuthorizationsServices {
         }
     }
 
-    async getUserInfo(){
-        try{
-            const userInfo = await this.axios.instance.get(`/authorization/userinfo`)
-            await localStorage.setItem("UserInfo", JSON.stringify(userInfo.data))
-            console.log(userInfo.data)
-        }
-        catch (error) {
-            console.error(error)
-            throw error 
-        }
-    }
-
     async logout() {
         try {
             await localStorage.removeItem("Authorization")
